@@ -12,6 +12,6 @@
         <title>Progetto Secondo Web</title>
     </head>
     <body>
-        <h1>Fucking Hello World!!</h1>
+        <h1>Fucking Hello World!</h1>
     </body>
 </html>
