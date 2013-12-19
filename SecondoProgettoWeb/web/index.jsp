@@ -5,17 +5,10 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link rel="stylesheet" type="text/css" href="/SecondoProgettoWeb/res/css/application.css"
-        <title>Progetto Secondo Web</title>
-    </head>
-    <body>
-        <h1 class="green">Fucking Hello World!</h1>
-        <p class="purple">
-            Test!
-        </p>
-    </body>
-</html>
+<%@include file="layout/head.jsp" %>
+    
+    <h1>Hello</h1>
+    <p>Contenuto pagina</p>
+
+<%@include file="layout/foot.jsp" %>
+
