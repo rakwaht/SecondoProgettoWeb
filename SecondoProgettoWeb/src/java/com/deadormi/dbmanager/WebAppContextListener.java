@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package dbmanager;
+package com.deadormi.dbmanager;
 
-import dbmanager.DbManager;
+import com.deadormi.dbmanager.DbManager;
 
 import java.sql.Connection;
 
@@ -25,32 +25,22 @@ import javax.servlet.ServletContextListener;
  * @author Timbu
  */
 public class WebAppContextListener implements ServletContextListener {
+
     DbManager manager;
+
     public void contextInitialized(ServletContextEvent sce) {
         String dburl = sce.getServletContext().getInitParameter("dburl");
-        
 
-            
         try {
             manager = new DbManager(dburl);
-             sce.getServletContext().setAttribute("dbmanager",manager);
+            sce.getServletContext().setAttribute("dbmanager", manager);
         } catch (Exception ex) {
             Logger.getLogger(WebAppContextListener.class.getName()).log(Level.SEVERE, null, ex);
         }
-               
-            
-
-        
-
     }
 
     public void contextDestroyed(ServletContextEvent sce) {
-
-        
-    
-            manager.close();
-
+        manager.close();
     }
 
 }
-

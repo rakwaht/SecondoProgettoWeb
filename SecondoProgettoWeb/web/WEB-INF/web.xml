@@ -6,16 +6,8 @@
     </context-param>
     <listener>
         <description>listener</description>
-        <listener-class>dbmanager.WebAppContextListener</listener-class>
+        <listener-class>com.deadormi.dbmanager.WebAppContextListener</listener-class>
     </listener>
-    <servlet>
-        <servlet-name>NewServlet</servlet-name>
-        <servlet-class>com.dedormi.controller.NewServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>NewServlet</servlet-name>
-        <url-pattern>/NewServlet</url-pattern>
-    </servlet-mapping>
     <session-config>
         <session-timeout>
             30
