@@ -12,10 +12,10 @@ DROP TABLE secondoprogettoweb.USER;
 
 CREATE TABLE secondoprogettoweb.USER(
 id INT NOT NULL AUTO_INCREMENT, 
-username CHAR(30) NOT NULL,
+username CHAR(30) NOT NULL UNIQUE,
 password VARCHAR(30) NOT NULL,
 avatar_name VARCHAR(50),
-email VARCHAR(45),
+email VARCHAR(45) UNIQUE,
 type ENUM('user','mod'),
 login_date VARCHAR(30),
 PRIMARY KEY(id)
