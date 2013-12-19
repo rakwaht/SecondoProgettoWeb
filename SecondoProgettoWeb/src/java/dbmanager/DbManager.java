@@ -30,8 +30,7 @@ public class DbManager implements Serializable {
       // This will load the MySQL driver, each DB has its own driver
       Class.forName("com.mysql.jdbc.Driver");
       // Setup the connection with the DB
-      connection = DriverManager
-          .getConnection("jdbc:mysql://localhost/secondoprogettoweb?user=root&password=password");
+      connection = DriverManager.getConnection(dburl,"root","password");
 
     } catch (Exception e) {
       throw e;
