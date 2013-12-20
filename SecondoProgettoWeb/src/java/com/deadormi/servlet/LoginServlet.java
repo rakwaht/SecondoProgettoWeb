@@ -4,7 +4,7 @@
  */
 package com.deadormi.servlet;
 
-import com.deadormi.controller.LoginController;
+import com.deadormi.controller.UserController;
 import com.deadormi.entity.User;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -82,10 +82,10 @@ public class LoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         //autenticazione
-        LoginController lc = new LoginController();
+        UserController uc = new UserController();
         User u = null;
         try {
-            u = lc.authenticate(request.getParameter("username"),request.getParameter("password"));
+            u = uc.authenticate(request.getParameter("username"),request.getParameter("password"));
         } catch (SQLException ex) {
             Logger.getLogger(LoginServlet.class.getName()).log(Level.SEVERE, null, ex);
         }

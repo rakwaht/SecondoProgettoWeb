@@ -6,7 +6,7 @@
 
 <%@page import="com.deadormi.entity.User"%>
 
-<jsp:useBean id="lc" scope="page" class="com.deadormi.controller.LoginController" />
+<jsp:useBean id="uc" scope="page" class="com.deadormi.controller.UserController" />
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
@@ -14,7 +14,7 @@
     String username = request.getParameter("username");
     String password = request.getParameter("password");
 
-    User user = lc.authenticate(username, password);
+    User user = uc.authenticate(username, password);
 
     if (user != null) {
         session.setAttribute("user", user);
