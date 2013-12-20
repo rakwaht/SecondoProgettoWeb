@@ -1,13 +1,8 @@
-<%-- 
-    Document   : home
-    Created on : 20-dic-2013, 10.07.59
-    Author     : Davide
---%>
-
-<jsp:useBean id="login" class="com.deadormi.javabeans.LoginBean" scope="request"/>
-<jsp:setProperty name="login" property="*"/> 
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
+  
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -15,8 +10,12 @@
         <title>JSP Page</title>
     </head>
     <body>
-        Hai scritto:<BR>
-        Username: <%= login.getUsername() %><BR>
-        Password: <%= login.getPassword() %><BR>
+        Benvenuto <h1>Benvenuto, ${user.username} ! </h1><br />
+        psw: ${user.password}<br />
+        email:${user.email}<br />
+        login date:${user.login_date}<br />
+        avatar:${user.avatar_name}<br />
+        id:${user.id}<br />
+        
     </body>
 </html>

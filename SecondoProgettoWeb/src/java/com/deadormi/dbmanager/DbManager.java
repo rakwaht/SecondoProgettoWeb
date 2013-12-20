@@ -19,7 +19,7 @@ import java.sql.Statement;
  */
 public class DbManager implements Serializable {
 
-    private Connection connection = null;
+    private static Connection connection = null;
     private Statement statement = null;
     private PreparedStatement preparedStatement = null;
     private ResultSet resultSet = null;
@@ -47,5 +47,9 @@ public class DbManager implements Serializable {
             }
         } catch (Exception e) {
         }
+    }
+    
+    public static Connection getConnection(){
+        return connection;
     }
 }

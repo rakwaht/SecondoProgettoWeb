@@ -11,6 +11,14 @@
         <description>listener</description>
         <listener-class>com.deadormi.dbmanager.WebAppContextListener</listener-class>
     </listener>
+    <servlet>
+        <servlet-name>LoginServlet</servlet-name>
+        <servlet-class>com.deadormi.servlet.LoginServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>LoginServlet</servlet-name>
+        <url-pattern>/LoginServlet</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30
