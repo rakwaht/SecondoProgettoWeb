@@ -13,12 +13,14 @@
     </head>
     <body>
         <h1>Hello World!</h1>
+        <div style="color: #FF0000">${message}</div>
+
         <form method="post" action="check_login2.jsp">
             username 		
             <input type="text" name="username"/><br>		
             password
             <input type="password" name="password"/>
-             <div>
+            <div>
                 <input type="submit" value="Login" />
             </div>			
         </form>

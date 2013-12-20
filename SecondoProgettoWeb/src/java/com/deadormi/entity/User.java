@@ -4,11 +4,13 @@
  */
 package com.deadormi.entity;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Davide
  */
-public class User {
+public class User implements Serializable {
     
     private int id;
     private String username;

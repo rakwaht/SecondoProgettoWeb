@@ -20,6 +20,7 @@
         session.setAttribute("user", user);
         response.sendRedirect("home.jsp");
     } else {
+        session.setAttribute("message", "Username/password non esistente!");
         response.sendRedirect("login2.jsp");
     }
 %>
