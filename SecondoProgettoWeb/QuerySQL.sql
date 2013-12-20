@@ -16,7 +16,7 @@ username CHAR(30) NOT NULL UNIQUE,
 password VARCHAR(30) NOT NULL,
 avatar_name VARCHAR(50),
 email VARCHAR(45) UNIQUE,
-type ENUM('user','mod'),
+moderator BOOLEAN DEFAULT false,
 login_date VARCHAR(30),
 PRIMARY KEY(id)
 );
@@ -93,10 +93,4 @@ PRIMARY KEY(id),
 FOREIGN KEY (id_post) REFERENCES POST(id)
 );
 
-
-
-
-
-
-
-
+INSERT INTO secondoprogettoweb.USER(username, password) VALUES ('gino', 'perna');

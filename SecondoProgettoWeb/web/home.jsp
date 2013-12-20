@@ -10,12 +10,11 @@
         <title>JSP Page</title>
     </head>
     <body>
-        Benvenuto <h1>Benvenuto, ${user.username} ! </h1><br />
+        <h1>Benvenuto, ${user.username} ! </h1><br />
         psw: ${user.password}<br />
         email:${user.email}<br />
         login date:${user.login_date}<br />
         avatar:${user.avatar_name}<br />
         id:${user.id}<br />
-        
     </body>
 </html>

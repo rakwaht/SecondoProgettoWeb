@@ -11,16 +11,13 @@ import java.io.Serializable;
  * @author Davide
  */
 public class User implements Serializable {
-    
     private int id;
     private String username;
     private String password;
     private String avatar_name;
     private String email;
-    private enum type {
-        user, mod
-    }
     private String login_date;
+    private Boolean moderator;
 
     public int getId() {
         return id;
@@ -69,4 +66,13 @@ public class User implements Serializable {
     public void setLogin_date(String login_date) {
         this.login_date = login_date;
     }
+
+    public Boolean isModerator() {
+        return moderator;
+    }
+
+    public void setModerator(Boolean moderator) {
+        this.moderator = moderator;
+    }
+    
 }
