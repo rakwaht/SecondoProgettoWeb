@@ -127,7 +127,7 @@ public class LoginServlet extends HttpServlet {
         if (u != null && !response.isCommitted()) {
             HttpSession session = request.getSession(true);
             session.setAttribute("user", u);
-            response.sendRedirect("home.jsp");
+            response.sendRedirect("secure/home.jsp");
         } else if(!response.isCommitted()){
             String message = "Username/password non esistente !";
             response.sendRedirect("login.jsp?message_login=" + URLEncoder.encode(message, "UTF-8"));

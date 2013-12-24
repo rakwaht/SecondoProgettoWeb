@@ -19,6 +19,10 @@
         <servlet-name>RegistrationService</servlet-name>
         <servlet-class>com.deadormi.servlet.RegistrationServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>HomeServlet</servlet-name>
+        <servlet-class>com.deadormi.servlet.HomeServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/LoginServlet</url-pattern>
@@ -26,6 +30,10 @@
     <servlet-mapping>
         <servlet-name>RegistrationService</servlet-name>
         <url-pattern>/RegistrationService</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>HomeServlet</servlet-name>
+        <url-pattern>/HomeServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
