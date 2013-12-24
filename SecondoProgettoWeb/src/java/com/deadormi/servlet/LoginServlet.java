@@ -6,8 +6,10 @@ package com.deadormi.servlet;
 
 import com.deadormi.controller.UserController;
 import com.deadormi.entity.User;
+import com.deadormi.util.Md5;
+import com.deadormi.util.Parser;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.net.URLEncoder;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -65,22 +67,70 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        //autenticazione
         UserController uc = new UserController();
         User u = null;
+        String new_user = request.getParameter("new_user");
+        //registrazione
+        if (new_user != null && new_user.equals("true")) {
+            //controllo validazione form di registrazione
+            String username = request.getParameter("username");
+            String password = request.getParameter("password");
+            String password2 = request.getParameter("password-confirm");
+            String email = request.getParameter("email");
+            try {
+                if(username.trim().equals("") || password.trim().equals("")){
+                      //torna a login con messaggio di errore
+                    String message = "Username e password obbligatorie!";
+                    response.sendRedirect("login.jsp?message_registration=" + URLEncoder.encode(message, "UTF-8"));
+                }
+                else if (uc.username_already_exist(username)) {
+                    //torna a login con messaggio di errore
+                    String message = "Username gia esistene!";
+                    response.sendRedirect("login.jsp?message_registration=" + URLEncoder.encode(message, "UTF-8"));
+                } else if (!password.equals(password2)) {
+                    //torna a login con messaggio di errore
+                    String message = "Le password devono coincidere !";
+                    response.sendRedirect("login.jsp?message_registration=" + URLEncoder.encode(message, "UTF-8"));
+                } else if (!Parser.isEmail(email)) {
+                    //torna a login con messaggio di errore
+                    String message = "L'Email deve essere un email valida !";
+                    response.sendRedirect("login.jsp?message_registration=" + URLEncoder.encode(message, "UTF-8"));
+                }else if (uc.email_already_exist(email)) {
+                    //torna a login con messaggio di errore
+                    String message = "Email gia registrata!";
+                    response.sendRedirect("login.jsp?message_registration=" + URLEncoder.encode(message, "UTF-8"));
+                }
+                else {
+                    //ok registro il nuovo utente
+                    u = new User();
+                    u.setUsername(username);
+                    u.setPassword(Md5.getMD5(password));
+                    u.setEmail(email);
+                    u.setModerator(Boolean.FALSE);
+                    try {
+                        uc.create_user(u);
+                    } catch (SQLException ex) {
+                        Logger.getLogger(LoginServlet.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(LoginServlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+
+        //autenticazione
         try {
-            u = uc.authenticate(request.getParameter("username"),request.getParameter("password"));
+            u = uc.authenticate(request.getParameter("username"), Md5.getMD5(request.getParameter("password")));
         } catch (SQLException ex) {
             Logger.getLogger(LoginServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
-        if(u != null){
-          HttpSession session = request.getSession(true);	    
-          session.setAttribute("user",u); 
-          response.sendRedirect("home.jsp"); 
-        }
-        else{
-            request.setAttribute("message", "Username/password non esistente !");
-            response.sendRedirect("login.jsp");
+        if (u != null && !response.isCommitted()) {
+            HttpSession session = request.getSession(true);
+            session.setAttribute("user", u);
+            response.sendRedirect("home.jsp");
+        } else if(!response.isCommitted()){
+            String message = "Username/password non esistente !";
+            response.sendRedirect("login.jsp?message_login=" + URLEncoder.encode(message, "UTF-8"));
         }
     }
 

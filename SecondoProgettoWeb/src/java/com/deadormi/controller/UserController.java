@@ -75,4 +75,58 @@ public class UserController {
         }
         return null;
     }
+
+    public void create_user(User u) throws SQLException {
+        PreparedStatement stm = con.prepareStatement("INSERT INTO SECONDOPROGETTOWEB.USER (username,password,avatar_name,email,login_date,moderator) VALUES (?,?,?,?,?,?)");
+
+        try {
+            stm.setString(1, u.getUsername());
+            stm.setString(2, u.getPassword());
+            stm.setString(3, u.getAvatar_name());
+            stm.setString(4, u.getEmail());
+            stm.setString(5, u.getLogin_date());
+            stm.setBoolean(6, u.isModerator());
+            stm.executeUpdate();
+        } finally {
+            stm.close();
+        }
+    }
+
+    public boolean username_already_exist(String username) throws SQLException {
+        PreparedStatement stm = con.prepareStatement("SELECT * FROM secondoprogettoweb.user WHERE username=?");
+        try {
+            stm.setString(1, username);
+            ResultSet rs = stm.executeQuery();
+            try {
+                if (rs.next()) {
+                    return true;
+                } else {
+                    return false;
+                }
+            } finally {
+                rs.close();
+            }
+        } finally {
+            stm.close();
+        }
+    }
+
+    public boolean email_already_exist(String email) throws SQLException {
+        PreparedStatement stm = con.prepareStatement("SELECT * FROM secondoprogettoweb.user WHERE email=?");
+        try {
+            stm.setString(1, email);
+            ResultSet rs = stm.executeQuery();
+            try {
+                if (rs.next()) {
+                    return true;
+                } else {
+                    return false;
+                }
+            } finally {
+                rs.close();
+            }
+        } finally {
+            stm.close();
+        }
+    }
 }

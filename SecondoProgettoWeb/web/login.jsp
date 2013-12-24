@@ -10,13 +10,13 @@
     Please enter your password
     <input type="password" name="password"/>
     <div>
-        <div>${message}</div>
+        <div><p>${param.message_login}</p></div>
         <input type="submit" value="Login" />
         <input type="reset" value="Reset" />
     </div>			
 </form>
 <h1>Registration</h1>
-<form method="post" action="LoginServlet">
+<form method="post" action="LoginServlet?new_user=true">
     Please enter your username 		
     <input type="text" name="username"/><br/>		
     Please enter your password
@@ -27,7 +27,7 @@
     <input type="email" name="email"/><br/>
     
     <div>
-        <div>${message}</div>
+        <div><p>${param.message_registration}</p></div>
         <input type="submit" value="Register" />
         <input type="reset" value="Reset" />
     </div>			

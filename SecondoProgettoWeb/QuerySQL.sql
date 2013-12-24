@@ -13,7 +13,7 @@ DROP TABLE secondoprogettoweb.USER;
 CREATE TABLE secondoprogettoweb.USER(
 id INT NOT NULL AUTO_INCREMENT, 
 username CHAR(30) NOT NULL UNIQUE,
-password VARCHAR(30) NOT NULL,
+password VARCHAR(33) NOT NULL,
 avatar_name VARCHAR(50),
 email VARCHAR(45) UNIQUE,
 moderator BOOLEAN DEFAULT false,
@@ -93,4 +93,4 @@ PRIMARY KEY(id),
 FOREIGN KEY (id_post) REFERENCES POST(id)
 );
 
-INSERT INTO secondoprogettoweb.USER(username, password) VALUES ('gino', 'perna');
+INSERT INTO secondoprogettoweb.USER(username, password) VALUES ('gino', 'd9d72431035d8535d1b65ce9a01c2f60');
