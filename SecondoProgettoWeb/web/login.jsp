@@ -32,5 +32,6 @@
         <input type="reset" value="Reset" />
     </div>			
 </form>
-        
+<br /><br /><br />
+ <a href="/SecondoProgettoWeb/HomeServlet?next=groups">Vedi gruppi pubblici</a>
 <%@include file="layout/foot.jsp" %>
