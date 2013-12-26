@@ -4,7 +4,16 @@
  */
 package com.deadormi.servlet;
 
+import com.deadormi.controller.CrewController;
+import com.deadormi.entity.Crew;
+import com.deadormi.entity.User;
 import java.io.IOException;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -15,7 +24,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author Davide
  */
-public class HomeServlet extends HttpServlet {
+public class GroupsServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP
@@ -44,13 +53,32 @@ public class HomeServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String next = request.getParameter("next");
         HttpSession session = request.getSession();
-        if(next.equals("edit")){
-            response.sendRedirect("secure/editprofile.jsp");
+        User u = (User) session.getAttribute("user");
+        ArrayList<Crew> public_groups = null;
+        ArrayList<Crew> my_groups = null;
+        CrewController cc = new CrewController();
+        if (u != null) {
+            try {
+                my_groups = cc.findCrewsByUserId(u.getId());
+                public_groups = cc.findPublicCrew();
+            } catch (SQLException ex) {
+                Logger.getLogger(HomeServlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            RequestDispatcher rd = request.getRequestDispatcher("groups.jsp");
+            request.setAttribute("public_groups",public_groups);
+            request.setAttribute("my_groups",my_groups);
+            rd.forward(request, response);
         }
-        else if(next.equals("groups")){
-             response.sendRedirect("GroupsServlet");
+        else{
+            try {
+                public_groups = cc.findPublicCrew();
+            } catch (SQLException ex) {
+                Logger.getLogger(HomeServlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            RequestDispatcher rd = request.getRequestDispatcher("groups.jsp");
+            request.setAttribute("public_groups",public_groups);
+            rd.forward(request, response);
         }
     }
 

@@ -8,5 +8,6 @@
         login date:${user.login_date}<br />
         avatar:${user.avatar_name}<br />
         id:${user.id}<br />
-         <a href="/SecondoProgettoWeb/HomeServlet?next=edit">Edita il mio profilo</a>
+         <a href="/SecondoProgettoWeb/HomeServlet?next=edit">Edita il mio profilo</a><br />
+         <a href="/SecondoProgettoWeb/HomeServlet?next=groups">Gruppi</a>
 <%@include file="/layout/foot.jsp" %>

@@ -1,17 +1,19 @@
-<%-- 
-    Document   : groups
-    Created on : 24-dic-2013, 19.08.54
-    Author     : Davide
---%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-    </head>
-    <body>
-        <h1>Hello World!</h1>
-    </body>
-</html>
+<%@include file="/layout/head.jsp" %>
+
+<h1>Gruppi di ${user.username} ! </h1><br />
+Eccoti i nome dei gruppi Pubblici:<br />
+<c:forEach var="g" items="${public_groups}">
+    <c:out value="${g.name}" /><br />
+</c:forEach>
+
+    <br /><br />
+    
+Eccoti i nomi dei gruppi a cui sei iscritto:<br />
+<c:forEach var="myg" items="${my_groups}">
+    <c:out value="${myg.name}" /><br />
+</c:forEach>
+
+
+<%@include file="/layout/foot.jsp" %>
+
