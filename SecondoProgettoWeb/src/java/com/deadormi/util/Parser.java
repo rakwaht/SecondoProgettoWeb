@@ -11,7 +11,10 @@ package com.deadormi.util;
 public class Parser {
     
     public static Boolean isEmail(String email){
-        //controllare che sia una email valida della forma something@something.sm
+        //todo parser da migliorare
+        if(!email.contains("@") || !email.contains(".") || email.length()<=6){
+            return false;
+        }
         return true;
     }
     
