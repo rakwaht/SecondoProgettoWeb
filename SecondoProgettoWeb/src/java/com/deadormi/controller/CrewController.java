@@ -10,6 +10,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 /**
@@ -79,8 +80,10 @@ public class CrewController {
         return result;
     }
 
-    public void create_crew(Crew c) throws SQLException {
-        PreparedStatement stm = con.prepareStatement("INSERT INTO secondoprogettoweb.CREW(id_admin,name,description,crew_private,creation_date,crew_enabled) VALUES (?,?,?,?,?,?)");
+    public int create_crew(Crew c) throws SQLException {
+        Integer id_gruppo = null;
+        PreparedStatement stm = con.prepareStatement("INSERT INTO secondoprogettoweb.CREW(id_admin,name,description,crew_private,creation_date,crew_enabled) VALUES (?,?,?,?,?,?)",Statement.RETURN_GENERATED_KEYS);
+          ResultSet generated_keys;
         ArrayList<Crew> result = new ArrayList<Crew>();
         try {
             stm.setInt(1,c.getId_admin());
@@ -90,11 +93,16 @@ public class CrewController {
             stm.setString(5, c.getCreation_date());
             stm.setBoolean(6,c.isCrew_enabled());
             stm.executeUpdate();
-            
+            generated_keys = stm.getGeneratedKeys();
+            if (generated_keys.next()) {
+                    //mando gli inviti
+                    id_gruppo = generated_keys.getInt(1);
+                   
+            }
         } finally {
             stm.close();
         }
-   
+         return id_gruppo;
     }
     
     

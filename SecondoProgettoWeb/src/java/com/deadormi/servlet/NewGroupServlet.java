@@ -7,6 +7,7 @@ package com.deadormi.servlet;
 import com.deadormi.controller.CrewController;
 import com.deadormi.controller.UserController;
 import com.deadormi.entity.Crew;
+import com.deadormi.entity.Invite;
 import com.deadormi.entity.User;
 import com.deadormi.util.Md5;
 import com.deadormi.util.Parser;
@@ -76,20 +77,20 @@ public class NewGroupServlet extends HttpServlet {
         HttpSession session = request.getSession();
         User u = (User) session.getAttribute("user");
         ArrayList<User> users = null;
-        
+
         UserController uc = new UserController();
-        
-            try {
-                users = uc.getAllUsers();
-            } catch (SQLException ex) {
-                Logger.getLogger(HomeServlet.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            RequestDispatcher rd = request.getRequestDispatcher("create_group.jsp");
-            request.setAttribute("users",users);
-            
-            rd.forward(request, response);
-       
-        
+
+        try {
+            users = uc.getAllUsers();
+        } catch (SQLException ex) {
+            Logger.getLogger(HomeServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        RequestDispatcher rd = request.getRequestDispatcher("create_group.jsp");
+        request.setAttribute("users", users);
+
+        rd.forward(request, response);
+
+
     }
 
     /**
@@ -106,12 +107,14 @@ public class NewGroupServlet extends HttpServlet {
             throws ServletException, IOException {
         HttpSession session = request.getSession();
         User u = (User) session.getAttribute("user");
-        System.out.println(u + "***********");
+
         CrewController cc = new CrewController();
         //controllo validazione form di registrazione
         String name = request.getParameter("name");
         String description = request.getParameter("description");
         String type = request.getParameter("type");
+        String[] users = request.getParameterValues("users");
+        InviteController ic = new InviteController();
         if (name.trim().equals("") || description.trim().equals("")) {
             //torna a login con messaggio di errore
             String message = "Nome e/o descrizione obbligatorie!";
@@ -131,12 +134,20 @@ public class NewGroupServlet extends HttpServlet {
             }
             try {
                 cc.create_crew(c);
+                if (users != null) {
+                    for (int i = 0; i < users.length; i++) {
+                        Invite in = new Invite();
+                        in.setId_crew(i);
+                        ic.create_invite(in);
+                    }
+                }
             } catch (SQLException ex) {
                 Logger.getLogger(LoginServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
+
         }
-        if(!response.isCommitted()){
-        response.sendRedirect("/SecondoProgettoWeb/GroupsServlet");
+        if (!response.isCommitted()) {
+            response.sendRedirect("/SecondoProgettoWeb/GroupsServlet");
         }
 
 
