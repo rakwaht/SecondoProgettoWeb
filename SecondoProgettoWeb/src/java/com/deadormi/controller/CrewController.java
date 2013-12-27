@@ -78,5 +78,25 @@ public class CrewController {
         System.out.println("trovati pubblici" + result.size());
         return result;
     }
+
+    public void create_crew(Crew c) throws SQLException {
+        PreparedStatement stm = con.prepareStatement("INSERT INTO secondoprogettoweb.CREW(id_admin,name,description,crew_private,creation_date,crew_enabled) VALUES (?,?,?,?,?,?)");
+        ArrayList<Crew> result = new ArrayList<Crew>();
+        try {
+            stm.setInt(1,c.getId_admin());
+            stm.setString(2,c.getName());
+            stm.setString(3,c.getDescription());
+            stm.setBoolean(4, c.isCrew_private());
+            stm.setString(5, c.getCreation_date());
+            stm.setBoolean(6,c.isCrew_enabled());
+            stm.executeUpdate();
+            
+        } finally {
+            stm.close();
+        }
+   
+    }
+    
+    
     
 }

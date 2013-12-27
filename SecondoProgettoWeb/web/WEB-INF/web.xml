@@ -27,6 +27,10 @@
         <servlet-name>GroupsServlet</servlet-name>
         <servlet-class>com.deadormi.servlet.GroupsServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>NewGroupServlet</servlet-name>
+        <servlet-class>com.deadormi.servlet.NewGroupServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/LoginServlet</url-pattern>
@@ -42,6 +46,10 @@
     <servlet-mapping>
         <servlet-name>GroupsServlet</servlet-name>
         <url-pattern>/GroupsServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>NewGroupServlet</servlet-name>
+        <url-pattern>/secure/NewGroupServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

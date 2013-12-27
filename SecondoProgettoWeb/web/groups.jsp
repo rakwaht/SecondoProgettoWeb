@@ -13,6 +13,8 @@ Eccoti i nomi dei gruppi a cui sei iscritto:<br />
 <c:forEach var="myg" items="${my_groups}">
     <c:out value="${myg.name}" /><br />
 </c:forEach>
+    
+    <a href="secure/NewGroupServlet">NUOVO GRUPPO</a>
 
 
 <%@include file="/layout/foot.jsp" %>

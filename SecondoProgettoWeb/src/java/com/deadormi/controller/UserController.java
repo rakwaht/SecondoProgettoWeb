@@ -10,6 +10,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 /**
  *
@@ -128,5 +129,31 @@ public class UserController {
         } finally {
             stm.close();
         }
+    }
+
+    public ArrayList<User> getAllUsers() throws SQLException {
+         PreparedStatement stm = con.prepareStatement("SELECT * FROM secondoprogettoweb.user");
+        ArrayList<User> users = new ArrayList();
+         try {
+            ResultSet rs = stm.executeQuery();
+            try {
+                while (rs.next()) {
+                    User u = new User();
+                    u.setId(rs.getInt("id"));
+                    u.setAvatar_name(rs.getString("avatar_name"));
+                    u.setEmail(rs.getString("email"));
+                    u.setLogin_date(rs.getString("login_date"));
+                    u.setModerator(rs.getBoolean("moderator"));
+                    u.setPassword(rs.getString("password"));
+                    u.setUsername(rs.getString("username"));
+                    users.add(u);
+                } 
+            } finally {
+                rs.close();
+            }
+        } finally {
+            stm.close();
+        }
+         return users;
     }
 }
