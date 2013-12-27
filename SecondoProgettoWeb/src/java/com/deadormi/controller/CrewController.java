@@ -96,6 +96,7 @@ public class CrewController {
             generated_keys = stm.getGeneratedKeys();
             if (generated_keys.next()) {
                     //mando gli inviti
+                    
                     id_gruppo = generated_keys.getInt(1);
                    
             }

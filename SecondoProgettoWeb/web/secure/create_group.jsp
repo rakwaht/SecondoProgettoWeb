@@ -8,7 +8,11 @@
             Tipo:<br/>
             <input type="radio" name="type" value="public"  checked="checked"/>Public<br/>
             <input type="radio" name="type" value="private"/>Private<br/>
-            Utenti:<br/>
+            <c:if test="${not empty users}">
+                 Utenti:<br/>
+            </c:if>
+            
+           
             <c:forEach var="u" items="${users}">
                
             

@@ -7,6 +7,7 @@ package com.deadormi.servlet;
 import com.deadormi.controller.CrewController;
 import com.deadormi.controller.UserController;
 import com.deadormi.entity.Crew;
+import com.deadormi.entity.Crew_User;
 import com.deadormi.entity.Invite;
 import com.deadormi.entity.User;
 import com.deadormi.util.Md5;
@@ -86,6 +87,11 @@ public class NewGroupServlet extends HttpServlet {
             Logger.getLogger(HomeServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
         RequestDispatcher rd = request.getRequestDispatcher("create_group.jsp");
+        for (int i = 0; i < users.size(); i++) {
+            if(users.get(i).getId().equals(u.getId())){
+                users.remove(i);
+            }
+        }
         request.setAttribute("users", users);
 
         rd.forward(request, response);
@@ -115,11 +121,13 @@ public class NewGroupServlet extends HttpServlet {
         String type = request.getParameter("type");
         String[] users = request.getParameterValues("users");
         InviteController ic = new InviteController();
+        Integer id_crew;
         if (name.trim().equals("") || description.trim().equals("")) {
             //torna a login con messaggio di errore
             String message = "Nome e/o descrizione obbligatorie!";
             response.sendRedirect("create_group.jsp?message_newgroup=" + URLEncoder.encode(message, "UTF-8"));
         } else {
+           
             //ok registro il nuovo utente
             Crew c = new Crew();
             c.setId_admin(u.getId());
@@ -133,14 +141,26 @@ public class NewGroupServlet extends HttpServlet {
                 c.setCrew_private(Boolean.FALSE);
             }
             try {
-                cc.create_crew(c);
+                id_crew = cc.create_crew(c);
                 if (users != null) {
                     for (int i = 0; i < users.length; i++) {
                         Invite in = new Invite();
-                        in.setId_crew(i);
+                        in.setId_crew(id_crew);
+                        in.setId_receiver(Integer.parseInt(users[i]));
+                        in.setId_sender(u.getId());
+                        in.setInvite_enabled(Boolean.TRUE);
                         ic.create_invite(in);
+                        
                     }
+                    
                 }
+                Crew_UserController cuc = new Crew_UserController();
+                Crew_User cu = new Crew_User();
+                cu.setId_user(u.getId());
+                cu.setId_crew(id_crew);
+                cu.setCrew_user_enabled(Boolean.TRUE);
+                cuc.create_crew_user(cu);
+                
             } catch (SQLException ex) {
                 Logger.getLogger(LoginServlet.class.getName()).log(Level.SEVERE, null, ex);
             }

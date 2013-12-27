@@ -5,8 +5,8 @@
 package com.deadormi.servlet;
 
 import com.deadormi.dbmanager.DbManager;
+import com.deadormi.entity.Crew_User;
 import com.deadormi.entity.Invite;
-import com.deadormi.entity.User;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -16,23 +16,21 @@ import java.sql.SQLException;
  *
  * @author Timbu
  */
-public class InviteController {
+public class Crew_UserController {
+     private static Connection con;
 
-    private static Connection con;
-
-    public InviteController() {
+    public Crew_UserController() {
         con = DbManager.getConnection();
     }
 
-    void create_invite(Invite i) throws SQLException {
-        PreparedStatement stm = con.prepareStatement("INSERT INTO secondoprogettoweb.INVITE(id_receiver,id_sender,id_crew,invite_enabled) VALUES (?, ?,?,?)");
+    void create_crew_user(Crew_User cu) throws SQLException {
+        PreparedStatement stm = con.prepareStatement("INSERT INTO secondoprogettoweb.CREW_USER(id_user,id_crew,crew_user_enabled) VALUES (?, ?,?)");
         
        
         try {
-            stm.setInt(1,i.getId_receiver());
-            stm.setInt(2,i.getId_sender());
-            stm.setInt(3,i.getId_crew());
-            stm.setBoolean(4,i.isInvite_enabled());
+            stm.setInt(1,cu.getId_user());
+            stm.setInt(2,cu.getId_crew());
+            stm.setBoolean(3,cu.isCrew_user_enabled());
             stm.executeUpdate();
             
         } finally {
