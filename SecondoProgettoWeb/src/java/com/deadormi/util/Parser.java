@@ -4,18 +4,29 @@
  */
 package com.deadormi.util;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 /**
  *
  * @author Davide
  */
 public class Parser {
     
-    public static Boolean isEmail(String email){
-        //todo parser da migliorare
-        if(!email.contains("@") || !email.contains(".") || email.length()<=6){
-            return false;
-        }
-        return true;
+     private Pattern pattern;
+    private Matcher matcher;
+ 
+    private static final String EMAIL_PATTERN = 
+	"^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+	+ "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
+    
+    public Parser() {
+ 	pattern = Pattern.compile(EMAIL_PATTERN);
+    }
+    
+    public boolean isEmail(final String hex) {
+	matcher = pattern.matcher(hex);
+	return matcher.matches();
     }
     
 }

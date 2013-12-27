@@ -77,6 +77,7 @@ public class LoginServlet extends HttpServlet {
             String password = request.getParameter("password");
             String password2 = request.getParameter("password-confirm");
             String email = request.getParameter("email");
+            Parser parser = new Parser();
             try {
                 if(username.trim().equals("") || password.trim().equals("")){
                       //torna a login con messaggio di errore
@@ -91,7 +92,7 @@ public class LoginServlet extends HttpServlet {
                     //torna a login con messaggio di errore
                     String message = "Le password devono coincidere !";
                     response.sendRedirect("login.jsp?message_registration=" + URLEncoder.encode(message, "UTF-8"));
-                } else if (!Parser.isEmail(email)) {
+                } else if (!parser.isEmail(email)) {
                     //torna a login con messaggio di errore
                     String message = "L'Email deve essere un email valida !";
                     response.sendRedirect("login.jsp?message_registration=" + URLEncoder.encode(message, "UTF-8"));
