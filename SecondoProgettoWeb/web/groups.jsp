@@ -4,7 +4,7 @@
 <h1>Gruppi di ${user.username} ! </h1><br />
 Eccoti i nome dei gruppi Pubblici:<br />
 <c:forEach var="g" items="${public_groups}">
-    <c:out value="${g.name}" /><br />
+    <c:out value="${g.name}" /> <a href="ShowGroupServlet?id_group=${g.id}" >Show Gruppo</a><br />
 </c:forEach>
 
 <br /><br />
@@ -15,7 +15,7 @@ Eccoti i nome dei gruppi Pubblici:<br />
     <c:forEach var="myg" items="${my_groups}">
         <c:out value="${myg.name}" /><br />
     </c:forEach>
-    <a href="secure/NewGroupServlet">NUOVO GRUPPO</a>
+    <a href="NewGroupServlet">NUOVO GRUPPO</a>
 </c:if>
 
 

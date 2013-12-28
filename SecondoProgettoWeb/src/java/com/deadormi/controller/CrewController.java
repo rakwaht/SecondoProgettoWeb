@@ -49,7 +49,6 @@ public class CrewController {
         } finally {
             stm.close();
         }
-        System.out.println("trovati privati" + result.size());
         return result;
     }
 
@@ -105,7 +104,33 @@ public class CrewController {
         }
          return id_gruppo;
     }
-    
+
+    public Crew find_crew_by_id(Integer crew_id) throws SQLException {
+        PreparedStatement stm = con.prepareStatement("SELECT * FROM secondoprogettoweb.crew WHERE id=? AND crew_enabled=true");
+        Crew result = new Crew();
+        try {
+            stm.setInt(1, crew_id);
+            ResultSet rs = stm.executeQuery();
+            try {
+                while (rs.next()) {
+                    Crew c = new Crew();
+                    c.setCreation_date(rs.getString("creation_date"));
+                    c.setCrew_enabled(rs.getBoolean("crew_enabled"));
+                    c.setCrew_private(rs.getBoolean("crew_private"));
+                    c.setDescription(rs.getString("description"));
+                    c.setId(rs.getInt("id"));
+                    c.setId_admin(rs.getInt("id_admin"));
+                    c.setName(rs.getString("name"));
+                    return c;
+                }
+            } finally {
+                rs.close();
+            }
+        } finally {
+            stm.close();
+        }
+        return result;
+    }
     
     
 }
