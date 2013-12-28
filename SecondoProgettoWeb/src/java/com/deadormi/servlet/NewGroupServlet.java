@@ -4,6 +4,7 @@
  */
 package com.deadormi.servlet;
 
+import com.deadormi.controller.InviteController;
 import com.deadormi.controller.Crew_UserController;
 import com.deadormi.controller.CrewController;
 import com.deadormi.controller.UserController;

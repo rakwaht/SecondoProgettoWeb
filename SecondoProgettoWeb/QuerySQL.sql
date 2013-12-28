@@ -59,7 +59,7 @@ FOREIGN KEY (id_user) REFERENCES USER(id)
 # INVITE TABLE CREATION
 
 CREATE TABLE secondoprogettoweb.INVITE(
-id INT,
+id INT NOT NULL AUTO_INCREMENT,
 id_receiver INT,
 id_sender INT,
 id_crew INT,

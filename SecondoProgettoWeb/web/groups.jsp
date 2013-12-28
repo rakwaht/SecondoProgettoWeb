@@ -15,7 +15,7 @@ Eccoti i nome dei gruppi Pubblici:<br />
     <c:forEach var="myg" items="${my_groups}">
         <c:out value="${myg.name}" /><br />
     </c:forEach>
-    <a href="NewGroupServlet">NUOVO GRUPPO</a>
+    <a href="secure/NewGroupServlet">NUOVO GRUPPO</a>
 </c:if>
 
 

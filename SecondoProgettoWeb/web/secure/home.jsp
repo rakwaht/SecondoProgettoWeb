@@ -10,4 +10,5 @@
         id:${user.id}<br />
          <a href="/SecondoProgettoWeb/HomeServlet?next=edit">Edita il mio profilo</a><br />
          <a href="/SecondoProgettoWeb/HomeServlet?next=groups">Gruppi</a>
+         <a href="/SecondoProgettoWeb/secure/InviteServlet">Inviti</a>
 <%@include file="/layout/foot.jsp" %>
