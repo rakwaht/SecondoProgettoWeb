@@ -69,4 +69,19 @@ public class InviteController {
         }
         return invites;
     }
+
+    public void disableInvite(Integer id, Integer id_group) throws SQLException {
+       PreparedStatement stm = con.prepareStatement("UPDATE secondoprogettoweb.INVITE SET invite_enabled=?  WHERE id_receiver=? AND id_crew=? AND invite_enabled=? ");
+       try {
+             stm.setBoolean(1, false);
+            stm.setInt(2, id);
+            stm.setInt(3, id_group);
+            stm.setBoolean(4, true);
+             System.out.println("CIAOOOIFWPOIPODGIPFDGIEPIGPOI");
+            stm.executeUpdate();
+            
+        } finally {
+            stm.close();
+        }
+    }
 }

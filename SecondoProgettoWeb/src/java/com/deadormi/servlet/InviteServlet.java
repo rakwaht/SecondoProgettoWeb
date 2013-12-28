@@ -4,8 +4,10 @@
  */
 package com.deadormi.servlet;
 
+import com.deadormi.controller.Crew_UserController;
 import com.deadormi.controller.InviteController;
 import com.deadormi.controller.UserController;
+import com.deadormi.entity.Crew_User;
 import com.deadormi.entity.Invite;
 import com.deadormi.entity.User;
 import java.io.IOException;
@@ -87,7 +89,28 @@ public class InviteServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+       HttpSession session = request.getSession();
+       InviteController ic = new InviteController();
+       Crew_UserController cuc = new Crew_UserController();
+       User u = (User) session.getAttribute("user");
+       String[] groups = request.getParameterValues("groups");
+       if(groups!=null){
+           for(int i=0; i<groups.length; i++){
+               Integer id_group = Integer.parseInt(groups[i]);
+               Crew_User cu = new Crew_User();
+               cu.setId_crew(id_group);
+               cu.setId_user(u.getId());
+               cu.setCrew_user_enabled(Boolean.TRUE);
+               try {
+                   ic.disableInvite(u.getId(), id_group);
+                   cuc.create_crew_user(cu);
+               } catch (SQLException ex) {
+                   Logger.getLogger(InviteServlet.class.getName()).log(Level.SEVERE, null, ex);
+               }
+               
+           }
+       }
+       response.sendRedirect("InviteServlet");
     }
 
     /**

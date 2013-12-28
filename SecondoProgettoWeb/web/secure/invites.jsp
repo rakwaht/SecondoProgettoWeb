@@ -8,8 +8,15 @@
 
 <%@include file="/layout/head.jsp" %>
 <h1>Inviti!</h1>
-<c:forEach var="i" items="${invites}">
-    <c:out value="${i.id_crew}" />
-</c:forEach>
+<form action='InviteServlet' method='POST'>
+    <c:forEach var="i" items="${invites}">
+        <c:out value="${i.id_crew}" />
+        
+        <input type='checkbox' name='groups' value='${i.id_crew}'/><br/>
+
+
+    </c:forEach>
+        <input type='submit' value='Accetta'/>
+</form>
 </body>
 <%@include file="/layout/foot.jsp" %>
