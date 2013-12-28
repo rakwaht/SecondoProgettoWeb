@@ -6,6 +6,7 @@ package com.deadormi.servlet;
 
 import com.deadormi.controller.UserController;
 import com.deadormi.entity.User;
+import com.deadormi.util.CurrentDate;
 import com.deadormi.util.Md5;
 import com.deadormi.util.Parser;
 import java.io.IOException;
@@ -107,6 +108,7 @@ public class LoginServlet extends HttpServlet {
                     u.setUsername(username);
                     u.setPassword(Md5.getMD5(password));
                     u.setEmail(email);
+                    u.setLogin_date(CurrentDate.getCurrentDate());
                     u.setModerator(Boolean.FALSE);
                     try {
                         uc.create_user(u);

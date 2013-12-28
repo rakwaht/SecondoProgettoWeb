@@ -12,6 +12,7 @@ import com.deadormi.entity.Crew;
 import com.deadormi.entity.Crew_User;
 import com.deadormi.entity.Invite;
 import com.deadormi.entity.User;
+import com.deadormi.util.CurrentDate;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.URLEncoder;
@@ -131,7 +132,7 @@ public class NewGroupServlet extends HttpServlet {
             //ok registro il nuovo utente
             Crew c = new Crew();
             c.setId_admin(u.getId());
-            c.setCreation_date("26/07/1992;12:55");
+            c.setCreation_date(CurrentDate.getCurrentDate());
             c.setCrew_enabled(Boolean.TRUE);
             c.setName(name);
             c.setDescription(description);
