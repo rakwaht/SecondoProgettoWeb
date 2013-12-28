@@ -4,14 +4,13 @@
  */
 package com.deadormi.servlet;
 
+import com.deadormi.controller.Crew_UserController;
 import com.deadormi.controller.CrewController;
 import com.deadormi.controller.UserController;
 import com.deadormi.entity.Crew;
 import com.deadormi.entity.Crew_User;
 import com.deadormi.entity.Invite;
 import com.deadormi.entity.User;
-import com.deadormi.util.Md5;
-import com.deadormi.util.Parser;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.URLEncoder;
@@ -125,7 +124,7 @@ public class NewGroupServlet extends HttpServlet {
         if (name.trim().equals("") || description.trim().equals("")) {
             //torna a login con messaggio di errore
             String message = "Nome e/o descrizione obbligatorie!";
-            response.sendRedirect("create_group.jsp?message_newgroup=" + URLEncoder.encode(message, "UTF-8"));
+            response.sendRedirect("NewGroupServlet?message_newgroup=" + URLEncoder.encode(message, "UTF-8"));
         } else {
            
             //ok registro il nuovo utente

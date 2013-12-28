@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.deadormi.servlet;
+package com.deadormi.controller;
 
 import com.deadormi.dbmanager.DbManager;
 import com.deadormi.entity.Crew_User;
@@ -23,7 +23,7 @@ public class Crew_UserController {
         con = DbManager.getConnection();
     }
 
-    void create_crew_user(Crew_User cu) throws SQLException {
+    public void create_crew_user(Crew_User cu) throws SQLException {
         PreparedStatement stm = con.prepareStatement("INSERT INTO secondoprogettoweb.CREW_USER(id_user,id_crew,crew_user_enabled) VALUES (?, ?,?)");
         
        
