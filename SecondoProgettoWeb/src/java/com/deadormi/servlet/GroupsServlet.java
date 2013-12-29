@@ -10,15 +10,13 @@ import com.deadormi.entity.User;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -26,6 +24,8 @@ import javax.servlet.http.HttpSession;
  */
 public class GroupsServlet extends HttpServlet {
 
+    static Logger log = Logger.getLogger(GroupsServlet.class);
+    
     /**
      * Processes requests for both HTTP
      * <code>GET</code> and
@@ -63,7 +63,7 @@ public class GroupsServlet extends HttpServlet {
                 my_groups = cc.findCrewsByUserId(u.getId());
                 public_groups = cc.findPublicCrew();
             } catch (SQLException ex) {
-                Logger.getLogger(HomeServlet.class.getName()).log(Level.SEVERE, null, ex);
+                log.warn(ex);
             }
             RequestDispatcher rd = request.getRequestDispatcher("groups.jsp");
             request.setAttribute("public_groups",public_groups);
@@ -74,7 +74,7 @@ public class GroupsServlet extends HttpServlet {
             try {
                 public_groups = cc.findPublicCrew();
             } catch (SQLException ex) {
-                Logger.getLogger(HomeServlet.class.getName()).log(Level.SEVERE, null, ex);
+                log.warn(ex);
             }
             RequestDispatcher rd = request.getRequestDispatcher("groups.jsp");
             request.setAttribute("public_groups",public_groups);

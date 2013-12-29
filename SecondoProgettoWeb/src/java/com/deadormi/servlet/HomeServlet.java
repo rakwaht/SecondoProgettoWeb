@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -17,6 +18,8 @@ import javax.servlet.http.HttpSession;
  */
 public class HomeServlet extends HttpServlet {
 
+    static Logger log = Logger.getLogger(HomeServlet.class);
+    
     /**
      * Processes requests for both HTTP
      * <code>GET</code> and

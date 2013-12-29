@@ -12,13 +12,12 @@ import com.deadormi.util.Parser;
 import java.io.IOException;
 import java.net.URLEncoder;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -26,6 +25,8 @@ import javax.servlet.http.HttpSession;
  */
 public class LoginServlet extends HttpServlet {
 
+    static Logger log = Logger.getLogger(LoginServlet.class);
+    
     /**
      * Processes requests for both HTTP
      * <code>GET</code> and
@@ -113,11 +114,11 @@ public class LoginServlet extends HttpServlet {
                     try {
                         uc.create_user(u);
                     } catch (SQLException ex) {
-                        Logger.getLogger(LoginServlet.class.getName()).log(Level.SEVERE, null, ex);
+                        log.warn(ex);
                     }
                 }
             } catch (SQLException ex) {
-                Logger.getLogger(LoginServlet.class.getName()).log(Level.SEVERE, null, ex);
+                log.warn(ex);
             }
         }
 
@@ -125,7 +126,7 @@ public class LoginServlet extends HttpServlet {
         try {
             u = uc.authenticate(request.getParameter("username"), Md5.getMD5(request.getParameter("password")));
         } catch (SQLException ex) {
-            Logger.getLogger(LoginServlet.class.getName()).log(Level.SEVERE, null, ex);
+            log.warn(ex);
         }
         if (u != null && !response.isCommitted()) {
             HttpSession session = request.getSession(true);

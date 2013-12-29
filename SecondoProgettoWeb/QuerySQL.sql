@@ -104,3 +104,6 @@ INSERT INTO secondoprogettoweb.CREW(id_admin,name,description,crew_private,creat
 
 # inserisco associzione crew_utente per test gruppi privati
 INSERT INTO secondoprogettoweb.CREW_USER(id_user,id_crew,crew_user_enabled) VALUES ('1','2','1');
+
+# inserisco post per test di show gruppo
+INSERT INTO secondoprogettoweb.post(id_writer,id_crew,creation_date,text) VALUES ('1','1','01/03/2013','lore ipsum e porco dio');

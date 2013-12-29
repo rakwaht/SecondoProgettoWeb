@@ -1,17 +1,16 @@
-<%-- 
-    Document   : show_group
-    Created on : 24-dic-2013, 19.10.01
-    Author     : Davide
---%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-    </head>
-    <body>
-        <h1>Hello World!</h1>
-    </body>
-</html>
+<%@include file="/layout/head.jsp" %>
+
+<h1>Pagina show gruppo del gruppo: ${crew.name}</h1><br />
+
+Dettagli gruppo:<br />
+nome: ${crew.name}
+desctizione: ${crew.description}
+
+<br />Ecco i post:<br />
+<c:forEach var="p" items="${posts}">
+    <c:out value="${p.text}" /><br />
+</c:forEach>
+
+<%@include file="/layout/foot.jsp" %>
+

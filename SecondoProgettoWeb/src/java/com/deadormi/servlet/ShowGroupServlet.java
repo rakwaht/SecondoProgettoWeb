@@ -6,25 +6,29 @@ package com.deadormi.servlet;
 
 import com.deadormi.controller.CrewController;
 import com.deadormi.controller.Crew_UserController;
+import com.deadormi.controller.PostController;
 import com.deadormi.entity.Crew;
+import com.deadormi.entity.Post;
 import com.deadormi.entity.User;
+import com.deadormi.util.Parser;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.ArrayList;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import org.apache.log4j.Logger;
 
 /**
  *
  * @author Davide
  */
 public class ShowGroupServlet extends HttpServlet {
+
+    static Logger log = Logger.getLogger(ShowGroupServlet.class);
 
     /**
      * Processes requests for both HTTP
@@ -56,38 +60,54 @@ public class ShowGroupServlet extends HttpServlet {
         //istanzio oggetti che mi servono
         CrewController cc = new CrewController();
         Crew_UserController cu = new Crew_UserController();
-        Integer crew_id = (Integer) request.getAttribute("id_group");
+        PostController pc = new PostController();
+        String crew_id_string = request.getParameter("id_group");
         HttpSession session = request.getSession();
         User u = (User) session.getAttribute("user");
 
-        if (crew_id == null) {
+        if (crew_id_string == null) {
             //se non trovo l'id url sbagliato torno a gruppi
+            log.debug("crew_id null");
             response.sendRedirect("GroupsServlet");
         } else {
-            try {
-                Crew crew = cc.find_crew_by_id(crew_id);
-                if (crew == null) {
-                    //se non trovo il gruppo torno a gruppi
-                    response.sendRedirect("GroupsServlet");
-                } else if (!crew.isCrew_private()) {
-                    //se il gruppo è pubblico lo mostro
-                    RequestDispatcher rd = request.getRequestDispatcher("show_group.jsp");
-                    request.setAttribute("crew", crew);
-                    rd.forward(request, response);
-                } else if (u == null) {
-                    //se il gruppo è privato e io non sono loggato torno a gruppi
-                    response.sendRedirect("GroupsServlet");
-                } else if (cu.crew_belongs_to_user(crew.getId(), u.getId())) {
-                    //se sono loggato e il gruppo è privato ed io sono iscritto lo mostro
-                    RequestDispatcher rd = request.getRequestDispatcher("show_group.jsp");
-                    request.setAttribute("crew", crew);
-                    rd.forward(request, response);
-                } else {
-                    //altrimenti torno a gruppi
-                    response.sendRedirect("GroupsServlet");
+            if (Parser.isNumeric(crew_id_string)) {
+                try {
+                    Integer crew_id = Integer.parseInt(crew_id_string);
+                    Crew crew = cc.find_crew_by_id(crew_id);
+                    if (crew == null) {
+                        //se non trovo il gruppo torno a gruppi
+                        log.debug("caso crew non trovata");
+                        response.sendRedirect("GroupsServlet");
+                    } else if (!crew.isCrew_private()) {
+                        log.debug("gruppo pubblico quindi lo mostro");
+                        //se il gruppo è pubblico lo mostro
+                        ArrayList<Post> posts = pc.getPostsByCrewId(crew_id);
+                        RequestDispatcher rd = request.getRequestDispatcher("show_group.jsp");
+                        request.setAttribute("crew", crew);
+                        request.setAttribute("posts", posts);
+                        rd.forward(request, response);
+                    } else if (u == null) {
+                        log.debug("utente non loggato quindi non mostro gruppi privati");
+                        //se il gruppo è privato e io non sono loggato torno a gruppi
+                        response.sendRedirect("GroupsServlet");
+                    } else if (cu.crew_belongs_to_user(crew.getId(), u.getId())) {
+                        log.debug("utente e crew matchano quindi mostro il gruppo");
+                        //se sono loggato e il gruppo è privato ed io sono iscritto lo mostro
+                        RequestDispatcher rd = request.getRequestDispatcher("show_group.jsp");
+                        request.setAttribute("crew", crew);
+                        rd.forward(request, response);
+                    } else {
+                        log.debug("else finale non puoi vedere il gruppo");
+                        //altrimenti torno a gruppi
+                        response.sendRedirect("GroupsServlet");
+                    }
+                } catch (SQLException ex) {
+                    log.warn(ex);
                 }
-            } catch (SQLException ex) {
-                Logger.getLogger(ShowGroupServlet.class.getName()).log(Level.SEVERE, null, ex);
+            } else {
+                log.debug("Gruppo id non è un numero quindi torno a gruppi");
+                //altrimenti torno a gruppi
+                response.sendRedirect("GroupsServlet");
             }
         }
     }

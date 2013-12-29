@@ -18,21 +18,22 @@ import java.io.PrintWriter;
 import java.net.URLEncoder;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import org.apache.log4j.Logger;
 
 /**
  *
  * @author Timbu
  */
 public class NewGroupServlet extends HttpServlet {
-
+    
+    static Logger log = Logger.getLogger(NewGroupServlet.class);
+    
     /**
      * Processes requests for both HTTP
      * <code>GET</code> and
@@ -45,22 +46,6 @@ public class NewGroupServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = response.getWriter();
-        try {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet NewGroupServlet</title>");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet NewGroupServlet at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        } finally {
-            out.close();
-        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -85,7 +70,7 @@ public class NewGroupServlet extends HttpServlet {
         try {
             users = uc.getAllUsers();
         } catch (SQLException ex) {
-            Logger.getLogger(HomeServlet.class.getName()).log(Level.SEVERE, null, ex);
+            log.warn(ex);
         }
         RequestDispatcher rd = request.getRequestDispatcher("create_group.jsp");
         for (int i = 0; i < users.size(); i++) {
@@ -163,7 +148,7 @@ public class NewGroupServlet extends HttpServlet {
                 cuc.create_crew_user(cu);
                 
             } catch (SQLException ex) {
-                Logger.getLogger(LoginServlet.class.getName()).log(Level.SEVERE, null, ex);
+                log.warn(ex);
             }
 
         }

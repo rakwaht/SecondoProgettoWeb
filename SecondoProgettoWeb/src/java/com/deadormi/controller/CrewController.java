@@ -12,6 +12,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -19,6 +20,8 @@ import java.util.ArrayList;
  */
 public class CrewController {
 
+    static Logger log = Logger.getLogger(CrewController.class);
+    
     private static Connection con;
 
     public CrewController() {
@@ -75,7 +78,6 @@ public class CrewController {
         } finally {
             stm.close();
         }
-        System.out.println("trovati pubblici" + result.size());
         return result;
     }
 
@@ -107,7 +109,6 @@ public class CrewController {
 
     public Crew find_crew_by_id(Integer crew_id) throws SQLException {
         PreparedStatement stm = con.prepareStatement("SELECT * FROM secondoprogettoweb.crew WHERE id=? AND crew_enabled=true");
-        Crew result = new Crew();
         try {
             stm.setInt(1, crew_id);
             ResultSet rs = stm.executeQuery();
@@ -129,7 +130,7 @@ public class CrewController {
         } finally {
             stm.close();
         }
-        return result;
+        return null;
     }
     
     

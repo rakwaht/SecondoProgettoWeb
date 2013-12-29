@@ -7,19 +7,21 @@ package com.deadormi.controller;
 import com.deadormi.dbmanager.DbManager;
 import com.deadormi.entity.Crew;
 import com.deadormi.entity.Crew_User;
-import com.deadormi.entity.Invite;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import org.apache.log4j.Logger;
 
 /**
  *
  * @author Timbu
  */
 public class Crew_UserController {
-     private static Connection con;
+
+    static Logger log = Logger.getLogger(Crew_UserController.class);
+    private static Connection con;
 
     public Crew_UserController() {
         con = DbManager.getConnection();

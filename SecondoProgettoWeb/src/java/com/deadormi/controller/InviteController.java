@@ -6,12 +6,12 @@ package com.deadormi.controller;
 
 import com.deadormi.dbmanager.DbManager;
 import com.deadormi.entity.Invite;
-import com.deadormi.entity.User;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -19,6 +19,7 @@ import java.util.ArrayList;
  */
 public class InviteController {
 
+    static Logger log = Logger.getLogger(InviteController.class);
     private static Connection con;
 
     public InviteController() {

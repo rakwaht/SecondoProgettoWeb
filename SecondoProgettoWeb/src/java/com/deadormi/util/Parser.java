@@ -29,4 +29,10 @@ public class Parser {
 	return matcher.matches();
     }
     
+    public static boolean isNumeric(String num){
+        Pattern pattern = Pattern.compile("^-?\\d+\\.?\\d*$");
+        Matcher matcher = pattern.matcher(num);
+        return matcher.matches();
+    }
+    
 }
