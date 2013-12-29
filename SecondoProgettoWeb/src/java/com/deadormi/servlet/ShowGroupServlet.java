@@ -71,9 +71,11 @@ public class ShowGroupServlet extends HttpServlet {
             response.sendRedirect("GroupsServlet");
         } else {
             if (Parser.isNumeric(crew_id_string)) {
+                //se l'id è un numero procedo
                 try {
                     Integer crew_id = Integer.parseInt(crew_id_string);
                     Crew crew = cc.find_crew_by_id(crew_id);
+                    //testo la crew trovata
                     if (crew == null) {
                         //se non trovo il gruppo torno a gruppi
                         log.debug("caso crew non trovata");
@@ -93,8 +95,10 @@ public class ShowGroupServlet extends HttpServlet {
                     } else if (cu.crew_belongs_to_user(crew.getId(), u.getId())) {
                         log.debug("utente e crew matchano quindi mostro il gruppo");
                         //se sono loggato e il gruppo è privato ed io sono iscritto lo mostro
+                        ArrayList<Post> posts = pc.getPostsByCrewId(crew_id);
                         RequestDispatcher rd = request.getRequestDispatcher("show_group.jsp");
                         request.setAttribute("crew", crew);
+                        request.setAttribute("posts", posts);
                         rd.forward(request, response);
                     } else {
                         log.debug("else finale non puoi vedere il gruppo");

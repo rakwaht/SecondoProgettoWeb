@@ -5,12 +5,17 @@
 package com.deadormi.entity;
 
 import java.io.Serializable;
+import org.apache.log4j.Logger;
 
 /**
  *
  * @author Davide
  */
 public class User implements Serializable {
+
+    static Logger log = Logger.getLogger(User.class);
+    
+    
     private Integer id;
     private String username;
     private String password;
@@ -74,5 +79,4 @@ public class User implements Serializable {
     public void setModerator(Boolean moderator) {
         this.moderator = moderator;
     }
-    
 }

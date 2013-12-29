@@ -6,6 +6,7 @@
 package com.deadormi.entity;
 
 import java.io.Serializable;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -13,8 +14,10 @@ import java.io.Serializable;
  */
 public class Crew implements Serializable {
 
+     static Logger log = Logger.getLogger(Crew.class);
+    
     private Integer id;
-    private Integer id_admin;
+    private User admin;
     private String name;
     private String description;
     private Boolean crew_private;
@@ -27,14 +30,6 @@ public class Crew implements Serializable {
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public Integer getId_admin() {
-        return id_admin;
-    }
-
-    public void setId_admin(Integer id_admin) {
-        this.id_admin = id_admin;
     }
 
     public String getName() {
@@ -76,6 +71,12 @@ public class Crew implements Serializable {
     public void setCrew_enabled(Boolean crew_enabled) {
         this.crew_enabled = crew_enabled;
     }
-    
-    
+
+    public User getAdmin() {
+        return admin;
+    }
+
+    public void setAdmin(User admin) {
+        this.admin = admin;
+    }
 }

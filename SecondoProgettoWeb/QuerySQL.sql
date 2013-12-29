@@ -100,7 +100,7 @@ INSERT INTO secondoprogettoweb.USER(username, password) VALUES ('gino', 'd9d7243
 INSERT INTO secondoprogettoweb.CREW(id_admin,name,description,crew_private,creation_date,crew_enabled) VALUES ('1','Public test','descrizione test','0','10/10/10','1');
 
 # inserimento crew privata
-INSERT INTO secondoprogettoweb.CREW(id_admin,name,description,crew_private,creation_date,crew_enabled) VALUES ('1','Private test','descrizione test','1','10/10/10','1');
+INSERT INTO secondoprogettoweb.CREW(id_admin,name,description,crew_private,creation_date,crew_enabled) VALUES ('1','Private test','descrizione test','1','11/11/11','1');
 
 # inserisco associzione crew_utente per test gruppi privati
 INSERT INTO secondoprogettoweb.CREW_USER(id_user,id_crew,crew_user_enabled) VALUES ('1','2','1');

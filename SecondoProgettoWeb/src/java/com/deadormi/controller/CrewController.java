@@ -31,6 +31,7 @@ public class CrewController {
     public ArrayList<Crew> findCrewsByUserId(Integer id) throws SQLException {
         PreparedStatement stm = con.prepareStatement("SELECT * FROM secondoprogettoweb.crew C JOIN secondoprogettoweb.crew_user U ON C.id=U.id_crew  WHERE id_user=? AND crew_enabled=true AND crew_user_enabled=true");
         ArrayList<Crew> result = new ArrayList<Crew>();
+        UserController uc = new UserController();
         try {
             stm.setInt(1, id);
             ResultSet rs = stm.executeQuery();
@@ -42,7 +43,8 @@ public class CrewController {
                     c.setCrew_private(rs.getBoolean("crew_private"));
                     c.setDescription(rs.getString("description"));
                     c.setId(rs.getInt("id"));
-                    c.setId_admin(rs.getInt("id_admin"));
+                    int id_admin = rs.getInt("id_admin"); 
+                    c.setAdmin(uc.findUserbyId(id_admin));
                     c.setName(rs.getString("name"));
                     result.add(c);
                 }
@@ -58,6 +60,7 @@ public class CrewController {
     public ArrayList<Crew> findPublicCrew() throws SQLException {
         PreparedStatement stm = con.prepareStatement("SELECT * FROM secondoprogettoweb.crew WHERE crew_private=false AND crew_enabled=true");
         ArrayList<Crew> result = new ArrayList<Crew>();
+         UserController uc = new UserController();
         try {
             ResultSet rs = stm.executeQuery();
             try {
@@ -68,7 +71,8 @@ public class CrewController {
                     c.setCrew_private(rs.getBoolean("crew_private"));
                     c.setDescription(rs.getString("description"));
                     c.setId(rs.getInt("id"));
-                    c.setId_admin(rs.getInt("id_admin"));
+                    int id_admin = rs.getInt("id_admin"); 
+                    c.setAdmin(uc.findUserbyId(id_admin));
                     c.setName(rs.getString("name"));
                     result.add(c);
                 }
@@ -87,7 +91,7 @@ public class CrewController {
           ResultSet generated_keys;
         ArrayList<Crew> result = new ArrayList<Crew>();
         try {
-            stm.setInt(1,c.getId_admin());
+            stm.setInt(1,c.getAdmin().getId());
             stm.setString(2,c.getName());
             stm.setString(3,c.getDescription());
             stm.setBoolean(4, c.isCrew_private());
@@ -109,6 +113,7 @@ public class CrewController {
 
     public Crew find_crew_by_id(Integer crew_id) throws SQLException {
         PreparedStatement stm = con.prepareStatement("SELECT * FROM secondoprogettoweb.crew WHERE id=? AND crew_enabled=true");
+        UserController uc = new UserController();
         try {
             stm.setInt(1, crew_id);
             ResultSet rs = stm.executeQuery();
@@ -120,7 +125,8 @@ public class CrewController {
                     c.setCrew_private(rs.getBoolean("crew_private"));
                     c.setDescription(rs.getString("description"));
                     c.setId(rs.getInt("id"));
-                    c.setId_admin(rs.getInt("id_admin"));
+                    int id_admin = rs.getInt("id_admin"); 
+                    c.setAdmin(uc.findUserbyId(id_admin));
                     c.setName(rs.getString("name"));
                     return c;
                 }

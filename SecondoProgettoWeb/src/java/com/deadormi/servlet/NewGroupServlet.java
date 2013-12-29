@@ -116,7 +116,7 @@ public class NewGroupServlet extends HttpServlet {
            
             //ok registro il nuovo utente
             Crew c = new Crew();
-            c.setId_admin(u.getId());
+            c.setAdmin(u);
             c.setCreation_date(CurrentDate.getCurrentDate());
             c.setCrew_enabled(Boolean.TRUE);
             c.setName(name);
