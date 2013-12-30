@@ -28,19 +28,48 @@ public class Crew_UserController {
     }
 
     public void create_crew_user(Crew_User cu) throws SQLException {
-        PreparedStatement stm = con.prepareStatement("INSERT INTO secondoprogettoweb.CREW_USER(id_user,id_crew,crew_user_enabled) VALUES (?, ?,?)");
-        
-       
+        PreparedStatement stm = con.prepareStatement("SELECT * FROM secondoprogettoweb.CREW_USER where id_crew=? AND id_user=?");
+        ResultSet rs;
         try {
-            stm.setInt(1,cu.getId_user());
-            stm.setInt(2,cu.getId_crew());
-            stm.setBoolean(3,cu.isCrew_user_enabled());
-            stm.executeUpdate();
-            
+            stm.setInt(1, cu.getId_crew());
+            stm.setInt(2, cu.getId_user());
+            stm.setBoolean(3, cu.isCrew_user_enabled());
+            rs = stm.executeQuery();
+            if (rs.next()) {
+                stm = con.prepareStatement("UPDATE secondoprogettoweb.CREW_USER set crew_user_enabled=? WHERE id_crew=? AND id_user=?");
+                
+
+                try {
+                     stm.setBoolean(1, true);
+                    stm.setInt(3, cu.getId_user());
+                    stm.setInt(2, cu.getId_crew());
+                  
+                    stm.executeUpdate();
+
+                } finally {
+                    stm.close();
+                }
+            } else {
+                stm = con.prepareStatement("INSERT INTO secondoprogettoweb.CREW_USER(id_user,id_crew,crew_user_enabled) VALUES (?, ?,?)");
+
+
+                try {
+                    stm.setInt(1, cu.getId_user());
+                    stm.setInt(2, cu.getId_crew());
+                    stm.setBoolean(3, cu.isCrew_user_enabled());
+                    stm.executeUpdate();
+
+                } finally {
+                    stm.close();
+                }
+            }
+
         } finally {
             stm.close();
         }
-     
+
+
+
     }
 
     public boolean crew_belongs_to_user(Integer id_crew, Integer id_user) throws SQLException {
@@ -64,17 +93,17 @@ public class Crew_UserController {
     }
 
     public void removeCrewUserById(Integer id_follower, Integer id_crew) throws SQLException {
-         PreparedStatement stm = con.prepareStatement("UPDATE secondoprogettoweb.crew_user SET crew_user_enabled=? WHERE id_crew=? AND id_user=?");
+        PreparedStatement stm = con.prepareStatement("UPDATE secondoprogettoweb.crew_user SET crew_user_enabled=? WHERE id_crew=? AND id_user=?");
         ArrayList<Crew> result = new ArrayList<Crew>();
         try {
             stm.setBoolean(1, false);
             stm.setInt(2, id_crew);
             stm.setInt(3, id_follower);
-            stm.executeUpdate();  
+            stm.executeUpdate();
         } finally {
             stm.close();
         }
-      
-    
+
+
     }
 }
