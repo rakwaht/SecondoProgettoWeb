@@ -73,6 +73,11 @@ public class ModifyGroupServlet extends HttpServlet {
         } catch (SQLException ex) {
             Logger.getLogger(ModifyGroupServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
+        for (int i = 0; i < followers.size(); i++) {
+            if(followers.get(i).getId().equals(crew.getAdmin().getId())){
+                followers.remove(i);
+            }
+        }
         RequestDispatcher rd = request.getRequestDispatcher("modify_group.jsp");
         request.setAttribute("followers", followers);
         request.setAttribute("not_followers", not_followers);
@@ -96,9 +101,11 @@ public class ModifyGroupServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         Integer id_crew = Integer.parseInt(request.getParameter("id_crew"));
-        
+        String title = request.getParameter("title");
+        String description = request.getParameter("description");
         CrewController cu = new CrewController();
         Crew crew=null;
+        
         UserController uc = new UserController();
         Crew_UserController cuc = new Crew_UserController();
         InviteController ic = new InviteController();
@@ -139,7 +146,18 @@ public class ModifyGroupServlet extends HttpServlet {
                 
             }
         }
-        
+        if(title.trim().equals("")||description.trim().equals("")){
+            //ERROR
+        }else{
+            crew.setDescription(description);
+            crew.setName(title);
+            
+            try {
+                cu.updateCrew(crew);
+            } catch (SQLException ex) {
+                Logger.getLogger(ModifyGroupServlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
         response.sendRedirect("/SecondoProgettoWeb/ShowGroupServlet?id_group="+crew.getId());
         
         

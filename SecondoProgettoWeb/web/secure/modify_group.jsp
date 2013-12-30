@@ -7,8 +7,8 @@
 
 
 <form method="post" action="ModifyGroupServlet?id_crew=${crew.id}">
-    <input type='text' value='${crew.name}'/><br/>
-    <textarea type='text'>${crew.description}</textarea><br/>
+    <input type='text' name='title'value='${crew.name}'/><br/>
+    <textarea type='text' name='description'>${crew.description}</textarea><br/>
 
     <c:if test="${not empty followers}">
         ELIMINA:<br/>

@@ -21,13 +21,12 @@ import org.apache.log4j.Logger;
 public class CrewController {
 
     static Logger log = Logger.getLogger(CrewController.class);
-    
     private static Connection con;
 
     public CrewController() {
         con = DbManager.getConnection();
     }
-    
+
     public ArrayList<Crew> findCrewsByUserId(Integer id) throws SQLException {
         PreparedStatement stm = con.prepareStatement("SELECT * FROM secondoprogettoweb.crew C JOIN secondoprogettoweb.crew_user U ON C.id=U.id_crew  WHERE id_user=? AND crew_enabled=true AND crew_user_enabled=true");
         ArrayList<Crew> result = new ArrayList<Crew>();
@@ -43,7 +42,7 @@ public class CrewController {
                     c.setCrew_private(rs.getBoolean("crew_private"));
                     c.setDescription(rs.getString("description"));
                     c.setId(rs.getInt("id"));
-                    int id_admin = rs.getInt("id_admin"); 
+                    int id_admin = rs.getInt("id_admin");
                     c.setAdmin(uc.findUserbyId(id_admin));
                     c.setName(rs.getString("name"));
                     result.add(c);
@@ -60,7 +59,7 @@ public class CrewController {
     public ArrayList<Crew> findPublicCrew() throws SQLException {
         PreparedStatement stm = con.prepareStatement("SELECT * FROM secondoprogettoweb.crew WHERE crew_private=false AND crew_enabled=true");
         ArrayList<Crew> result = new ArrayList<Crew>();
-         UserController uc = new UserController();
+        UserController uc = new UserController();
         try {
             ResultSet rs = stm.executeQuery();
             try {
@@ -71,7 +70,7 @@ public class CrewController {
                     c.setCrew_private(rs.getBoolean("crew_private"));
                     c.setDescription(rs.getString("description"));
                     c.setId(rs.getInt("id"));
-                    int id_admin = rs.getInt("id_admin"); 
+                    int id_admin = rs.getInt("id_admin");
                     c.setAdmin(uc.findUserbyId(id_admin));
                     c.setName(rs.getString("name"));
                     result.add(c);
@@ -87,28 +86,28 @@ public class CrewController {
 
     public int create_crew(Crew c) throws SQLException {
         Integer id_gruppo = null;
-        PreparedStatement stm = con.prepareStatement("INSERT INTO secondoprogettoweb.CREW(id_admin,name,description,crew_private,creation_date,crew_enabled) VALUES (?,?,?,?,?,?)",Statement.RETURN_GENERATED_KEYS);
-          ResultSet generated_keys;
+        PreparedStatement stm = con.prepareStatement("INSERT INTO secondoprogettoweb.CREW(id_admin,name,description,crew_private,creation_date,crew_enabled) VALUES (?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
+        ResultSet generated_keys;
         ArrayList<Crew> result = new ArrayList<Crew>();
         try {
-            stm.setInt(1,c.getAdmin().getId());
-            stm.setString(2,c.getName());
-            stm.setString(3,c.getDescription());
+            stm.setInt(1, c.getAdmin().getId());
+            stm.setString(2, c.getName());
+            stm.setString(3, c.getDescription());
             stm.setBoolean(4, c.isCrew_private());
             stm.setString(5, c.getCreation_date());
-            stm.setBoolean(6,c.isCrew_enabled());
+            stm.setBoolean(6, c.isCrew_enabled());
             stm.executeUpdate();
             generated_keys = stm.getGeneratedKeys();
             if (generated_keys.next()) {
-                    //mando gli inviti
-                    
-                    id_gruppo = generated_keys.getInt(1);
-                   
+                //mando gli inviti
+
+                id_gruppo = generated_keys.getInt(1);
+
             }
         } finally {
             stm.close();
         }
-         return id_gruppo;
+        return id_gruppo;
     }
 
     public Crew find_crew_by_id(Integer crew_id) throws SQLException {
@@ -125,7 +124,7 @@ public class CrewController {
                     c.setCrew_private(rs.getBoolean("crew_private"));
                     c.setDescription(rs.getString("description"));
                     c.setId(rs.getInt("id"));
-                    int id_admin = rs.getInt("id_admin"); 
+                    int id_admin = rs.getInt("id_admin");
                     c.setAdmin(uc.findUserbyId(id_admin));
                     c.setName(rs.getString("name"));
                     return c;
@@ -138,6 +137,18 @@ public class CrewController {
         }
         return null;
     }
-    
-    
+
+    public void updateCrew(Crew crew) throws SQLException {
+        PreparedStatement stm = con.prepareStatement("UPDATE secondoprogettoweb.crew SET name=?,description=? WHERE id=? ");
+        try {
+            stm.setString(1, crew.getName());
+            stm.setString(2,crew.getDescription());
+            stm.setInt(3, crew.getId());
+            stm.executeUpdate();
+        } finally {
+            stm.close();
+        }
+
+
+    }
 }

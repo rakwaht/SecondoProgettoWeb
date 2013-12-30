@@ -33,35 +33,30 @@ public class Crew_UserController {
         try {
             stm.setInt(1, cu.getId_crew());
             stm.setInt(2, cu.getId_user());
-            stm.setBoolean(3, cu.isCrew_user_enabled());
+            
             rs = stm.executeQuery();
             if (rs.next()) {
                 stm = con.prepareStatement("UPDATE secondoprogettoweb.CREW_USER set crew_user_enabled=? WHERE id_crew=? AND id_user=?");
                 
-
-                try {
-                     stm.setBoolean(1, true);
-                    stm.setInt(3, cu.getId_user());
+                
+                    stm.setBoolean(1, true);
                     stm.setInt(2, cu.getId_crew());
-                  
+                    stm.setInt(3, cu.getId_user());
+
+
                     stm.executeUpdate();
 
-                } finally {
-                    stm.close();
-                }
+                
             } else {
                 stm = con.prepareStatement("INSERT INTO secondoprogettoweb.CREW_USER(id_user,id_crew,crew_user_enabled) VALUES (?, ?,?)");
-
-
-                try {
+                 
+               
                     stm.setInt(1, cu.getId_user());
                     stm.setInt(2, cu.getId_crew());
                     stm.setBoolean(3, cu.isCrew_user_enabled());
                     stm.executeUpdate();
 
-                } finally {
-                    stm.close();
-                }
+               
             }
 
         } finally {

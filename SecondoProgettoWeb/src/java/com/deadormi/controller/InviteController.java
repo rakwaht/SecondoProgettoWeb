@@ -27,16 +27,36 @@ public class InviteController {
     }
 
     public void create_invite(Invite i) throws SQLException {
-        PreparedStatement stm = con.prepareStatement("INSERT INTO secondoprogettoweb.INVITE(id_receiver,id_sender,id_crew,invite_enabled) VALUES (?, ?,?,?)");
-
+        PreparedStatement stm = con.prepareStatement("SELECT * FROM secondoprogettoweb.invite WHERE id_receiver=? AND id_crew=? AND id_sender=?");
+        ResultSet rs;
 
         try {
             stm.setInt(1, i.getId_receiver());
-            stm.setInt(2, i.getId_sender());
-            stm.setInt(3, i.getId_crew());
-            stm.setBoolean(4, i.isInvite_enabled());
-            stm.executeUpdate();
+            stm.setInt(2, i.getId_crew());
+            stm.setInt(3, i.getId_sender());
             
+            rs = stm.executeQuery();
+            if (rs.next()) {
+                System.out.println("gia presente in db setto true");
+
+                stm = con.prepareStatement("UPDATE secondoprogettoweb.invite SET invite_enabled=? WHERE id_receiver=? AND id_crew=? AND id_sender=?  ");
+                stm.setBoolean(1, true);
+                stm.setInt(2, i.getId_receiver());
+                stm.setInt(3, i.getId_crew());
+                stm.setInt(4, i.getId_sender());
+
+                stm.executeUpdate();
+            } else {
+                System.out.println("NOOOOOO gia presente in db setto true");
+
+                stm = con.prepareStatement("INSERT INTO secondoprogettoweb.invite (id_receiver,id_sender,id_crew,invite_enabled) VALUES(?,?,?,?)");
+                stm.setInt(1, i.getId_receiver());
+                stm.setInt(3, i.getId_crew());
+                stm.setInt(2, i.getId_sender());
+                stm.setBoolean(4, true);
+
+                stm.executeUpdate();
+            }
         } finally {
             stm.close();
         }
@@ -45,7 +65,7 @@ public class InviteController {
 
     public ArrayList<Invite> getInvitesByIdUser(Integer id) throws SQLException {
         ArrayList<Invite> invites = new ArrayList<Invite>();
-        
+
         PreparedStatement stm = con.prepareStatement("SELECT * FROM secondoprogettoweb.INVITE WHERE id_receiver=? AND invite_enabled=? ");
         try {
             stm.setInt(1, id);
@@ -59,7 +79,7 @@ public class InviteController {
                     i.setId_receiver(rs.getInt("id_receiver"));
                     i.setId_sender(rs.getInt("id_sender"));
                     i.setInvite_enabled(rs.getBoolean("invite_enabled"));
-                    System.out.println(i.getId() + " "  + i.getId_crew());
+                    System.out.println(i.getId() + " " + i.getId_crew());
                     invites.add(i);
                 }
             } finally {
@@ -72,14 +92,14 @@ public class InviteController {
     }
 
     public void disableInvite(Integer id, Integer id_group) throws SQLException {
-       PreparedStatement stm = con.prepareStatement("UPDATE secondoprogettoweb.INVITE SET invite_enabled=?  WHERE id_receiver=? AND id_crew=? AND invite_enabled=? ");
-       try {
-             stm.setBoolean(1, false);
+        PreparedStatement stm = con.prepareStatement("UPDATE secondoprogettoweb.INVITE SET invite_enabled=?  WHERE id_receiver=? AND id_crew=? AND invite_enabled=? ");
+        try {
+            stm.setBoolean(1, false);
             stm.setInt(2, id);
             stm.setInt(3, id_group);
             stm.setBoolean(4, true);
             stm.executeUpdate();
-            
+
         } finally {
             stm.close();
         }

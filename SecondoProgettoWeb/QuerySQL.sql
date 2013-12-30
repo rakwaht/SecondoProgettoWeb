@@ -12,7 +12,7 @@ DROP TABLE secondoprogettoweb.USER;
 
 CREATE TABLE secondoprogettoweb.USER(
 id INT NOT NULL AUTO_INCREMENT, 
-username CHAR(30) NOT NULL UNIQUE,
+username VARCHAR(30) NOT NULL UNIQUE,
 password VARCHAR(33) NOT NULL,
 avatar_name VARCHAR(50),
 email VARCHAR(45) UNIQUE,
@@ -26,7 +26,7 @@ PRIMARY KEY(id)
 CREATE TABLE secondoprogettoweb.CREW(
 id INT NOT NULL AUTO_INCREMENT,
 id_admin INT,
-name CHAR(40),
+name VARCHAR(40),
 description VARCHAR(150),
 crew_private BOOLEAN,
 creation_date VARCHAR(30),
