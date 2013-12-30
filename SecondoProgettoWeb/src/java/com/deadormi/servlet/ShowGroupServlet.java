@@ -99,6 +99,11 @@ public class ShowGroupServlet extends HttpServlet {
                         RequestDispatcher rd = request.getRequestDispatcher("show_group.jsp");
                         request.setAttribute("crew", crew);
                         request.setAttribute("posts", posts);
+                        if(crew.getAdmin().getId().equals(u.getId())){
+                            request.setAttribute("admin", true);
+                        } else{
+                            request.setAttribute("admin", false);
+                        }
                         rd.forward(request, response);
                     } else {
                         log.debug("else finale non puoi vedere il gruppo");

@@ -158,4 +158,92 @@ public class UserController {
         }
          return users;
     }
+
+    public ArrayList<User> getUsersInGroup(Integer id_crew) throws SQLException {
+         ArrayList<User> users = new ArrayList();
+         PreparedStatement stm = con.prepareStatement("SELECT * FROM secondoprogettoweb.crew_user t1 JOIN secondoprogettoweb.user t2 ON t2.id=t1.id_user WHERE id_crew=? AND crew_user_enabled=? ");
+         User u;
+         try {
+            stm.setInt(1, id_crew);
+            stm.setBoolean(2, true);
+            ResultSet rs = stm.executeQuery();
+            try {
+                while (rs.next()) {
+                    u = new User();
+                    u.setId(rs.getInt("id"));
+                    u.setAvatar_name(rs.getString("avatar_name"));
+                    u.setEmail(rs.getString("email"));
+                    u.setLogin_date(rs.getString("login_date"));
+                    u.setModerator(rs.getBoolean("moderator"));
+                    u.setPassword(rs.getString("password"));
+                    u.setUsername(rs.getString("username"));
+                    users.add(u);
+                }
+            } finally {
+                rs.close();
+            }
+        } finally {
+            stm.close();
+        }
+         return users;
+    }
+
+    public ArrayList<User> getUserNotInGroup(Integer id_crew) throws SQLException {
+        ArrayList<User> users = new ArrayList();
+        PreparedStatement stm = con.prepareStatement("select distinct * from secondoprogettoweb.user WHERE id NOT IN (select id_user from secondoprogettoweb.crew_user where id_crew=?) AND id  NOT IN(select id_receiver FROM secondoprogettoweb.invite where invite_enabled=? )");
+        User u;
+         try {
+            stm.setInt(1, id_crew);
+            stm.setBoolean(2, true);
+            ResultSet rs = stm.executeQuery();
+            try {
+                while (rs.next()) {
+                    u = new User();
+                    u.setId(rs.getInt("id"));
+                    u.setAvatar_name(rs.getString("avatar_name"));
+                    u.setEmail(rs.getString("email"));
+                    u.setLogin_date(rs.getString("login_date"));
+                    u.setModerator(rs.getBoolean("moderator"));
+                    u.setPassword(rs.getString("password"));
+                    u.setUsername(rs.getString("username"));
+                    users.add(u);
+                }
+            } finally {
+                rs.close();
+            }
+        } finally {
+            stm.close();
+        }
+         
+         return users;
+   }
+
+    public ArrayList<User> getUserInvitedToGroup(Integer id_crew) throws SQLException {
+          ArrayList<User> users = new ArrayList();
+         PreparedStatement stm = con.prepareStatement("SELECT * FROM secondoprogettoweb.invite t1 JOIN secondoprogettoweb.user t2 ON t1.id_receiver=t2.id WHERE id_crew=? AND invite_enabled=? ");
+         User u;
+         try {
+            stm.setInt(1, id_crew);
+            stm.setBoolean(2, true);
+            ResultSet rs = stm.executeQuery();
+            try {
+                while (rs.next()) {
+                    u = new User();
+                    u.setId(rs.getInt("id"));
+                    u.setAvatar_name(rs.getString("avatar_name"));
+                    u.setEmail(rs.getString("email"));
+                    u.setLogin_date(rs.getString("login_date"));
+                    u.setModerator(rs.getBoolean("moderator"));
+                    u.setPassword(rs.getString("password"));
+                    u.setUsername(rs.getString("username"));
+                    users.add(u);
+                }
+            } finally {
+                rs.close();
+            }
+        } finally {
+            stm.close();
+        }
+         return users;
+    }
 }

@@ -43,6 +43,10 @@
         <servlet-name>InviteServlet</servlet-name>
         <servlet-class>com.deadormi.servlet.InviteServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ModifyGroupServlet</servlet-name>
+        <servlet-class>com.deadormi.servlet.ModifyGroupServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/LoginServlet</url-pattern>
@@ -70,6 +74,10 @@
     <servlet-mapping>
         <servlet-name>InviteServlet</servlet-name>
         <url-pattern>/secure/InviteServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ModifyGroupServlet</servlet-name>
+        <url-pattern>/secure/ModifyGroupServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

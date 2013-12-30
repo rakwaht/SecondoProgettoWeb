@@ -1,17 +1,28 @@
-<%-- 
-    Document   : modify_group
-    Created on : 24-dic-2013, 19.11.13
-    Author     : Davide
---%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-    </head>
-    <body>
-        <h1>Hello World!</h1>
-    </body>
-</html>
+<%@include file="/layout/head.jsp" %>
+
+<h1>MODIFICA GRUPPO ${crew.name}</h1><br />
+
+<c:if test="${not empty followers}"><br />
+    FOLLOW: 
+<c:forEach var="followers" items="${followers}">
+    <br /><c:out value="${followers.username}" />
+</c:forEach>
+</c:if>
+    
+<c:if test="${not empty not_followers}"><br />
+    NOT FOLLOW:
+<c:forEach var="not_followers" items="${not_followers}">
+    <br /><c:out value="${not_followers.username}" />
+</c:forEach>
+</c:if>
+ 
+<c:if test="${not empty invited}"><br />
+    INVITED:
+<c:forEach var="invited" items="${invited}">
+    <br /><c:out value="${invited.username}" />
+</c:forEach>
+</c:if>
+
+<%@include file="/layout/foot.jsp" %>
+
