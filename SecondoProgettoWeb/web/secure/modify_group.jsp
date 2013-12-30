@@ -3,26 +3,41 @@
 
 <h1>MODIFICA GRUPPO ${crew.name}</h1><br />
 
-<c:if test="${not empty followers}"><br />
-    FOLLOW: 
-<c:forEach var="followers" items="${followers}">
-    <br /><c:out value="${followers.username}" />
-</c:forEach>
-</c:if>
-    
-<c:if test="${not empty not_followers}"><br />
-    NOT FOLLOW:
-<c:forEach var="not_followers" items="${not_followers}">
-    <br /><c:out value="${not_followers.username}" />
-</c:forEach>
-</c:if>
- 
-<c:if test="${not empty invited}"><br />
-    INVITED:
-<c:forEach var="invited" items="${invited}">
-    <br /><c:out value="${invited.username}" />
-</c:forEach>
-</c:if>
+
+
+
+<form method="post" action="ModifyGroupServlet?id_crew=${crew.id}">
+    <input type='text' value='${crew.name}'/><br/>
+    <textarea type='text'>${crew.description}</textarea><br/>
+
+    <c:if test="${not empty followers}">
+        ELIMINA:<br/>
+        <c:forEach var="followers" items="${followers}">
+            ${followers.username}<input type='checkbox' name='followers'value='${followers.id}'/><br/>
+        </c:forEach>
+    </c:if>
+    <c:if test="${not empty not_followers}">
+        INVITA:<br/>
+        <c:forEach var="not_followers" items="${not_followers}">
+            ${not_followers.username}<input type='checkbox' name='not_followers'value='${not_followers.id}'/><br/>
+        </c:forEach>
+    </c:if>        
+    <c:if test="${not empty invited}">
+    <c:forEach var="invited" items="${invited}">
+        ${invited.username} già invitato!
+    </c:forEach>
+    </c:if>
+    <input type='submit' value='Modifica'/>
+</form>
+
+
+
+
+
+
+
+
+
 
 <%@include file="/layout/foot.jsp" %>
 

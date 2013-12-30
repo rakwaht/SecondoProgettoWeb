@@ -36,7 +36,7 @@ public class InviteController {
             stm.setInt(3, i.getId_crew());
             stm.setBoolean(4, i.isInvite_enabled());
             stm.executeUpdate();
-
+            
         } finally {
             stm.close();
         }
@@ -78,7 +78,6 @@ public class InviteController {
             stm.setInt(2, id);
             stm.setInt(3, id_group);
             stm.setBoolean(4, true);
-             System.out.println("CIAOOOIFWPOIPODGIPFDGIEPIGPOI");
             stm.executeUpdate();
             
         } finally {

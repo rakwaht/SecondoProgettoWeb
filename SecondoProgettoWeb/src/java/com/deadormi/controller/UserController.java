@@ -190,11 +190,12 @@ public class UserController {
 
     public ArrayList<User> getUserNotInGroup(Integer id_crew) throws SQLException {
         ArrayList<User> users = new ArrayList();
-        PreparedStatement stm = con.prepareStatement("select distinct * from secondoprogettoweb.user WHERE id NOT IN (select id_user from secondoprogettoweb.crew_user where id_crew=?) AND id  NOT IN(select id_receiver FROM secondoprogettoweb.invite where invite_enabled=? )");
+        PreparedStatement stm = con.prepareStatement("select distinct * from secondoprogettoweb.user WHERE id NOT IN (select id_user from secondoprogettoweb.crew_user where id_crew=? AND crew_user_enabled=?) AND id  NOT IN(select id_receiver FROM secondoprogettoweb.invite where invite_enabled=? )");
         User u;
          try {
             stm.setInt(1, id_crew);
             stm.setBoolean(2, true);
+            stm.setBoolean(3, true);
             ResultSet rs = stm.executeQuery();
             try {
                 while (rs.next()) {
