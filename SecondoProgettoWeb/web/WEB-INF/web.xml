@@ -47,6 +47,10 @@
         <servlet-name>ModifyGroupServlet</servlet-name>
         <servlet-class>com.deadormi.servlet.ModifyGroupServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ModeratorServlet</servlet-name>
+        <servlet-class>com.deadormi.servlet.ModeratorServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/LoginServlet</url-pattern>
@@ -78,6 +82,10 @@
     <servlet-mapping>
         <servlet-name>ModifyGroupServlet</servlet-name>
         <url-pattern>/secure/ModifyGroupServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ModeratorServlet</servlet-name>
+        <url-pattern>/secure/ModeratorServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

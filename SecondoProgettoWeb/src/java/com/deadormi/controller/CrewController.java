@@ -6,6 +6,7 @@ package com.deadormi.controller;
 
 import com.deadormi.dbmanager.DbManager;
 import com.deadormi.entity.Crew;
+import com.deadormi.entity.User;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -150,5 +151,31 @@ public class CrewController {
         }
 
 
+    }
+
+    public ArrayList<Crew> getAllCrews() throws SQLException {
+        ArrayList<Crew> crews = new ArrayList();
+         PreparedStatement stm = con.prepareStatement("SELECT * FROM secondoprogettoweb.CREW");
+         ResultSet rs;
+         UserController uc = new UserController();
+        try {
+           rs=stm.executeQuery();
+           while(rs.next()){
+               Crew c = new Crew();
+               User u = uc.findUserbyId(rs.getInt("id_admin"));
+               c.setAdmin(u);
+               c.setCrew_enabled(rs.getBoolean("crew_enabled"));
+               c.setCreation_date(rs.getString("creation_date"));
+               c.setCrew_private(rs.getBoolean("crew_private"));
+               c.setDescription(rs.getString("description"));
+               c.setId(rs.getInt("id"));
+               c.setName(rs.getString("name"));
+               crews.add(c);
+               
+           }
+        } finally {
+            stm.close();
+        }
+        return crews;
     }
 }

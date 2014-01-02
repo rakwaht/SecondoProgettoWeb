@@ -51,6 +51,10 @@ public class Crew implements Serializable {
     public Boolean isCrew_private() {
         return crew_private;
     }
+    
+    public Boolean getCrew_private() {
+        return crew_private;
+    }
 
     public void setCrew_private(Boolean crew_private) {
         this.crew_private = crew_private;
@@ -65,6 +69,10 @@ public class Crew implements Serializable {
     }
 
     public Boolean isCrew_enabled() {
+        return crew_enabled;
+    }
+    
+     public Boolean getCrew_enabled() {
         return crew_enabled;
     }
 

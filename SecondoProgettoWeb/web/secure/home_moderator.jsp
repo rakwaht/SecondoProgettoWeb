@@ -1,17 +1,14 @@
-<%-- 
-    Document   : home_moderator
-    Created on : 24-dic-2013, 19.08.14
-    Author     : Davide
---%>
+<%@include file="/layout/head.jsp" %>
+<h1>MOD PAGE</h1>
+<c:forEach var="c" items="${crews}">
+    ---------<br/>
+    <c:out value="${c.name}" /><br />
+    NUMERO DI UTENTI<br/>
+    <c:out value="${c.crew_private}" /><br />
+    <a href="/SecondoProgettoWeb/ShowGroupServlet?id_group=${c.id}">Link</a><br />
+    NUMERO DI POST<br/>
+    ---------<br/><br/>
+</c:forEach>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-    </head>
-    <body>
-        <h1>Hello World!</h1>
-    </body>
-</html>
+
+<%@include file="/layout/foot.jsp" %>

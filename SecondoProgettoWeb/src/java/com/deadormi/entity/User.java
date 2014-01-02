@@ -75,6 +75,10 @@ public class User implements Serializable {
     public Boolean isModerator() {
         return moderator;
     }
+    
+     public Boolean getModerator() {
+        return moderator;
+    }
 
     public void setModerator(Boolean moderator) {
         this.moderator = moderator;

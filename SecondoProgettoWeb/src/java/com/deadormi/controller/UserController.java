@@ -41,6 +41,7 @@ public class UserController {
                     u.setId(rs.getInt("id"));
                     u.setEmail(rs.getString("email"));
                     u.setAvatar_name(rs.getString("avatar_name"));
+                    u.setModerator(rs.getBoolean("moderator"));
                     return u;
                 }
             } finally {
@@ -68,6 +69,7 @@ public class UserController {
                     u.setId(rs.getInt("id"));
                     u.setEmail(rs.getString("email"));
                     u.setAvatar_name(rs.getString("avatar_name"));
+                    u.setModerator(rs.getBoolean("moderator"));
                     return u;
                 }
             } finally {

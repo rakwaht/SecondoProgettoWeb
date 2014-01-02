@@ -94,7 +94,7 @@ FOREIGN KEY (id_post) REFERENCES POST(id)
 );
 
 # Inserimento utente gino perna
-INSERT INTO secondoprogettoweb.USER(username, password) VALUES ('gino', 'd9d72431035d8535d1b65ce9a01c2f60');
+INSERT INTO secondoprogettoweb.USER(username, password,avatar_name,email,moderator,login_date) VALUES ('gino', 'd9d72431035d8535d1b65ce9a01c2f60','ciao','ciao@gino.com',TRUE,'26-07-1992');
 
 # inserimento gruppo pubblico
 INSERT INTO secondoprogettoweb.CREW(id_admin,name,description,crew_private,creation_date,crew_enabled) VALUES ('1','Public test','descrizione test','0','10/10/10','1');

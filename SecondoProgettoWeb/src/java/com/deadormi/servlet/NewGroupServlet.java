@@ -128,7 +128,6 @@ public class NewGroupServlet extends HttpServlet {
             }
             try {
                 id_crew = cc.create_crew(c);
-                System.out.println(id_crew + "]]]]]]]]]]]]]]]]]]]]]]]]");
                 if (users != null) {
                     for (int i = 0; i < users.length; i++) {
                         Invite in = new Invite();
