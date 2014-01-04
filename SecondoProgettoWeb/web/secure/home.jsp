@@ -11,8 +11,8 @@ id:${user.id}<br />
 login_date:${user.login_date}
 
 <a href="/SecondoProgettoWeb/HomeServlet?next=edit">Edita il mio profilo</a><br />
-<a href="/SecondoProgettoWeb/HomeServlet?next=groups">Gruppi</a>
-<a href="/SecondoProgettoWeb/secure/InviteServlet">Inviti</a>
+<a href="/SecondoProgettoWeb/HomeServlet?next=groups">Gruppi</a><br />
+<a href="/SecondoProgettoWeb/secure/InviteServlet">Inviti</a><br />
 <c:if test="${user.moderator}">
 <a href="/SecondoProgettoWeb/secure/ModeratorServlet">ModeratorPage</a>
 </c:if>
