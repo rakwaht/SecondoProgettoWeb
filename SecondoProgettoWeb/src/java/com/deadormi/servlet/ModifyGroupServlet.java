@@ -132,11 +132,10 @@ public class ModifyGroupServlet extends HttpServlet {
             for(int i =0; i<not_followers.length; i++){
                 Integer id_not_follower = Integer.parseInt(not_followers[i]);
                 try {
-                    Invite in = new Invite();
-                    in.setId_crew(crew.getId());
-                    
-                    in.setId_receiver(id_not_follower);
-                    in.setId_sender(crew.getAdmin().getId());
+                    Invite in = new Invite();   
+                    in.setCrew(crew);
+                    in.setReceiver(uc.findUserbyId(id_not_follower));
+                    in.setSender(crew.getAdmin());
                     in.setInvite_enabled(Boolean.TRUE);
                     ic.create_invite(in);
                     
