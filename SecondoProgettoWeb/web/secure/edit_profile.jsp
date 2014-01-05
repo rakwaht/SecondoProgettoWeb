@@ -9,7 +9,7 @@
         Inserisci il nuovo nome utente: <input type="text" name="new_username" value="${user.username}"/>
         <input type="hidden" name="whatEdit" value="editName"/>
         <input type="submit" value="Modifica"/>
-        <p>${param.message}</p>
+        <p>${param.message_username}</p>
     </form>
 </div>    
 
@@ -19,9 +19,10 @@
         Cambia password:<br />
         Inserisci vecchia password: <input type="password" name="old_password" value=""/><br />
         Inserisci nuova password: <input type="password" name="new_password" value=""/><br />
-        Ripeti nuova password: <input type="password" name="new_password2" value=""/><br />
+        Ripeti nuova password: <input type="password" name="new_password_confirm" value=""/><br />
         <input type="hidden" name="whatEdit" value="editPassword"/>
         <input type="submit" value="Modifica"/>
+        <p>${param.message_password}</p>
     </form>
 </div>           
 <div class="box">

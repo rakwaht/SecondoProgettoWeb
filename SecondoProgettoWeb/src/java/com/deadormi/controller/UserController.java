@@ -259,8 +259,20 @@ public class UserController {
             u.setUsername(new_username);
         } finally {
             stm.close();
-        }
-        
+        } 
+        return u;
+    }
+
+    public User updatePassword(User u, String new_password) throws SQLException {
+        PreparedStatement stm = con.prepareStatement("UPDATE secondoprogettoweb.user SET password=? WHERE id=?");
+        try {
+            stm.setString(1, new_password);
+            stm.setInt(2, u.getId());
+            stm.executeUpdate();
+            u.setPassword(new_password);
+        } finally {
+            stm.close();
+        }    
         return u;
     }
 }

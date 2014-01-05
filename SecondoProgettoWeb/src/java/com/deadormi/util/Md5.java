@@ -13,6 +13,7 @@ import java.security.NoSuchAlgorithmException;
  * @author Davide
  */
 public class Md5 {
+
     public static String getMD5(String input) {
         try {
             MessageDigest md = MessageDigest.getInstance("MD5");
@@ -24,8 +25,7 @@ public class Md5 {
                 hashtext = "0" + hashtext;
             }
             return hashtext;
-        }
-        catch (NoSuchAlgorithmException e) {
+        } catch (NoSuchAlgorithmException e) {
             throw new RuntimeException(e);
         }
     }
