@@ -17,5 +17,10 @@
         <input type='submit' value='Accetta'/>
     </form>
 </c:if>
+
+<c:if test="${empty invites}">
+    Non ci sono inviti! <a href="home.jsp">Torna alla home</a>
+</c:if>
+
 </body>
 <%@include file="/layout/foot.jsp" %>
