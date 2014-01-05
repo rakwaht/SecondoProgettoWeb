@@ -12,13 +12,13 @@
         </tr>
     </thead>
     <tbody>
-        <c:forEach var="c" items="${crews}">
+        <c:forEach var="m" items="${moderatordtos}">
             <tr>
-                <td><c:out value="${c.name}" /></td>
-                <td>todo</td>
+                <td><c:out value="${m.crew.name}" /></td>
+                <td><c:out value="${fn:length(m.users)}" /></td>
                 <td>
                     <c:choose>
-                        <c:when test="${c.crew_private}">
+                        <c:when test="${m.crew.crew_private}">
                             Privato
                         </c:when>
                         <c:otherwise>
@@ -26,7 +26,7 @@
                         </c:otherwise>
                     </c:choose>
                 </td>
-                <td>todo</td>
+                <td><c:out value="${fn:length(m.posts)}" /></td>
                 <td><a href="/SecondoProgettoWeb/ShowGroupServlet?id_group=${c.id}">Vai a Gruppo</a></td>
             </tr>
         </c:forEach>

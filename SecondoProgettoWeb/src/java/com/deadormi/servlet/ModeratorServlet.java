@@ -5,8 +5,10 @@
 package com.deadormi.servlet;
 
 import com.deadormi.controller.CrewController;
+import com.deadormi.controller.DtoController;
 import com.deadormi.entity.Crew;
 import com.deadormi.entity.User;
+import com.deadormi.entitydto.ModeratorDto;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
@@ -59,16 +61,16 @@ public class ModeratorServlet extends HttpServlet {
         if (!u.isModerator()) {
             response.sendRedirect("home.jsp");
         }
-        ArrayList<Crew> crews = new ArrayList();
-        CrewController cc = new CrewController();
+        ArrayList<ModeratorDto> moderatordtos = new ArrayList();
+        DtoController dc = new DtoController();
         try {
-            crews = cc.getAllCrews();
+            moderatordtos = dc.getAllModeratorDto();
         } catch (SQLException ex) {
             Logger.getLogger(ModeratorServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         RequestDispatcher rd = request.getRequestDispatcher("home_moderator.jsp");
-        request.setAttribute("crews", crews);
+        request.setAttribute("moderatordtos", moderatordtos);
         rd.forward(request, response);
 
 
