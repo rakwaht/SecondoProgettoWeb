@@ -83,22 +83,7 @@ public class EditProfileServlet extends HttpServlet {
         String edit = request.getParameter("whatEdit");
 
         if ("editAvatar".equals(edit)) {
-            response.setContentType("text/html;charset=UTF-8");
-            PrintWriter out = response.getWriter();
-            try {
-                /* TODO output your page here. You may use following sample code. */
-                out.println("<!DOCTYPE html>");
-                out.println("<html>");
-                out.println("<head>");
-                out.println("<title>Servlet NewServlet</title>");
-                out.println("</head>");
-                out.println("<body>");
-                out.println("<h1>CAMBIA AVATAR</h1>");
-                out.println("</body>");
-                out.println("</html>");
-            } finally {
-                out.close();
-            }
+        
         }
 
         if ("editName".equals(edit)) {
