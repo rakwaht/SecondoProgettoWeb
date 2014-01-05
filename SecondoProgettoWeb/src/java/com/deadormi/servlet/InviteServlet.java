@@ -68,9 +68,7 @@ public class InviteServlet extends HttpServlet {
             log.warn(ex);
         }
         RequestDispatcher rd = request.getRequestDispatcher("invites.jsp");
-
         request.setAttribute("invites", invites);
-
         rd.forward(request, response);
     }
 
