@@ -14,6 +14,7 @@
         
         <!-- <link rel='stylesheet' type='text/css' href='/SecondoProgettoWeb/res/css/bootstrap.min.css'> -->
         <link rel='stylesheet' type='text/css' href='/SecondoProgettoWeb/res/css/application.css'>
+        <link rel='stylesheet' type='text/css' href='/SecondoProgettoWeb/res/css/jquery.dataTables.css'>
     </head>
     <body>
         
