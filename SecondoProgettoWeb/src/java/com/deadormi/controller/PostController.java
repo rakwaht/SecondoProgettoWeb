@@ -46,6 +46,7 @@ public class PostController {
         PreparedStatement stm = con.prepareStatement("SELECT * FROM secondoprogettoweb.post WHERE id_crew=?");
         ArrayList<Post> result = new ArrayList<Post>();
         UserController uc = new UserController();
+        FileController fc = new FileController();
         try {
             stm.setInt(1, crew_id);
             ResultSet rs = stm.executeQuery();
@@ -57,6 +58,7 @@ public class PostController {
                     p.setId_crew(rs.getInt("id_crew"));
                     p.setWriter(uc.findUserbyId(rs.getInt("id_writer")));
                     p.setText(rs.getString("text"));
+                    p.setFiles(fc.getFileByPostId(p.getId()));
                     result.add(p);
                 }
             } finally {

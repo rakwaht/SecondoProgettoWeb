@@ -6,6 +6,8 @@
 package com.deadormi.entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -18,7 +20,16 @@ public class Post implements Serializable {
     private Integer id_crew;
     private String creation_date;
     private String text;
+    private ArrayList<Post_File> files;
 
+    public ArrayList<Post_File> getFiles() {
+        return files;
+    }
+
+    public void setFiles(ArrayList<Post_File> files) {
+        this.files = files;
+    }
+    
     public Integer getId() {
         return id;
     }

@@ -29,6 +29,10 @@ data creazione: ${crew.creation_date}<br />
 <c:forEach var="p" items="${posts}">
     <c:out value="${p.text}" /><br />
     Scritto da ${p.writer.username}<br />
+    Files del post:
+    <c:forEach var="f" items="${p.files}">
+        nome:${f.name}<br />
+    </c:forEach>
 </c:forEach>
 
 <%@include file="/layout/foot.jsp" %>

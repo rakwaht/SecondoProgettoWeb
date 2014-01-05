@@ -5,11 +5,14 @@
 package com.deadormi.controller;
 
 import com.deadormi.dbmanager.DbManager;
+import com.deadormi.entity.Post_File;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 import org.apache.log4j.Logger;
 
 /**
@@ -76,5 +79,28 @@ public class FileController {
         } finally {
             stm.close();
         }
+    }
+
+    ArrayList<Post_File> getFileByPostId(Integer id) throws SQLException {
+        PreparedStatement stm = con.prepareStatement("SELECT * FROM secondoprogettoweb.post_file WHERE id_post=?");
+        ArrayList<Post_File> result = new ArrayList<Post_File>();
+        try {
+            stm.setInt(1, id);
+            ResultSet rs = stm.executeQuery();
+            try {
+                while (rs.next()) {
+                    Post_File pf = new Post_File();
+                    pf.setId(rs.getInt("id"));
+                    pf.setId_post(rs.getInt("id_post"));
+                    pf.setName(rs.getString("name"));
+                    result.add(pf);
+                }
+            } finally {
+                rs.close();
+            }
+        } finally {
+            stm.close();
+        }
+        return result;
     }
 }
