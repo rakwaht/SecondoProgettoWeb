@@ -12,6 +12,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import org.apache.log4j.Logger;
 
 /**
@@ -298,5 +300,18 @@ public class UserController {
         } finally {
             stm.close();
         }
+    }
+    
+    private User updateAvatar(User u, String fileName) throws SQLException {
+        PreparedStatement stm = con.prepareStatement("UPDATE secondoprogettoweb.user SET avatar_name=? WHERE id=?");
+        try {
+            stm.setString(1, fileName);
+            stm.setInt(2, u.getId());
+            stm.executeUpdate();
+            u.setAvatar_name(fileName);
+        } finally {
+            stm.close();
+        }
+        return u;
     }
 }
