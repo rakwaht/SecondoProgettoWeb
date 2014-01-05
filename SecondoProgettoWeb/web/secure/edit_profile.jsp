@@ -31,15 +31,16 @@
 
     <p>${param.message_avatar}</p>
 
-    <!-- -------- DEFAULT AVATAR -------- -->
-    <c:if test="${user.avatar_name == null}">
-        <img src="${pageContext.request.contextPath}/res/images/default_avatar.png" style="margin:0 auto; width:100px; heigth:100px;" />
-    </c:if>
-
-    <!-- -------- USER AVATAR -------- -->
-    <c:if test="${user.avatar_name != null}">
-        <img src="${pageContext.request.contextPath}/resource/avatar/${user.id}_${user.avatar_name}" style="margin:0 auto; width:100px; heigth:100px;" />
-    </c:if>
+    <!-- AVATAR -->        
+    <c:choose>
+        <c:when test="${empty user.avatar_name}">
+            <img src="${pageContext.request.contextPath}/res/images/default_avatar.png" style="margin:0 auto; width:100px; heigth:100px;" />
+        </c:when>
+        <c:otherwise>
+            <img src="${pageContext.request.contextPath}/resource/avatar/${user.id}_${user.avatar_name}" style="margin:0 auto; width:100px; heigth:100px;" />
+        </c:otherwise>
+    </c:choose>
+            
 </div>
 
 
