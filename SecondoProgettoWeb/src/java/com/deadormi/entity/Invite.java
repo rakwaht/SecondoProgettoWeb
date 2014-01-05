@@ -14,11 +14,11 @@ import java.io.Serializable;
 public class Invite implements Serializable {
 
     private Integer id;
-    private Integer id_receiver;
-    private Integer id_sender;
-    private Integer id_crew;
+    private User receiver;
+    private User sender;
+    private Crew crew;
     private Boolean invite_enabled;
-
+   
     public Integer getId() {
         return id;
     }
@@ -27,28 +27,28 @@ public class Invite implements Serializable {
         this.id = id;
     }
 
-    public Integer getId_receiver() {
-        return id_receiver;
+    public User getReceiver() {
+        return receiver;
     }
 
-    public void setId_receiver(Integer id_receiver) {
-        this.id_receiver = id_receiver;
+    public void setReceiver(User receiver) {
+        this.receiver = receiver;
     }
 
-    public Integer getId_sender() {
-        return id_sender;
+    public User getSender() {
+        return sender;
     }
 
-    public void setId_sender(Integer id_sender) {
-        this.id_sender = id_sender;
+    public void setSender(User sender) {
+        this.sender = sender;
     }
 
-    public Integer getId_crew() {
-        return id_crew;
+    public Crew getCrew() {
+        return crew;
     }
 
-    public void setId_crew(Integer id_crew) {
-        this.id_crew = id_crew;
+    public void setCrew(Crew crew) {
+        this.crew = crew;
     }
 
     public Boolean isInvite_enabled() {

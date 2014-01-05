@@ -31,9 +31,9 @@ import org.apache.log4j.Logger;
  * @author Timbu
  */
 public class NewGroupServlet extends HttpServlet {
-    
+
     static Logger log = Logger.getLogger(NewGroupServlet.class);
-    
+
     /**
      * Processes requests for both HTTP
      * <code>GET</code> and
@@ -74,7 +74,7 @@ public class NewGroupServlet extends HttpServlet {
         }
         RequestDispatcher rd = request.getRequestDispatcher("create_group.jsp");
         for (int i = 0; i < users.size(); i++) {
-            if(users.get(i).getId().equals(u.getId())){
+            if (users.get(i).getId().equals(u.getId())) {
                 users.remove(i);
             }
         }
@@ -101,19 +101,20 @@ public class NewGroupServlet extends HttpServlet {
         User u = (User) session.getAttribute("user");
 
         CrewController cc = new CrewController();
+        UserController uu = new UserController();
+        InviteController ic = new InviteController();
+
         //controllo validazione form di registrazione
         String name = request.getParameter("name");
         String description = request.getParameter("description");
         String type = request.getParameter("type");
         String[] users = request.getParameterValues("users");
-        InviteController ic = new InviteController();
         Integer id_crew;
         if (name.trim().equals("") || description.trim().equals("")) {
             //torna a login con messaggio di errore
             String message = "Nome e/o descrizione obbligatorie!";
             response.sendRedirect("NewGroupServlet?message_newgroup=" + URLEncoder.encode(message, "UTF-8"));
         } else {
-           
             //ok registro il nuovo utente
             Crew c = new Crew();
             c.setAdmin(u);
@@ -131,14 +132,14 @@ public class NewGroupServlet extends HttpServlet {
                 if (users != null) {
                     for (int i = 0; i < users.length; i++) {
                         Invite in = new Invite();
-                        in.setId_crew(id_crew);
-                        in.setId_receiver(Integer.parseInt(users[i]));
-                        in.setId_sender(u.getId());
+                        in.setCrew(cc.find_crew_by_id(id_crew));
+                        in.setReceiver(uu.findUserbyId(Integer.parseInt(users[i])));
+                        in.setSender(u);
                         in.setInvite_enabled(Boolean.TRUE);
                         ic.create_invite(in);
-                        
+
                     }
-                    
+
                 }
                 Crew_UserController cuc = new Crew_UserController();
                 Crew_User cu = new Crew_User();
@@ -146,7 +147,7 @@ public class NewGroupServlet extends HttpServlet {
                 cu.setId_crew(id_crew);
                 cu.setCrew_user_enabled(Boolean.TRUE);
                 cuc.create_crew_user(cu);
-                
+
             } catch (SQLException ex) {
                 log.warn(ex);
             }
