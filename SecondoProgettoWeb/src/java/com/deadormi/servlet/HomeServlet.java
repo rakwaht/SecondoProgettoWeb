@@ -50,7 +50,7 @@ public class HomeServlet extends HttpServlet {
         String next = request.getParameter("next");
         HttpSession session = request.getSession();
         if(next.equals("edit")){
-            response.sendRedirect("secure/editprofile.jsp");
+            response.sendRedirect("secure/edit_profile.jsp");
         }
         else if(next.equals("groups")){
              response.sendRedirect("GroupsServlet");

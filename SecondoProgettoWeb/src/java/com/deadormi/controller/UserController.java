@@ -136,9 +136,9 @@ public class UserController {
     }
 
     public ArrayList<User> getAllUsers() throws SQLException {
-         PreparedStatement stm = con.prepareStatement("SELECT * FROM secondoprogettoweb.user");
+        PreparedStatement stm = con.prepareStatement("SELECT * FROM secondoprogettoweb.user");
         ArrayList<User> users = new ArrayList();
-         try {
+        try {
             ResultSet rs = stm.executeQuery();
             try {
                 while (rs.next()) {
@@ -151,21 +151,21 @@ public class UserController {
                     u.setPassword(rs.getString("password"));
                     u.setUsername(rs.getString("username"));
                     users.add(u);
-                } 
+                }
             } finally {
                 rs.close();
             }
         } finally {
             stm.close();
         }
-         return users;
+        return users;
     }
 
     public ArrayList<User> getUsersInGroup(Integer id_crew) throws SQLException {
-         ArrayList<User> users = new ArrayList();
-         PreparedStatement stm = con.prepareStatement("SELECT * FROM secondoprogettoweb.crew_user t1 JOIN secondoprogettoweb.user t2 ON t2.id=t1.id_user WHERE id_crew=? AND crew_user_enabled=? ");
-         User u;
-         try {
+        ArrayList<User> users = new ArrayList();
+        PreparedStatement stm = con.prepareStatement("SELECT * FROM secondoprogettoweb.crew_user t1 JOIN secondoprogettoweb.user t2 ON t2.id=t1.id_user WHERE id_crew=? AND crew_user_enabled=? ");
+        User u;
+        try {
             stm.setInt(1, id_crew);
             stm.setBoolean(2, true);
             ResultSet rs = stm.executeQuery();
@@ -187,14 +187,14 @@ public class UserController {
         } finally {
             stm.close();
         }
-         return users;
+        return users;
     }
 
     public ArrayList<User> getUserNotInGroup(Integer id_crew) throws SQLException {
         ArrayList<User> users = new ArrayList();
         PreparedStatement stm = con.prepareStatement("select distinct * from secondoprogettoweb.user WHERE id NOT IN (select id_user from secondoprogettoweb.crew_user where id_crew=? AND crew_user_enabled=?) AND id  NOT IN(select id_receiver FROM secondoprogettoweb.invite where invite_enabled=? )");
         User u;
-         try {
+        try {
             stm.setInt(1, id_crew);
             stm.setBoolean(2, true);
             stm.setBoolean(3, true);
@@ -217,15 +217,15 @@ public class UserController {
         } finally {
             stm.close();
         }
-         
-         return users;
-   }
+
+        return users;
+    }
 
     public ArrayList<User> getUserInvitedToGroup(Integer id_crew) throws SQLException {
-          ArrayList<User> users = new ArrayList();
-         PreparedStatement stm = con.prepareStatement("SELECT * FROM secondoprogettoweb.invite t1 JOIN secondoprogettoweb.user t2 ON t1.id_receiver=t2.id WHERE id_crew=? AND invite_enabled=? ");
-         User u;
-         try {
+        ArrayList<User> users = new ArrayList();
+        PreparedStatement stm = con.prepareStatement("SELECT * FROM secondoprogettoweb.invite t1 JOIN secondoprogettoweb.user t2 ON t1.id_receiver=t2.id WHERE id_crew=? AND invite_enabled=? ");
+        User u;
+        try {
             stm.setInt(1, id_crew);
             stm.setBoolean(2, true);
             ResultSet rs = stm.executeQuery();
@@ -247,6 +247,20 @@ public class UserController {
         } finally {
             stm.close();
         }
-         return users;
+        return users;
+    }
+
+    public User updateUsername(User u, String new_username) throws SQLException {
+        PreparedStatement stm = con.prepareStatement("UPDATE secondoprogettoweb.user SET username=? WHERE id=?");
+        try {
+            stm.setString(1, new_username);
+            stm.setInt(2, u.getId());
+            stm.executeUpdate();
+            u.setUsername(new_username);
+        } finally {
+            stm.close();
+        }
+        
+        return u;
     }
 }

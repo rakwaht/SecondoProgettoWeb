@@ -29,3 +29,11 @@ and open the template in the editor.
 .gray { 
     background-color: #ebebeb
 }
+
+.box {
+    width: 600px;
+    display: block;
+    padding: 10px;
+    background-color: #ddd;
+    margin: 10px;
+}
