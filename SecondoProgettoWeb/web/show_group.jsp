@@ -27,7 +27,7 @@ data creazione: ${crew.creation_date}<br />
    
 <br />Ecco i post:<br />
 <c:forEach var="p" items="${posts}">
-    <c:out value="${p.text}" /><br />
+    <c:out value="${p.text}" escapeXml="false" /><br />
     Scritto da ${p.writer.username}<br />
     Files del post:
     <c:forEach var="f" items="${p.files}">

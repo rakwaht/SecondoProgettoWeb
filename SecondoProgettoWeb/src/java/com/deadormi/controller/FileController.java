@@ -29,7 +29,7 @@ public class FileController {
     }
 
     public boolean isFile(String trovata, String crew_id_string) throws SQLException {
-        PreparedStatement stm = con.prepareStatement("SELECT * FROM secondoprogettoweb.POST P JOIN sescondoprogettoweb.POST_FILE F ON P.id=F.id_post WHERE id_crew=? AND nome=? AND id=?");
+        PreparedStatement stm = con.prepareStatement("SELECT * FROM secondoprogettoweb.POST P JOIN secondoprogettoweb.POST_FILE F ON P.id=F.id_post WHERE id_crew=? AND name=? AND F.id=?");
         ResultSet rs;
         if (!trovata.contains("-")) {
             return false;
