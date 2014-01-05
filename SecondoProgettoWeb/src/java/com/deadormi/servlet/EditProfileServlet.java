@@ -4,15 +4,13 @@
  */
 package com.deadormi.servlet;
 
+import com.deadormi.controller.FileController;
 import com.deadormi.controller.UserController;
 import com.deadormi.entity.User;
-import static com.deadormi.servlet.LoginServlet.log;
 import com.deadormi.util.Md5;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.net.URLEncoder;
 import java.sql.SQLException;
-import java.util.logging.Level;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -20,6 +18,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.apache.log4j.Logger;
+import org.apache.tomcat.util.http.fileupload.FileUploadException;
+import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 
 /**
  *
@@ -83,7 +83,7 @@ public class EditProfileServlet extends HttpServlet {
         String edit = request.getParameter("whatEdit");
 
         if ("editAvatar".equals(edit)) {
-        
+            
         }
 
         if ("editName".equals(edit)) {
@@ -98,7 +98,7 @@ public class EditProfileServlet extends HttpServlet {
                     String message = "Username troppo corto";
                     response.sendRedirect("edit_profile.jsp?message_username=" + URLEncoder.encode(message, "UTF-8"));
                 } else {
-                    uc.updateUsername(u, new_username);
+                    u = uc.updateUsername(u, new_username);
                     String message = "Il nuovo username è " + u.getUsername();
                     response.sendRedirect("edit_profile.jsp?message_username=" + URLEncoder.encode(message, "UTF-8"));
                 }
@@ -119,7 +119,7 @@ public class EditProfileServlet extends HttpServlet {
                     response.sendRedirect("edit_profile.jsp?message_password=" + URLEncoder.encode(message, "UTF-8"));
                 } else {
                     if (new_password.equals(new_password_confirm) && !new_password.trim().equals("")) {
-                        uc.updatePassword(u, Md5.getMD5(new_password));
+                        u = uc.updatePassword(u, Md5.getMD5(new_password));
                         message = "Password cambiata con successo!";
                         response.sendRedirect("edit_profile.jsp?message_password=" + URLEncoder.encode(message, "UTF-8"));
                     } else {
