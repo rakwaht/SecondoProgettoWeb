@@ -37,27 +37,7 @@ public class RecoveryPasswordServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = response.getWriter();
-
-        HttpSession session = request.getSession();
-        User u = (User) session.getAttribute("user");
-        String email = request.getParameter("email");
-
-        try {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet RecoveryPasswordServlet</title>");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Il link per la nuova password sarà inviato a " + email + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        } finally {
-            out.close();
-        }
+        response.sendRedirect("password_recovery.jsp");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -95,8 +75,8 @@ public class RecoveryPasswordServlet extends HttpServlet {
         try {
             if (uc.findUserByEmail(email) != null) {
                 /* QUA IL CODICE PER L'INVIO DELLA MAIL */
-                
-                
+
+
                 message = "Il messaggio inviato. ( non è vero :D )";
                 response.sendRedirect("password_recovery.jsp?message_email=" + URLEncoder.encode(message, "UTF-8"));
             } else {
