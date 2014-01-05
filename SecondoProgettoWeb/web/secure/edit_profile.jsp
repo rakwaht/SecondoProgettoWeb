@@ -27,8 +27,8 @@
 </div>           
 <div class="box">
 
-    <form method="post" action="EditProfileServlet">
-        Inserisci nuovo avatar <input type="text" name="username" value="${user.username}"/>
+    <form method="post" action="EditProfileServlet" enctype="multipart/form-data">
+        Carica nuovo avatar <input type='file' name='avatar'/>
         <input type="hidden" name="whatEdit" value="editAvatar"/>
         <input type="submit" value="Modifica"/>
     </form>

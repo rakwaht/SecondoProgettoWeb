@@ -108,10 +108,10 @@ public class EditProfileServlet extends HttpServlet {
                 if (uc.username_already_exist(new_username)) {
                     //torna a login con messaggio di errore
                     String message = "Username già esistene!";
-                    response.sendRedirect("edit_profile.jsp?message=" + URLEncoder.encode(message, "UTF-8"));
+                    response.sendRedirect("edit_profile.jsp?message_username=" + URLEncoder.encode(message, "UTF-8"));
                 } else if (new_username.length() < 4) {
                     String message = "Username troppo corto";
-                    response.sendRedirect("edit_profile.jsp?message=" + URLEncoder.encode(message, "UTF-8"));
+                    response.sendRedirect("edit_profile.jsp?message_username=" + URLEncoder.encode(message, "UTF-8"));
                 } else {
                     uc.updateUsername(u, new_username);
                     String message = "Il nuovo username è " + u.getUsername();
@@ -120,8 +120,6 @@ public class EditProfileServlet extends HttpServlet {
             } catch (SQLException ex) {
                 log.warn(ex);
             }
-
-
         }
 
         if ("editPassword".equals(edit)) {
@@ -135,7 +133,7 @@ public class EditProfileServlet extends HttpServlet {
                     message = "Password vecchia non corretta!";
                     response.sendRedirect("edit_profile.jsp?message_password=" + URLEncoder.encode(message, "UTF-8"));
                 } else {
-                    if (new_password.equals(new_password_confirm) && !new_password.equals("")) {
+                    if (new_password.equals(new_password_confirm) && !new_password.trim().equals("")) {
                         uc.updatePassword(u, Md5.getMD5(new_password));
                         message = "Password cambiata con successo!";
                         response.sendRedirect("edit_profile.jsp?message_password=" + URLEncoder.encode(message, "UTF-8"));
