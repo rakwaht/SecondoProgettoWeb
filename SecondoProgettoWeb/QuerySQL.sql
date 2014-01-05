@@ -15,7 +15,7 @@ id INT NOT NULL AUTO_INCREMENT,
 username VARCHAR(30) NOT NULL UNIQUE,
 password VARCHAR(33) NOT NULL,
 avatar_name VARCHAR(50),
-email VARCHAR(45) UNIQUE,
+email VARCHAR(45) NOT NULL UNIQUE,
 moderator BOOLEAN DEFAULT false,
 login_date VARCHAR(30),
 PRIMARY KEY(id)
@@ -94,7 +94,10 @@ FOREIGN KEY (id_post) REFERENCES POST(id)
 );
 
 # Inserimento utente gino perna
-INSERT INTO secondoprogettoweb.USER(username, password,avatar_name,email,moderator,login_date) VALUES ('gino', 'd9d72431035d8535d1b65ce9a01c2f60','ciao','ciao@gino.com',TRUE,'26-07-1992');
+INSERT INTO secondoprogettoweb.USER(username, password, avatar_name, email, moderator, login_date) VALUES ('gino', 'd9d72431035d8535d1b65ce9a01c2f60','ciao','ciao@gino.com',TRUE,'26-07-1992');
+INSERT INTO secondoprogettoweb.USER(username, password, avatar_name, email, moderator, login_date) VALUES ('davide', '446fca5553df49ad9c6348cf1ff71d51','ciao','davide@example.com',TRUE,'26-07-1992');
+INSERT INTO secondoprogettoweb.USER(username, password, avatar_name, email, moderator, login_date) VALUES ('federico', '616706c4d6f7bdf68b30893f860cbb2b','ciao','federico@example.com',TRUE,'26-07-1992');
+INSERT INTO secondoprogettoweb.USER(username, password, avatar_name, email, moderator, login_date) VALUES ('francesco', '0581938f0767a65b373cea80e905c25f','ciao','francesco@example.com',TRUE,'26-07-1992');
 
 # inserimento gruppo pubblico
 INSERT INTO secondoprogettoweb.CREW(id_admin,name,description,crew_private,creation_date,crew_enabled) VALUES ('1','Public test','descrizione test','0','10/10/10','1');
