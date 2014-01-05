@@ -83,6 +83,10 @@ public class ShowGroupServlet extends HttpServlet {
                     } else if (!crew.isCrew_private()) {
                         log.debug("gruppo pubblico quindi lo mostro");
                         //se il gruppo è pubblico lo mostro
+                        if(u != null && cu.crew_belongs_to_user(crew.getId(), u.getId())){
+                            //se sono loggato e ho accettato l'invito a questo gruppo posso anche scrivere
+                            request.setAttribute("user_can_edit", true);
+                        }
                         ArrayList<Post> posts = pc.getPostsByCrewId(crew_id);
                         RequestDispatcher rd = request.getRequestDispatcher("show_group.jsp");
                         request.setAttribute("crew", crew);
@@ -102,6 +106,7 @@ public class ShowGroupServlet extends HttpServlet {
                         //se sono loggato e il gruppo è privato ed io sono iscritto lo mostro
                         ArrayList<Post> posts = pc.getPostsByCrewId(crew_id);
                         RequestDispatcher rd = request.getRequestDispatcher("show_group.jsp");
+                        request.setAttribute("user_can_edit", true);
                         request.setAttribute("crew", crew);
                         request.setAttribute("posts", posts);
                         if (crew.getAdmin().getId().equals(u.getId())) {

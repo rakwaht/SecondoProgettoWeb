@@ -14,14 +14,19 @@ data creazione: ${crew.creation_date}<br />
 </c:if>
 <br /><br /><br />
 
-<c:if test="${not empty user}">  
+<c:if test="${user_can_edit}">  
    Crea un post in questo gruppo : <br />
+   <c:if test="${not empty param.error}">
+       Errore in input numero ${param.error}
+   </c:if>
    <form method='POST' action='secure/NewPostServlet?id_crew=${crew.id}' enctype='multipart/form-data'>
        Testo: <textarea id="testo" name="testo" type='text' ></textarea><br />
        <input type='file' name='file' onchange='add_upload_file();' /> <br />
        <button type='submit' >Submit</button>
    </form>
 </c:if>
+   
+
 
    
    
