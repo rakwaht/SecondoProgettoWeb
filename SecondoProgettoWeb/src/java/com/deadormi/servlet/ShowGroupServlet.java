@@ -87,6 +87,11 @@ public class ShowGroupServlet extends HttpServlet {
                         RequestDispatcher rd = request.getRequestDispatcher("show_group.jsp");
                         request.setAttribute("crew", crew);
                         request.setAttribute("posts", posts);
+                        if (u != null && crew.getAdmin().getId().equals(u.getId())) {
+                            request.setAttribute("admin", true);
+                        } else {
+                            request.setAttribute("admin", false);
+                        }
                         rd.forward(request, response);
                     } else if (u == null) {
                         log.debug("utente non loggato quindi non mostro gruppi privati");
@@ -99,9 +104,9 @@ public class ShowGroupServlet extends HttpServlet {
                         RequestDispatcher rd = request.getRequestDispatcher("show_group.jsp");
                         request.setAttribute("crew", crew);
                         request.setAttribute("posts", posts);
-                        if(crew.getAdmin().getId().equals(u.getId())){
+                        if (crew.getAdmin().getId().equals(u.getId())) {
                             request.setAttribute("admin", true);
-                        } else{
+                        } else {
                             request.setAttribute("admin", false);
                         }
                         rd.forward(request, response);

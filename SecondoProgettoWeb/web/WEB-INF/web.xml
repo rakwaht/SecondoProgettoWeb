@@ -51,6 +51,10 @@
         <servlet-name>ModeratorServlet</servlet-name>
         <servlet-class>com.deadormi.servlet.ModeratorServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>NewPostServlet</servlet-name>
+        <servlet-class>com.deadormi.servlet.NewPostServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/LoginServlet</url-pattern>
@@ -86,6 +90,10 @@
     <servlet-mapping>
         <servlet-name>ModeratorServlet</servlet-name>
         <url-pattern>/secure/ModeratorServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>NewPostServlet</servlet-name>
+        <url-pattern>/secure/NewPostServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

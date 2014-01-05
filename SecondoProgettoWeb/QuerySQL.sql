@@ -73,7 +73,7 @@ FOREIGN KEY (id_crew) REFERENCES CREW(id)
 # POST TABLE CREATION
 
 CREATE TABLE secondoprogettoweb.POST(
-id INT,
+id INT NOT NULL AUTO_INCREMENT,
 id_writer INT,
 id_crew INT,
 creation_date VARCHAR(30),
@@ -86,7 +86,7 @@ FOREIGN KEY (id_crew) REFERENCES CREW(id)
 # POST FILE CREATION
 
 CREATE TABLE secondoprogettoweb.POST_FILE(
-id INT,
+id INT NOT NULL AUTO_INCREMENT,
 id_post INT,
 name VARCHAR(50),
 PRIMARY KEY(id),

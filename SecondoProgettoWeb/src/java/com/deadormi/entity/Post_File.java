@@ -13,6 +13,12 @@ import java.io.Serializable;
  */
 public class Post_File implements Serializable {
 
+    
+    private Integer id;
+    private Integer id_post;
+    private String name;
+
+    
     public Integer getId() {
         return id;
     }
@@ -36,9 +42,4 @@ public class Post_File implements Serializable {
     public void setName(String name) {
         this.name = name;
     }
-
-    private Integer id;
-    private Integer id_post;
-    private String name;
-
 }

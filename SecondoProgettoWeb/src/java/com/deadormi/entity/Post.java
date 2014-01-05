@@ -14,7 +14,7 @@ import java.io.Serializable;
 public class Post implements Serializable {
 
     private Integer id;
-    private Integer id_writer;
+    private User writer;
     private Integer id_crew;
     private String creation_date;
     private String text;
@@ -25,14 +25,6 @@ public class Post implements Serializable {
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public Integer getId_writer() {
-        return id_writer;
-    }
-
-    public void setId_writer(Integer id_writer) {
-        this.id_writer = id_writer;
     }
 
     public Integer getId_crew() {
@@ -57,6 +49,14 @@ public class Post implements Serializable {
 
     public void setText(String text) {
         this.text = text;
+    }
+
+    public User getWriter() {
+        return writer;
+    }
+
+    public void setWriter(User writer) {
+        this.writer = writer;
     }
     
     
