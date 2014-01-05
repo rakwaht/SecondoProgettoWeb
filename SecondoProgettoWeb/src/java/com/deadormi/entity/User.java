@@ -22,8 +22,17 @@ public class User implements Serializable {
     private String avatar_name;
     private String email;
     private String login_date;
+    private String last_login_date;
     private Boolean moderator;
 
+    public String getLast_login_date() {
+        return last_login_date;
+    }
+
+    public void setLast_login_date(String last_login_date) {
+        this.last_login_date = last_login_date;
+    }
+    
     public Integer getId() {
         return id;
     }

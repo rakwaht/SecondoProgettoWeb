@@ -6,6 +6,7 @@ package com.deadormi.controller;
 
 import com.deadormi.dbmanager.DbManager;
 import com.deadormi.entity.User;
+import com.deadormi.util.CurrentDate;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -38,6 +39,7 @@ public class UserController {
                     u.setUsername(rs.getString("username"));
                     u.setPassword(rs.getString("password"));
                     u.setLogin_date(rs.getString("login_date"));
+                    u.setLast_login_date(rs.getString("last_login_date"));
                     u.setId(rs.getInt("id"));
                     u.setEmail(rs.getString("email"));
                     u.setAvatar_name(rs.getString("avatar_name"));
@@ -55,17 +57,21 @@ public class UserController {
 
     public User authenticate(String username, String password) throws SQLException {
         PreparedStatement stm = con.prepareStatement("SELECT * FROM secondoprogettoweb.user WHERE username=? AND password=?");
-
+        UserController uc = new UserController();
         User u = new User();
         try {
             stm.setString(1, username);
             stm.setString(2, password);
             ResultSet rs = stm.executeQuery();
             try {
-                while (rs.next()) {
+                if (rs.next()) {
+                    //update date di login
+                    uc.update_login_date(rs.getInt("id"),rs.getString("login_date"));
+                    //setto i parametri invertendo le date di login cosi da avere in last_login data attuale
                     u.setUsername(rs.getString("username"));
                     u.setPassword(rs.getString("password"));
-                    u.setLogin_date(rs.getString("login_date"));
+                    u.setLogin_date(CurrentDate.getCurrentDate());
+                    u.setLast_login_date(rs.getString("login_date"));
                     u.setId(rs.getInt("id"));
                     u.setEmail(rs.getString("email"));
                     u.setAvatar_name(rs.getString("avatar_name"));
@@ -82,7 +88,7 @@ public class UserController {
     }
 
     public void create_user(User u) throws SQLException {
-        PreparedStatement stm = con.prepareStatement("INSERT INTO SECONDOPROGETTOWEB.USER (username,password,avatar_name,email,login_date,moderator) VALUES (?,?,?,?,?,?)");
+        PreparedStatement stm = con.prepareStatement("INSERT INTO SECONDOPROGETTOWEB.USER (username,password,avatar_name,email,login_date,moderator,last_login_date) VALUES (?,?,?,?,?,?,?)");
 
         try {
             stm.setString(1, u.getUsername());
@@ -91,6 +97,7 @@ public class UserController {
             stm.setString(4, u.getEmail());
             stm.setString(5, u.getLogin_date());
             stm.setBoolean(6, u.isModerator());
+            stm.setString(7, u.getLast_login_date());            
             stm.executeUpdate();
         } finally {
             stm.close();
@@ -147,6 +154,7 @@ public class UserController {
                     u.setAvatar_name(rs.getString("avatar_name"));
                     u.setEmail(rs.getString("email"));
                     u.setLogin_date(rs.getString("login_date"));
+                    u.setLast_login_date(rs.getString("last_login_date"));
                     u.setModerator(rs.getBoolean("moderator"));
                     u.setPassword(rs.getString("password"));
                     u.setUsername(rs.getString("username"));
@@ -176,6 +184,7 @@ public class UserController {
                     u.setAvatar_name(rs.getString("avatar_name"));
                     u.setEmail(rs.getString("email"));
                     u.setLogin_date(rs.getString("login_date"));
+                    u.setLast_login_date(rs.getString("last_login_date"));
                     u.setModerator(rs.getBoolean("moderator"));
                     u.setPassword(rs.getString("password"));
                     u.setUsername(rs.getString("username"));
@@ -206,6 +215,7 @@ public class UserController {
                     u.setAvatar_name(rs.getString("avatar_name"));
                     u.setEmail(rs.getString("email"));
                     u.setLogin_date(rs.getString("login_date"));
+                    u.setLast_login_date(rs.getString("last_login_date"));
                     u.setModerator(rs.getBoolean("moderator"));
                     u.setPassword(rs.getString("password"));
                     u.setUsername(rs.getString("username"));
@@ -236,6 +246,7 @@ public class UserController {
                     u.setAvatar_name(rs.getString("avatar_name"));
                     u.setEmail(rs.getString("email"));
                     u.setLogin_date(rs.getString("login_date"));
+                    u.setLast_login_date(rs.getString("last_login_date"));
                     u.setModerator(rs.getBoolean("moderator"));
                     u.setPassword(rs.getString("password"));
                     u.setUsername(rs.getString("username"));
@@ -274,5 +285,18 @@ public class UserController {
             stm.close();
         }    
         return u;
+    }
+
+    private void update_login_date(int id,String login_date) throws SQLException {
+        PreparedStatement stm = con.prepareStatement("UPDATE secondoprogettoweb.user SET last_login_date=?, login_date=? WHERE id=?");
+        try {
+            log.debug("Aggiorno data ultimo login utente");
+            stm.setString(1, login_date);
+            stm.setString(2, CurrentDate.getCurrentDate());
+            stm.setInt(3, id);
+            stm.executeUpdate();
+        } finally {
+            stm.close();
+        }
     }
 }

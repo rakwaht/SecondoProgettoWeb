@@ -4,13 +4,19 @@
 <%@include file="/layout/head.jsp" %>
 <a href="/SecondoProgettoWeb/LogoutServlet">logout</a>
 
-<h1>Benvenuto, ${user.username} ! </h1><br />
+<c:choose>
+    <c:when test="${empty user.last_login_date}">
+        <h1>Benvenuto, ${user.username} ! </h1><br />
+    </c:when>
+    <c:otherwise>
+        <h1>Bentornato, ${user.username} ! </h1><br /> last_login date:${user.last_login_date}<br />
+    </c:otherwise>
+</c:choose>
 psw: ${user.password}<br />
 email:${user.email}<br />
-login date:${user.login_date}<br />
 avatar:${user.avatar_name}<br />
 id:${user.id}<br />
-login_date:${user.login_date}
+
 
 <br />
 <br />

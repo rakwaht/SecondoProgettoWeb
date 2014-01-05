@@ -109,7 +109,7 @@ public class LoginServlet extends HttpServlet {
                     u.setUsername(username);
                     u.setPassword(Md5.getMD5(password));
                     u.setEmail(email);
-                    u.setLogin_date(CurrentDate.getCurrentDate());
+                    u.setLogin_date(null); //empty string non ha mai loggato
                     u.setModerator(Boolean.FALSE);
                     try {
                         uc.create_user(u);

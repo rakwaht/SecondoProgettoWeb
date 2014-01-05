@@ -18,6 +18,7 @@ avatar_name VARCHAR(50),
 email VARCHAR(45) NOT NULL UNIQUE,
 moderator BOOLEAN DEFAULT false,
 login_date VARCHAR(30),
+last_login_date VARCHAR(30),
 PRIMARY KEY(id)
 );
 
