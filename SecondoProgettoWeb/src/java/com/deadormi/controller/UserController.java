@@ -302,7 +302,7 @@ public class UserController {
         }
     }
     
-    private User updateAvatar(User u, String fileName) throws SQLException {
+    public User updateAvatar(User u, String fileName) throws SQLException {
         PreparedStatement stm = con.prepareStatement("UPDATE secondoprogettoweb.user SET avatar_name=? WHERE id=?");
         try {
             stm.setString(1, fileName);

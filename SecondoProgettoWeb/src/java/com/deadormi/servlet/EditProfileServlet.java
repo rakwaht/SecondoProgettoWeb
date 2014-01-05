@@ -9,8 +9,10 @@ import com.deadormi.controller.UserController;
 import com.deadormi.entity.User;
 import com.deadormi.util.Md5;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.net.URLEncoder;
 import java.sql.SQLException;
+import java.util.logging.Level;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -82,11 +84,38 @@ public class EditProfileServlet extends HttpServlet {
 
         String edit = request.getParameter("whatEdit");
 
+        log.debug("edit profile POST with param: " + edit);
+
+
         if ("editAvatar".equals(edit)) {
-            
+            log.debug("editAvatar");
+
+            FileController fc = new FileController();
+            try {
+                Integer result = fc.changeAvatar(request);
+
+                String message = "";
+                if (result.equals(0)) {
+                    message = "Avatar cambiato!";
+                } else if (result.equals(1)) {
+                    message = "File troppo grande!";
+                } else if (result.equals(2)) {
+                    message = "Il file non è un'immagine!";
+                } else if (result.equals(3)) {
+                    message = "Nessun file selezionato!";
+                }
+
+                response.sendRedirect("edit_profile.jsp?message_avatar=" + URLEncoder.encode(message, "UTF-8"));
+
+
+            } catch (SQLException ex) {
+                log.error("Errore avatar: " + ex);
+            }
+
         }
 
         if ("editName".equals(edit)) {
+            log.debug("editName");
             String new_username = request.getParameter("new_username");
             UserController uc = new UserController();
             try {
@@ -108,6 +137,7 @@ public class EditProfileServlet extends HttpServlet {
         }
 
         if ("editPassword".equals(edit)) {
+            log.debug("editPassword");
             String old_password = request.getParameter("old_password");
             String new_password = request.getParameter("new_password");
             String new_password_confirm = request.getParameter("new_password_confirm");
