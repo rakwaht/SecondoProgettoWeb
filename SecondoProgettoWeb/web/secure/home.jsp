@@ -24,7 +24,7 @@ id:${user.id}<br />
 <a href="/SecondoProgettoWeb/HomeServlet?next=groups">Gruppi</a><br />
 <a href="/SecondoProgettoWeb/secure/InviteServlet">Inviti</a><br />
 <c:if test="${user.moderator}">
-<a href="/SecondoProgettoWeb/secure/ModeratorServlet">ModeratorPage</a>
+    <a href="/SecondoProgettoWeb/secure/ModeratorServlet">ModeratorPage</a>
 </c:if>
 
 <%@include file="/layout/foot.jsp" %>

@@ -92,6 +92,7 @@ public class NewPostServlet extends HttpServlet {
             response.sendRedirect(request.getServletContext().getContextPath() + "/GroupsServlet");
         } else {
             try {
+                int error = 0;
                 Integer crew_id = Integer.parseInt(crew_id_string);
                 Crew crew = cc.find_crew_by_id(crew_id);
                 if (crew == null) {
@@ -101,9 +102,14 @@ public class NewPostServlet extends HttpServlet {
                     boolean isMultipart = ServletFileUpload.isMultipartContent(request);
                     if (isMultipart) {
                         log.debug("è multipart percio processo");
-                        int error = PostController.creaPost(request);
+                        error = pc.creaPost(request);
                     }
-                    response.sendRedirect(request.getServletContext().getContextPath() + "/ShowGroupServlet?id_group="+crew_id_string);
+                    if(error != 0){
+                        response.sendRedirect(request.getServletContext().getContextPath() + "/ShowGroupServlet?id_group="+crew_id_string+"&error="+error);
+                    }
+                    else{
+                        response.sendRedirect(request.getServletContext().getContextPath() + "/ShowGroupServlet?id_group="+crew_id_string);
+                    }                   
                 } else {
                     log.debug("non puoi creare il post per altri motivi. Es: gruppo pubblico ma non sei iscritto");
                     response.sendRedirect(request.getServletContext().getContextPath() + "/GroupsServlet");

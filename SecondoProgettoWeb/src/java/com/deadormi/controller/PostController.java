@@ -70,7 +70,7 @@ public class PostController {
         return result;
     }
 
-    public static int creaPost(HttpServletRequest request) throws SQLException, FileUploadException {
+    public int creaPost(HttpServletRequest request) throws SQLException, FileUploadException {
         log.debug("inizio salvataggio file");
         String crew_id_string = request.getParameter("id_crew");
         HttpSession session = request.getSession();
