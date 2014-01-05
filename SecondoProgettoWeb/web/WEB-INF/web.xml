@@ -63,6 +63,10 @@
         <servlet-name>EditProfileServlet</servlet-name>
         <servlet-class>com.deadormi.servlet.EditProfileServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>RecoveryPasswordServlet</servlet-name>
+        <servlet-class>com.deadormi.servlet.RecoveryPasswordServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/LoginServlet</url-pattern>
@@ -110,6 +114,10 @@
     <servlet-mapping>
         <servlet-name>EditProfileServlet</servlet-name>
         <url-pattern>/secure/EditProfileServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RecoveryPasswordServlet</servlet-name>
+        <url-pattern>/RecoveryPasswordServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -56,6 +56,34 @@ public class UserController {
         }
         return null;
     }
+    
+    public User findUserByEmail(String email) throws SQLException {
+        PreparedStatement stm = con.prepareStatement("SELECT * FROM secondoprogettoweb.user WHERE email=?");
+
+        User u = new User();
+        try {
+            stm.setString(1, email);
+            ResultSet rs = stm.executeQuery();
+            try {
+                while (rs.next()) {
+                    u.setUsername(rs.getString("username"));
+                    u.setPassword(rs.getString("password"));
+                    u.setLogin_date(rs.getString("login_date"));
+                    u.setLast_login_date(rs.getString("last_login_date"));
+                    u.setId(rs.getInt("id"));
+                    u.setEmail(rs.getString("email"));
+                    u.setAvatar_name(rs.getString("avatar_name"));
+                    u.setModerator(rs.getBoolean("moderator"));
+                    return u;
+                }
+            } finally {
+                rs.close();
+            }
+        } finally {
+            stm.close();
+        }
+        return null;
+    }
 
     public User authenticate(String username, String password) throws SQLException {
         PreparedStatement stm = con.prepareStatement("SELECT * FROM secondoprogettoweb.user WHERE username=? AND password=?");

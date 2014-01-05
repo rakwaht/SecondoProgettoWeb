@@ -8,7 +8,8 @@
     Please enter your username 		
     <input type="text" name="username"/><br/>		
     Please enter your password
-    <input type="password" name="password"/>
+    <input type="password" name="password"/><br />
+    <a href="password_recovery.jsp">Password dimenticata?</a>
     <div>
         <div><p>${param.message_login}</p></div>
         <input type="submit" value="Login" />
