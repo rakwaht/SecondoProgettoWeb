@@ -7,6 +7,14 @@
         <param-name>dburl</param-name>
         <param-value>jdbc:mysql://localhost:3306/secondoprogettoweb</param-value>
     </context-param>
+    <filter>
+        <filter-name>SecureFilter</filter-name>
+        <filter-class>com.deadormi.util.SecureFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>SecureFilter</filter-name>
+        <url-pattern>/secure/*</url-pattern>
+    </filter-mapping>
     <listener>
         <description>listener</description>
         <listener-class>com.deadormi.dbmanager.WebAppContextListener</listener-class>
