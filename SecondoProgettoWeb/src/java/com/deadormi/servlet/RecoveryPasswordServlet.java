@@ -7,6 +7,7 @@ package com.deadormi.servlet;
 import com.deadormi.controller.UserController;
 import com.deadormi.entity.User;
 import static com.deadormi.servlet.EditProfileServlet.log;
+import com.deadormi.util.Mailer;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.URLEncoder;
@@ -71,13 +72,23 @@ public class RecoveryPasswordServlet extends HttpServlet {
 
         String email = request.getParameter("email");
         UserController uc = new UserController();
+        User u = null;
         String message = "";
         try {
-            if (uc.findUserByEmail(email) != null) {
-                /* QUA IL CODICE PER L'INVIO DELLA MAIL */
+            u = uc.findUserByEmail(email);
+            if (u != null) {
+   
+                // Nuova oggetto per invio email
+                Mailer m = new Mailer();
+                // Oggetto del messaggio
+                String subject = "[SecondoProgettoWeb] Recupero password";
+                // Testo del messaggio
+                String text = "Ciao " + u.getUsername() + ",\n\n"  + "Istruzioni per cabiare password...";
+                // Invia email
+                m.sendEmail(u, subject, text);
 
-
-                message = "Il messaggio inviato. ( non è vero :D )";
+                // Messaggio a video
+                message = "Il messaggio inviato.";
                 response.sendRedirect("password_recovery.jsp?message_email=" + URLEncoder.encode(message, "UTF-8"));
             } else {
                 message = "Non è stato registrato alcun utente con questa email.";
