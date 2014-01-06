@@ -55,7 +55,7 @@ public class Mailer {
             log.debug("Messaggio non inviato!");
             res = false;
         }
-        log.debug("Messaggio iviato!");
+        log.debug("Messaggio inviato!");
         return res;
     }
 }

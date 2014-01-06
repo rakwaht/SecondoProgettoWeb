@@ -86,7 +86,7 @@ public class RecoveryPasswordServlet extends HttpServlet {
                 if (m.sendEmail(u, subject, text)) {
                     message = "Messaggio inviato correttamente.";
                 } else {
-                    message = "Errore, messaggio non inivato.";
+                    message = "Errore, messaggio non inviato.";
                 }
 
                 response.sendRedirect("password_recovery.jsp?message_email=" + URLEncoder.encode(message, "UTF-8"));
