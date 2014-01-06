@@ -10,6 +10,10 @@ import com.deadormi.util.CurrentDate;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.logging.Level;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -89,20 +93,33 @@ public class PasswordChangeServlet extends HttpServlet {
         String password = request.getParameter("password");
         String password_confirm = request.getParameter("password_confirm");
 
-        String now_date = CurrentDate.getCurrentDate();
         Password_ChangeController pcc = new Password_ChangeController();
         String db_date = "";
         Password_Change pc = null;
 
         try {
             pc = pcc.getPassword_ChangeById(psw_change_id);
+            db_date = pc.getPassword_date();
         } catch (SQLException ex) {
             log.warn(ex);
         }
 
-        log.debug("CAZZO");
-        
+        Date date_now = null;
+        Date date_db = null;
 
+        try {
+            date_now = CurrentDate.toDate(CurrentDate.getCurrentDate());
+            date_db = CurrentDate.toDate(db_date);
+
+        } catch (ParseException ex) {
+            java.util.logging.Logger.getLogger(PasswordChangeServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        log.debug("adesso: " + date_now);
+        log.debug("dbdb: " + date_db);
+        
+        long diff = (date_now.getTime() - date_db.getTime())/1000;
+        log.debug("diff: " + diff );
 
         /* ------------------------------------------------- */
 
@@ -117,7 +134,10 @@ public class PasswordChangeServlet extends HttpServlet {
             out.println("<ul>");
             out.println("<li>psw_change_id: " + psw_change_id + "</li>");
             out.println("<li>id: " + pc.getId() + "</li>");
-            out.println("<li>now_date: " + now_date + "</li>");
+            out.println("<li>now_date: " + date_now + "</li>");
+            out.println("<li>db_date: " + pc.getPassword_date() + "</li>");
+            out.println("<li>diff: " + diff + "</li>");
+
             out.println("<li>passw: " + password + "</li>");
             out.println("<li>passw_conf: " + password_confirm + "</li>");
             out.println("</ul>");
