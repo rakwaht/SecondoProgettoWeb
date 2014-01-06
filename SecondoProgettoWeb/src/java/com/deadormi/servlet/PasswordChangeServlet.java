@@ -4,18 +4,25 @@
  */
 package com.deadormi.servlet;
 
+import com.deadormi.controller.Password_ChangeController;
+import com.deadormi.entity.Password_Change;
+import com.deadormi.util.CurrentDate;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.apache.log4j.Logger;
 
 /**
  *
  * @author francesco
  */
 public class PasswordChangeServlet extends HttpServlet {
+
+    static Logger log = Logger.getLogger(PasswordChangeServlet.class);
 
     /**
      * Processes requests for both HTTP
@@ -82,6 +89,23 @@ public class PasswordChangeServlet extends HttpServlet {
         String password = request.getParameter("password");
         String password_confirm = request.getParameter("password_confirm");
 
+        String now_date = CurrentDate.getCurrentDate();
+        Password_ChangeController pcc = new Password_ChangeController();
+        String db_date = "";
+        Password_Change pc = null;
+
+        try {
+            pc = pcc.getPassword_ChangeById(psw_change_id);
+        } catch (SQLException ex) {
+            log.warn(ex);
+        }
+
+        log.debug("CAZZO");
+        
+
+
+        /* ------------------------------------------------- */
+
         try {
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
@@ -90,12 +114,21 @@ public class PasswordChangeServlet extends HttpServlet {
             out.println("<title>Servlet PasswordChangeservlet</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<ul><li>" + psw_change_id + "</li><li>" + password + "</li><li>" + password_confirm + "</li></ul>");
+            out.println("<ul>");
+            out.println("<li>psw_change_id: " + psw_change_id + "</li>");
+            out.println("<li>id: " + pc.getId() + "</li>");
+            out.println("<li>now_date: " + now_date + "</li>");
+            out.println("<li>passw: " + password + "</li>");
+            out.println("<li>passw_conf: " + password_confirm + "</li>");
+            out.println("</ul>");
+            out.println("<p>dio canenenenenen</p>");
+
             out.println("</body>");
             out.println("</html>");
         } finally {
             out.close();
         }
+
     }
 
     /**
