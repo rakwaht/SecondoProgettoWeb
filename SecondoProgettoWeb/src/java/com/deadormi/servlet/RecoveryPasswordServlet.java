@@ -102,7 +102,7 @@ public class RecoveryPasswordServlet extends HttpServlet {
                 
                 // Link di recovery
                 String link_path = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath();
-                String link_recovery = "<a href='" + link_path + "/secure/password_change.jsp?psw_change_id=" + psw_change_id + "'>qui</a>";
+                String link_recovery = "<a href='" + link_path + "/password_change.jsp?psw_change_id=" + psw_change_id + "'>qui</a>";
                 
                 // Testo del messaggio in HTML
                 String text = "Ciao " + u.getUsername() + ",<br /><br />"; 
