@@ -8,6 +8,7 @@ import com.deadormi.entity.User;
 import java.util.*;
 import javax.mail.*;
 import javax.mail.internet.*;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -15,7 +16,10 @@ import javax.mail.internet.*;
  */
 public class Mailer {
 
-    public void sendEmail(User u, String subject, String text) {
+    static Logger log = Logger.getLogger(Mailer.class);
+
+    public Boolean sendEmail(User u, String subject, String text) {
+
         final String email_to = u.getEmail();
         final String username = "deadormi@gmail.com";
         final String password = "diomerda";
@@ -32,6 +36,7 @@ public class Mailer {
             }
         });
 
+        Boolean res = true;
         try {
             // Nuovo messaggio
             Message message = new MimeMessage(session);
@@ -46,7 +51,11 @@ public class Mailer {
             // Invia il messaggio
             Transport.send(message);
         } catch (MessagingException e) {
-            throw new RuntimeException(e);
+            log.error(e);
+            log.debug("Messaggio non inviato!");
+            res = false;
         }
+        log.debug("Messaggio iviato!");
+        return res;
     }
 }

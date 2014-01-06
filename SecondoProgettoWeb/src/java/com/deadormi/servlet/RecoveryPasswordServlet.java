@@ -6,25 +6,24 @@ package com.deadormi.servlet;
 
 import com.deadormi.controller.UserController;
 import com.deadormi.entity.User;
-import static com.deadormi.servlet.EditProfileServlet.log;
 import com.deadormi.util.Mailer;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.net.URLEncoder;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import org.apache.log4j.Logger;
 
 /**
  *
  * @author francesco
  */
 public class RecoveryPasswordServlet extends HttpServlet {
+
+    static Logger log = Logger.getLogger(RecoveryPasswordServlet.class);
 
     /**
      * Processes requests for both HTTP
@@ -73,22 +72,23 @@ public class RecoveryPasswordServlet extends HttpServlet {
         String email = request.getParameter("email");
         UserController uc = new UserController();
         User u = null;
-        String message = "";
+        String message = null  ;
         try {
             u = uc.findUserByEmail(email);
             if (u != null) {
-   
-                // Nuova oggetto per invio email
+                // Nuovo oggetto Mailer() per invio email
                 Mailer m = new Mailer();
                 // Oggetto del messaggio
                 String subject = "[SecondoProgettoWeb] Recupero password";
                 // Testo del messaggio
-                String text = "Ciao " + u.getUsername() + ",\n\n"  + "Istruzioni per cabiare password...";
+                String text = "Ciao " + u.getUsername() + ",\n\n" + "Istruzioni per cabiare password...";
                 // Invia email
-                m.sendEmail(u, subject, text);
+                if (m.sendEmail(u, subject, text)) {
+                    message = "Messaggio inviato correttamente.";
+                } else {
+                    message = "Errore, messaggio non inivato.";
+                }
 
-                // Messaggio a video
-                message = "Il messaggio inviato.";
                 response.sendRedirect("password_recovery.jsp?message_email=" + URLEncoder.encode(message, "UTF-8"));
             } else {
                 message = "Non è stato registrato alcun utente con questa email.";
@@ -97,10 +97,6 @@ public class RecoveryPasswordServlet extends HttpServlet {
         } catch (SQLException ex) {
             log.error(ex);
         }
-
-
-
-
     }
 
     /**
