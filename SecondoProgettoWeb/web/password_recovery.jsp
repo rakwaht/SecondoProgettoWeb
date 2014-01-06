@@ -14,4 +14,6 @@
 </form>
     <p>${param.message_email}</p>
     
+    <!-- MESSAGGIO SE L'UTENTE NON CAMBIA LA PASSWORD ENTRO 3 MIN -->
+    <p>${param.message_password}</p>
 <%@include file="layout/foot.jsp" %>

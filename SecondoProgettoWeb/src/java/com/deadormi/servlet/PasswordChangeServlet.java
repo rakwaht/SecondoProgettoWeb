@@ -9,6 +9,7 @@ import com.deadormi.entity.Password_Change;
 import com.deadormi.util.CurrentDate;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.URLEncoder;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -92,6 +93,8 @@ public class PasswordChangeServlet extends HttpServlet {
         String psw_change_id = request.getParameter("psw_change_id");
         String password = request.getParameter("password");
         String password_confirm = request.getParameter("password_confirm");
+        
+        log.debug("id req: " + psw_change_id);
 
         Password_ChangeController pcc = new Password_ChangeController();
         String db_date = "";
@@ -117,38 +120,49 @@ public class PasswordChangeServlet extends HttpServlet {
 
         log.debug("adesso: " + date_now);
         log.debug("dbdb: " + date_db);
-        
-        long diff = (date_now.getTime() - date_db.getTime())/1000;
-        log.debug("diff: " + diff );
+
+        long diff = (date_now.getTime() - date_db.getTime()) / 1000;
+        log.debug("diff: " + diff);
 
         /* ------------------------------------------------- */
 
-        try {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet PasswordChangeservlet</title>");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<ul>");
-            out.println("<li>psw_change_id: " + psw_change_id + "</li>");
-            out.println("<li>id: " + pc.getId() + "</li>");
-            out.println("<li>now_date: " + date_now + "</li>");
-            out.println("<li>db_date: " + pc.getPassword_date() + "</li>");
-            out.println("<li>diff: " + diff + "</li>");
+        String message;
+        // Se passano più di 180 sec la sessione scade e bye bye
+        if (diff > 180) {
+            message = "La sessione è scaduta. Inserisci di nuovo la email per inviare una nuova richiesta di cambio password.";
+            response.sendRedirect("password_recovery.jsp?message_password=" + URLEncoder.encode(message, "UTF-8"));
+        } else {
 
-            out.println("<li>passw: " + password + "</li>");
-            out.println("<li>passw_conf: " + password_confirm + "</li>");
-            out.println("</ul>");
-            out.println("<p>dio canenenenenen</p>");
+            
+            
 
-            out.println("</body>");
-            out.println("</html>");
-        } finally {
-            out.close();
+
+            try {
+                /* TODO output your page here. You may use following sample code. */
+                out.println("<!DOCTYPE html>");
+                out.println("<html>");
+                out.println("<head>");
+                out.println("<title>Servlet PasswordChangeservlet</title>");
+                out.println("</head>");
+                out.println("<body>");
+                out.println("<ul>");
+                out.println("<li>psw_change_id: " + psw_change_id + "</li>");
+                out.println("<li>id: " + pc.getId() + "</li>");
+                out.println("<li>now_date: " + date_now + "</li>");
+                out.println("<li>db_date: " + pc.getPassword_date() + "</li>");
+                out.println("<li>diff: " + diff + "</li>");
+
+                out.println("<li>passw: " + password + "</li>");
+                out.println("<li>passw_conf: " + password_confirm + "</li>");
+                out.println("</ul>");
+                out.println("<p>dio canenenenenen</p>");
+
+                out.println("</body>");
+                out.println("</html>");
+            } finally {
+                out.close();
+            }
         }
-
     }
 
     /**
