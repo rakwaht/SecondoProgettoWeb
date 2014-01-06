@@ -80,8 +80,19 @@ public class RecoveryPasswordServlet extends HttpServlet {
                 Mailer m = new Mailer();
                 // Oggetto del messaggio
                 String subject = "[SecondoProgettoWeb] Recupero password";
-                // Testo del messaggio
-                String text = "Ciao " + u.getUsername() + ",\n\n" + "Istruzioni per cabiare password...";
+                
+                // Link di recovery
+                String link_path = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath();
+                String link_recovery = "<a href='" + link_path + "/secure/password_change.jsp'>qui</a>";
+                
+                // Testo del messaggio in HTML
+                String text = "Ciao " + u.getUsername() + ",<br /><br />"; 
+                text += "E' arrivata una richista di recupero password per l'utente " + u.getEmail() + "<br /><br />";
+                text += "Se vuoi cambiare la password clicca ";
+                text += link_recovery + "<br /><br />";
+                text += "Altrimenti ignora il messaggio. <br /><br />";
+                text += "A presto,<br /><br />DeaDormi Team";
+                
                 // Invia email
                 if (m.sendEmail(u, subject, text)) {
                     message = "Messaggio inviato correttamente.";

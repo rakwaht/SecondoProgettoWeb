@@ -46,8 +46,8 @@ public class Mailer {
             message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(email_to));
             // Inserisce l'oggetto del messaggio
             message.setSubject(subject);
-            // Inserisci il testo del messaggio
-            message.setText(text);
+            // Setta il tipo del messaggio e il testo
+            message.setContent(text, "text/html");
             // Invia il messaggio
             Transport.send(message);
         } catch (MessagingException e) {
