@@ -5,8 +5,11 @@
 package com.deadormi.servlet;
 
 import com.deadormi.controller.Password_ChangeController;
+import com.deadormi.controller.UserController;
 import com.deadormi.entity.Password_Change;
+import com.deadormi.entity.User;
 import com.deadormi.util.CurrentDate;
+import com.deadormi.util.Md5;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.URLEncoder;
@@ -87,81 +90,70 @@ public class PasswordChangeServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = response.getWriter();
 
         String psw_change_id = request.getParameter("psw_change_id");
         String password = request.getParameter("password");
         String password_confirm = request.getParameter("password_confirm");
-        
-        log.debug("id req: " + psw_change_id);
 
         Password_ChangeController pcc = new Password_ChangeController();
         String db_date = "";
         Password_Change pc = null;
-
-        try {
-            pc = pcc.getPassword_ChangeById(psw_change_id);
-            db_date = pc.getPassword_date();
-        } catch (SQLException ex) {
-            log.warn(ex);
-        }
-
-        Date date_now = null;
-        Date date_db = null;
-
-        try {
-            date_now = CurrentDate.toDate(CurrentDate.getCurrentDate());
-            date_db = CurrentDate.toDate(db_date);
-
-        } catch (ParseException ex) {
-            java.util.logging.Logger.getLogger(PasswordChangeServlet.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        log.debug("adesso: " + date_now);
-        log.debug("dbdb: " + date_db);
-
-        long diff = (date_now.getTime() - date_db.getTime()) / 1000;
-        log.debug("diff: " + diff);
-
-        /* ------------------------------------------------- */
-
         String message;
-        // Se passano più di 180 sec la sessione scade e bye bye
-        if (diff > 180) {
+
+        if (psw_change_id.equals("") || psw_change_id == null) {
+
+            log.debug("------------------------------------");
             message = "La sessione è scaduta. Inserisci di nuovo la email per inviare una nuova richiesta di cambio password.";
             response.sendRedirect("password_recovery.jsp?message_password=" + URLEncoder.encode(message, "UTF-8"));
         } else {
 
-            
-            
-
+            log.debug("eccccckckckckckckckckckck");
 
             try {
-                /* TODO output your page here. You may use following sample code. */
-                out.println("<!DOCTYPE html>");
-                out.println("<html>");
-                out.println("<head>");
-                out.println("<title>Servlet PasswordChangeservlet</title>");
-                out.println("</head>");
-                out.println("<body>");
-                out.println("<ul>");
-                out.println("<li>psw_change_id: " + psw_change_id + "</li>");
-                out.println("<li>id: " + pc.getId() + "</li>");
-                out.println("<li>now_date: " + date_now + "</li>");
-                out.println("<li>db_date: " + pc.getPassword_date() + "</li>");
-                out.println("<li>diff: " + diff + "</li>");
-
-                out.println("<li>passw: " + password + "</li>");
-                out.println("<li>passw_conf: " + password_confirm + "</li>");
-                out.println("</ul>");
-                out.println("<p>dio canenenenenen</p>");
-
-                out.println("</body>");
-                out.println("</html>");
-            } finally {
-                out.close();
+                pc = pcc.getPassword_ChangeById(psw_change_id);
+                db_date = pc.getPassword_date();
+            } catch (SQLException ex) {
+                log.warn(ex);
             }
+
+            Date date_now = null;
+            Date date_db = null;
+            try {
+                date_now = CurrentDate.toDate(CurrentDate.getCurrentDate());
+                date_db = CurrentDate.toDate(db_date);
+            } catch (ParseException ex) {
+                java.util.logging.Logger.getLogger(PasswordChangeServlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+
+            log.debug("adesso: " + date_now);
+            log.debug("dbdb: " + date_db);
+
+            long diff = (date_now.getTime() - date_db.getTime()) / 1000;
+            log.debug("diff: " + diff);
+
+            // Se passano più di 180 sec la sessione scade e bye bye
+            if (diff > 180) {
+                message = "La sessione è scaduta. Inserisci di nuovo la email per inviare una nuova richiesta di cambio password.";
+                response.sendRedirect("password_recovery.jsp?message_password=" + URLEncoder.encode(message, "UTF-8"));
+            } else {
+                UserController uc = new UserController();
+                User u = pc.getUser();
+
+                if (password.equals(password_confirm) && !password.trim().equals("") && password.length() >= 5) {
+                    try {
+                        u = uc.updatePassword(u, Md5.getMD5(password));
+                        message = "Password cambiata con successo";
+                        response.sendRedirect("password_change.jsp?message_password=" + URLEncoder.encode(message, "UTF-8"));
+                    } catch (SQLException ex) {
+                        log.warn(ex);
+                    }
+                } else {
+                    message = "Nuova password non valida. Le password devono coincidere ed essere di lunghezza minima 5 caratteri.";
+                    response.sendRedirect("password_change.jsp?psw_change_id=" + psw_change_id + "&message_password=" + URLEncoder.encode(message, "UTF-8"));
+                }
+            }
+
         }
     }
 

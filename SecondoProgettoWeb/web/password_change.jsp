@@ -17,7 +17,7 @@ Ripeti nuova passvord: <input type='password' name='password_confirm' /><br />
 <input type='submit' value="Invia"/>
 </form>
 
-<p>${param.message}</p>
+<p>${param.message_password}</p>
 
 <%@include file="/layout/foot.jsp" %>
 
