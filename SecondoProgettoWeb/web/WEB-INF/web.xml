@@ -75,6 +75,10 @@
         <servlet-name>RecoveryPasswordServlet</servlet-name>
         <servlet-class>com.deadormi.servlet.RecoveryPasswordServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>PasswordChangeServlet</servlet-name>
+        <servlet-class>com.deadormi.servlet.PasswordChangeServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/LoginServlet</url-pattern>
@@ -126,6 +130,10 @@
     <servlet-mapping>
         <servlet-name>RecoveryPasswordServlet</servlet-name>
         <url-pattern>/RecoveryPasswordServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PasswordChangeServlet</servlet-name>
+        <url-pattern>/PasswordChangeServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

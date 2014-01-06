@@ -11,11 +11,13 @@
 <h2>WORK IN PROG!</h2>
 <h3>id richiesta: ${param.psw_change_id}</h3>
 
-<form method="post" action="PasswordChangeServlet">
-Nuova password: <input type='password' name='change_psw' /><br />
-Ripeti nuova passvord: <input type='password' name='change_psw_confirm' /><br />
+<form method="post" action="PasswordChangeServlet?psw_change_id=${param.psw_change_id}">
+Nuova password: <input type='password' name='password' /><br />
+Ripeti nuova passvord: <input type='password' name='password_confirm' /><br />
 <input type='submit' value="Invia"/>
 </form>
+
+<p>${param.message}</p>
 
 <%@include file="/layout/foot.jsp" %>
 
