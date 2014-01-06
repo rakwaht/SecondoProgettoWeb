@@ -139,19 +139,20 @@ public class NewGroupServlet extends HttpServlet {
                         in.setSender(u);
                         in.setInvite_enabled(Boolean.TRUE);
                         ic.create_invite(in);
-
+                        
                         // Preparo dati per l'invito via email
                         Mailer m = new Mailer();
                         // Oggetto
                         String subject = "[SecondoProgettoWeb] Hai ricevuto un invito";
 
                         // Messaggio HTML
-                        //String link_path = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath();
-                        //String link_invites = "<a href='" + link_path + "/blabla.jsp'>qui</a>";
+                        String link_path = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath();
+                        String link_invites = "<a href='" + link_path + "/AcceptInviteServlet?id_gruppo=" + in.getCrew().getId() + "&email_receiver=" + r.getEmail() + "&email_sender=" + u.getEmail() + "'>qui</a>";
 
-                        String text = "Ciao " + r.getUsername() + ",<br />";
+                        String text = "Ciao " + r.getUsername() + ",<br /><br />";
                         text += "<b>" + u.getUsername() + "</b> ti ha invitato a partecipare al gruppo <b>" + c.getName() + "</b>.<br />";
-
+                        text += "Clicca " + link_invites + " per accettare l'invito. Altrimenti ignora il messaggio.";
+                        
                         // Invio email: se la email non dovesse essere mandata per errori del server, ecc.
                         // l'invito non arriva per email
                         m.sendEmail(r, subject, text);

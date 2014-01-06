@@ -79,6 +79,10 @@
         <servlet-name>PasswordChangeServlet</servlet-name>
         <servlet-class>com.deadormi.servlet.PasswordChangeServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AcceptInviteServlet</servlet-name>
+        <servlet-class>com.deadormi.servlet.AcceptInviteServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/LoginServlet</url-pattern>
@@ -134,6 +138,10 @@
     <servlet-mapping>
         <servlet-name>PasswordChangeServlet</servlet-name>
         <url-pattern>/PasswordChangeServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AcceptInviteServlet</servlet-name>
+        <url-pattern>/AcceptInviteServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
