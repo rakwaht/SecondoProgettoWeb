@@ -105,7 +105,7 @@ public class ModifyGroupServlet extends HttpServlet {
         String description = request.getParameter("description");
         CrewController cu = new CrewController();
         Crew crew=null;
-        
+        Boolean isprivate = Boolean.parseBoolean(request.getParameter("type"));
         UserController uc = new UserController();
         Crew_UserController cuc = new Crew_UserController();
         InviteController ic = new InviteController();
@@ -150,7 +150,9 @@ public class ModifyGroupServlet extends HttpServlet {
         }else{
             crew.setDescription(description);
             crew.setName(title);
-            
+            if(!crew.getCrew_private().equals(isprivate)){
+                crew.setCrew_private(isprivate);
+            }
             try {
                 cu.updateCrew(crew);
             } catch (SQLException ex) {

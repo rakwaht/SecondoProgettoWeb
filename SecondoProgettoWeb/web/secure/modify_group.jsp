@@ -9,7 +9,12 @@
 <form method="post" action="ModifyGroupServlet?id_crew=${crew.id}">
     <input type='text' name='title'value='${crew.name}'/><br/>
     <textarea type='text' name='description'>${crew.description}</textarea><br/>
-
+    <c:if test='${crew.crew_private}'>
+        <input type='radio' name='type'value='0' />public<input type='radio' name='type'value='1' checked='checked'/>private<br/>
+    </c:if>
+    <c:if test='${!crew.crew_private}'>
+        <input type='radio' name='type'value='0' checked='checked' />public<input type='radio' name='type'value='1' />private<br/>
+    </c:if>
     <c:if test="${not empty followers}">
         ELIMINA:<br/>
         <c:forEach var="followers" items="${followers}">
@@ -23,9 +28,9 @@
         </c:forEach>
     </c:if>        
     <c:if test="${not empty invited}">
-    <c:forEach var="invited" items="${invited}">
-        ${invited.username} già invitato!
-    </c:forEach>
+        <c:forEach var="invited" items="${invited}">
+            ${invited.username} già invitato!
+        </c:forEach>
     </c:if>
     <input type='submit' value='Modifica'/>
 </form>

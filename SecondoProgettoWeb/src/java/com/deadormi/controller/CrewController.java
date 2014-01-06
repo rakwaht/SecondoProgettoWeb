@@ -140,11 +140,12 @@ public class CrewController {
     }
 
     public void updateCrew(Crew crew) throws SQLException {
-        PreparedStatement stm = con.prepareStatement("UPDATE secondoprogettoweb.crew SET name=?,description=? WHERE id=? ");
+        PreparedStatement stm = con.prepareStatement("UPDATE secondoprogettoweb.crew SET name=?,description=?,crew_private=? WHERE id=? ");
         try {
             stm.setString(1, crew.getName());
             stm.setString(2,crew.getDescription());
-            stm.setInt(3, crew.getId());
+            stm.setInt(4, crew.getId());
+            stm.setBoolean(3,crew.getCrew_private() );
             stm.executeUpdate();
         } finally {
             stm.close();
