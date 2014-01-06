@@ -8,6 +8,9 @@
 <%@include file="/layout/head.jsp" %>
 
 <h1>Ciao imposta la tua nuova password!</h1>
+<h2>WORK IN PROG!</h2>
+<h3>id richiesta: ${param.psw_change_id}</h3>
+
 <form method="post" action="PasswordChangeServlet">
 Nuova password: <input type='password' name='change_psw' /><br />
 Ripeti nuova passvord: <input type='password' name='change_psw_confirm' /><br />

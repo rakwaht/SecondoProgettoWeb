@@ -13,24 +13,24 @@ import java.io.Serializable;
  */
 public class Password_Change implements Serializable {
 
-    private Integer id;
-    private Integer id_user;
+    private String id;
+    private User user;
     private String password_date;
 
-    public Integer getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public Integer getId_user() {
-        return id_user;
+    public User getUser() {
+        return user;
     }
 
-    public void setId_user(Integer id_user) {
-        this.id_user = id_user;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public String getPassword_date() {

@@ -4,8 +4,12 @@
  */
 package com.deadormi.servlet;
 
+import com.deadormi.controller.Password_ChangeController;
 import com.deadormi.controller.UserController;
+import com.deadormi.entity.Password_Change;
 import com.deadormi.entity.User;
+import com.deadormi.util.CurrentDate;
+import com.deadormi.util.HashGenerator;
 import com.deadormi.util.Mailer;
 import java.io.IOException;
 import java.net.URLEncoder;
@@ -76,6 +80,21 @@ public class RecoveryPasswordServlet extends HttpServlet {
         try {
             u = uc.findUserByEmail(email);
             if (u != null) {
+                
+                Password_Change pc = new Password_Change();
+                Password_ChangeController pcc = new Password_ChangeController();
+                HashGenerator hg = new HashGenerator();
+                
+                // Genera id univoco per la password change
+                String psw_change_id = hg.generateId();
+                
+                // Setto l'oggetto pc
+                pc.setId(psw_change_id);
+                pc.setUser(u);
+                pc.setPassword_date(CurrentDate.getCurrentDate());
+                // Salvo nel DB
+                pcc.insert(pc);
+                
                 // Nuovo oggetto Mailer() per invio email
                 Mailer m = new Mailer();
                 // Oggetto del messaggio
@@ -83,7 +102,7 @@ public class RecoveryPasswordServlet extends HttpServlet {
                 
                 // Link di recovery
                 String link_path = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath();
-                String link_recovery = "<a href='" + link_path + "/secure/password_change.jsp'>qui</a>";
+                String link_recovery = "<a href='" + link_path + "/secure/password_change.jsp?psw_change_id=" + psw_change_id + "'>qui</a>";
                 
                 // Testo del messaggio in HTML
                 String text = "Ciao " + u.getUsername() + ",<br /><br />"; 
