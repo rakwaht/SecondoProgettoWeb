@@ -13,6 +13,7 @@ import com.deadormi.entity.Crew_User;
 import com.deadormi.entity.Invite;
 import com.deadormi.entity.User;
 import com.deadormi.util.CurrentDate;
+import com.deadormi.util.Mailer;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.URLEncoder;
@@ -115,7 +116,7 @@ public class NewGroupServlet extends HttpServlet {
             String message = "Nome e/o descrizione obbligatorie!";
             response.sendRedirect("NewGroupServlet?message_newgroup=" + URLEncoder.encode(message, "UTF-8"));
         } else {
-            //ok registro il nuovo utente
+            //ok registro il nuovo gruppo
             Crew c = new Crew();
             c.setAdmin(u);
             c.setCreation_date(CurrentDate.getCurrentDate());
@@ -132,12 +133,29 @@ public class NewGroupServlet extends HttpServlet {
                 if (users != null) {
                     for (int i = 0; i < users.length; i++) {
                         Invite in = new Invite();
+                        User r = uu.findUserbyId(Integer.parseInt(users[i]));
                         in.setCrew(cc.find_crew_by_id(id_crew));
-                        in.setReceiver(uu.findUserbyId(Integer.parseInt(users[i])));
+                        in.setReceiver(r);
                         in.setSender(u);
                         in.setInvite_enabled(Boolean.TRUE);
                         ic.create_invite(in);
 
+                        // Preparo dati per l'invito via email
+                        Mailer m = new Mailer();
+                        // Oggetto
+                        String subject = "[SecondoProgettoWeb] Hai ricevuto un invito";
+
+                        // Messaggio HTML
+                        //String link_path = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath();
+                        //String link_invites = "<a href='" + link_path + "/blabla.jsp'>qui</a>";
+
+                        String text = "Ciao " + r.getUsername() + ",<br />";
+                        text += "<b>" + u.getUsername() + "</b> ti ha invitato a partecipare al gruppo <b>" + c.getName() + "</b>.<br />";
+
+                        // Invio email: se la email non dovesse essere mandata per errori del server, ecc.
+                        // l'invito non arriva per email
+                        m.sendEmail(r, subject, text);
+                        
                     }
 
                 }

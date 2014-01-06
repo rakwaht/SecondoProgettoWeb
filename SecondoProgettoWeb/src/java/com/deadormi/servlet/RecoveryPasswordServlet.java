@@ -106,10 +106,10 @@ public class RecoveryPasswordServlet extends HttpServlet {
                 
                 // Testo del messaggio in HTML
                 String text = "Ciao " + u.getUsername() + ",<br /><br />"; 
-                text += "E' arrivata una richista di recupero password per l'utente " + u.getEmail() + "<br /><br />";
+                text += "E' arrivata una richista di recupero password per l'utente " + u.getEmail() + ".<br /><br />";
                 text += "Se vuoi cambiare la password clicca ";
-                text += link_recovery + "<br /><br />";
-                text += "Altrimenti ignora il messaggio. <br /><br />";
+                text += link_recovery + ".<br /><br />";
+                text += "Altrimenti ignora il messaggio.<br /><br />";
                 text += "A presto,<br /><br />DeaDormi Team";
                 
                 // Invia email
