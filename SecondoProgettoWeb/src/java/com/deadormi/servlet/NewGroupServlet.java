@@ -140,25 +140,30 @@ public class NewGroupServlet extends HttpServlet {
                         in.setSender(u);
                         in.setInvite_enabled(Boolean.TRUE);
                         ic.create_invite(in);
-                        
+
                         // Preparo dati per l'invito via email
                         Mailer m = new Mailer();
                         // Oggetto
                         String subject = "[SecondoProgettoWeb] Hai ricevuto un invito per " + c.getName();
 
                         // Messaggio HTML
+                        String button = "<div style=\"background-color: #82c1a9; font-size: 20px; width: 200px; text-align: center; margin: 20px auto; padding: 10px; border-radius: 10px; color: white\">Accetta invito</div>";
+
                         String link_path = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath();
-                        String link_invites = "<a href='" + link_path + "/AcceptInviteServlet?id_c=" + in.getCrew().getId();
-                        link_invites += "&e_r=" + r.getEmail() + "'>qui</a>";
-                        
-                        String text = "Ciao " + r.getUsername() + ",<br /><br />";
+                        String link_invites = "<a style='text-decoration:none' href='" + link_path + "/AcceptInviteServlet?id_c=" + in.getCrew().getId();
+                        link_invites += "&e_r=" + r.getEmail() + "'>" + button + "</a>";
+
+                        String text = "<div style='font-size: 16px; font-family:\"Helvetica Neue\", Helvetica, Arial, \"Lucida Grande\", sans-serif;'>";
+                        text += "Ciao " + r.getUsername() + ",<br /><br />";
                         text += "<b>" + u.getUsername() + "</b> ti ha invitato a partecipare al gruppo <b>" + c.getName() + "</b>.<br />";
-                        text += "Clicca " + link_invites + " per accettare l'invito. Altrimenti ignora il messaggio.";
-                        
+                        text += link_invites;
+                        text += "<div style='text-align:center; font-size:14px'>Altrimenti ignora il messaggio.</div>";
+                        text += "</div>";
+
                         // Invio email: se la email non dovesse essere mandata per errori del server, ecc.
                         // l'invito non arriva per email
                         m.sendEmail(r, subject, text);
-                        
+
                     }
 
                 }
