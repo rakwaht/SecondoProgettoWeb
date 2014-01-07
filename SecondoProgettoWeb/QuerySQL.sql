@@ -101,13 +101,13 @@ INSERT INTO secondoprogettoweb.USER(username, password, email, moderator, login_
 INSERT INTO secondoprogettoweb.USER(username, password, email, moderator, login_date) VALUES ('francesco', '0581938f0767a65b373cea80e905c25f','francesco@example.com',TRUE,'26-07-1992');
 
 # inserimento gruppo pubblico
-INSERT INTO secondoprogettoweb.CREW(id_admin,name,description,crew_private,creation_date,crew_enabled) VALUES ('1','Public test','descrizione test','0','10/10/10','1');
+INSERT INTO secondoprogettoweb.CREW(id_admin,name,description,crew_private,creation_date,crew_enabled) VALUES ('1','Public test','descrizione test','0','2014-01-07 alle 14:06:44','1');
 
 # inserimento crew privata
-INSERT INTO secondoprogettoweb.CREW(id_admin,name,description,crew_private,creation_date,crew_enabled) VALUES ('1','Private test','descrizione test','1','11/11/11','1');
+INSERT INTO secondoprogettoweb.CREW(id_admin,name,description,crew_private,creation_date,crew_enabled) VALUES ('1','Private test','descrizione test','1','2014-01-02 alle 14:14:00','1');
 
 # inserisco associzione crew_utente per test gruppi privati
 INSERT INTO secondoprogettoweb.CREW_USER(id_user,id_crew,crew_user_enabled) VALUES ('1','2','1');
 
 # inserisco post per test di show gruppo
-INSERT INTO secondoprogettoweb.post(id_writer,id_crew,creation_date,text) VALUES ('1','1','01/03/2013','lore ipsum e porco dio');
+INSERT INTO secondoprogettoweb.post(id_writer,id_crew,creation_date,text) VALUES ('1','1','2014-01-01 alle 22:06:34','lore ipsum e porco dio');
