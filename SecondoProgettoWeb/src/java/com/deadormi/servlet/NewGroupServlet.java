@@ -143,7 +143,7 @@ public class NewGroupServlet extends HttpServlet {
                         // Preparo dati per l'invito via email
                         Mailer m = new Mailer();
                         // Oggetto
-                        String subject = "[SecondoProgettoWeb] Hai ricevuto un invito";
+                        String subject = "[SecondoProgettoWeb] Hai ricevuto un invito per " + c.getName();
 
                         // Messaggio HTML
                         String link_path = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath();
