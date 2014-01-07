@@ -93,13 +93,13 @@ public class EditProfileServlet extends HttpServlet {
 
                 String message = "";
                 if (result.equals(0)) {
-                    message = "Avatar cambiato!";
+                    message = "changed";
                 } else if (result.equals(1)) {
-                    message = "File troppo grande!";
+                    message = "too_big";
                 } else if (result.equals(2)) {
-                    message = "Il file non è un'immagine!";
+                    message = "not_image";
                 } else if (result.equals(3)) {
-                    message = "Nessun file selezionato!";
+                    message = "not_uploaded";
                 }
 
                 response.sendRedirect("edit_profile.jsp?message_avatar=" + URLEncoder.encode(message, "UTF-8"));
@@ -118,14 +118,14 @@ public class EditProfileServlet extends HttpServlet {
             try {
                 if (uc.username_already_exist(new_username)) {
                     //torna a login con messaggio di errore
-                    String message = "Username già esistene!";
+                    String message = "already_exists";
                     response.sendRedirect("edit_profile.jsp?message_username=" + URLEncoder.encode(message, "UTF-8"));
                 } else if (new_username.length() < 4) {
-                    String message = "Username troppo corto";
+                    String message = "too_short";
                     response.sendRedirect("edit_profile.jsp?message_username=" + URLEncoder.encode(message, "UTF-8"));
                 } else {
                     u = uc.updateUsername(u, new_username);
-                    String message = "Il nuovo username è " + u.getUsername();
+                    String message = "changed";
                     response.sendRedirect("edit_profile.jsp?message_username=" + URLEncoder.encode(message, "UTF-8"));
                 }
             } catch (SQLException ex) {
@@ -142,15 +142,15 @@ public class EditProfileServlet extends HttpServlet {
             String message;
             try {
                 if (uc.authenticate(u.getUsername(), Md5.getMD5(old_password)) == null) {
-                    message = "Password vecchia non corretta!";
+                    message = "old_psw_error";
                     response.sendRedirect("edit_profile.jsp?message_password=" + URLEncoder.encode(message, "UTF-8"));
                 } else {
                     if (new_password.equals(new_password_confirm) && !new_password.trim().equals("")) {
                         u = uc.updatePassword(u, Md5.getMD5(new_password));
-                        message = "Password cambiata con successo!";
+                        message = "changed";
                         response.sendRedirect("edit_profile.jsp?message_password=" + URLEncoder.encode(message, "UTF-8"));
                     } else {
-                        message = "Password nuove non coicidono!";
+                        message = "new_psw_error";
                         response.sendRedirect("edit_profile.jsp?message_password=" + URLEncoder.encode(message, "UTF-8"));
                     }
 
