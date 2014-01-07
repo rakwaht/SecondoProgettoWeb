@@ -117,15 +117,15 @@ public class RecoveryPasswordServlet extends HttpServlet {
 
                 // Invia email
                 if (m.sendEmail(u, subject, text)) {
-                    message = "Messaggio inviato correttamente.";
+                    message = "sent";
                 } else {
-                    message = "Errore, messaggio non inviato.";
+                    message = "not_sent";
                 }
 
                 response.sendRedirect("password_recovery.jsp?message_email=" + URLEncoder.encode(message, "UTF-8"));
             } else {
-                message = "Non è stato registrato alcun utente con questa email.";
-                response.sendRedirect("password_recovery.jsp?message_email=" + URLEncoder.encode(message, "UTF-8"));
+                message = "user_not_found";
+                response.sendRedirect("password_recovery.jsp?message_user=" + URLEncoder.encode(message, "UTF-8"));
             }
         } catch (SQLException ex) {
             log.error(ex);

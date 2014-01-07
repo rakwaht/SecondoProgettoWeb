@@ -12,22 +12,22 @@ import com.deadormi.entity.Crew;
 import com.deadormi.entity.Invite;
 import com.deadormi.entity.User;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.apache.log4j.Logger;
 
 /**
  *
  * @author Timbu
  */
 public class ModifyGroupServlet extends HttpServlet {
+
+    static Logger log = Logger.getLogger(ModifyGroupServlet.class);
 
     /**
      * Processes requests for both HTTP
@@ -64,17 +64,17 @@ public class ModifyGroupServlet extends HttpServlet {
         UserController uc = new UserController();
 
         Integer id_crew = Integer.parseInt(request.getParameter("id_crew"));
-        
+
         try {
             crew = cu.find_crew_by_id(id_crew);
             followers = uc.getUsersInGroup(id_crew);
             not_followers = uc.getUserNotInGroup(id_crew);
             invited = uc.getUserInvitedToGroup(id_crew);
         } catch (SQLException ex) {
-            Logger.getLogger(ModifyGroupServlet.class.getName()).log(Level.SEVERE, null, ex);
+            log.warn(ex);
         }
         for (int i = 0; i < followers.size(); i++) {
-            if(followers.get(i).getId().equals(crew.getAdmin().getId())){
+            if (followers.get(i).getId().equals(crew.getAdmin().getId())) {
                 followers.remove(i);
             }
         }
@@ -104,66 +104,66 @@ public class ModifyGroupServlet extends HttpServlet {
         String title = request.getParameter("title");
         String description = request.getParameter("description");
         CrewController cu = new CrewController();
-        Crew crew=null;
+        Crew crew = null;
         Boolean isprivate = Boolean.parseBoolean(request.getParameter("type"));
         UserController uc = new UserController();
         Crew_UserController cuc = new Crew_UserController();
         InviteController ic = new InviteController();
         String[] followers = request.getParameterValues("followers");
         String[] not_followers = request.getParameterValues("not_followers");
-        
+
         try {
             crew = cu.find_crew_by_id(id_crew);
         } catch (SQLException ex) {
-            Logger.getLogger(ModifyGroupServlet.class.getName()).log(Level.SEVERE, null, ex);
+            log.warn(ex);
+
         }
-        if(followers!=null){
-            for(int i =0; i<followers.length; i++){
+        if (followers != null) {
+            for (int i = 0; i < followers.length; i++) {
                 Integer id_follower = Integer.parseInt(followers[i]);
                 try {
-                    cuc.removeCrewUserById(id_follower,id_crew);
+                    cuc.removeCrewUserById(id_follower, id_crew);
                 } catch (SQLException ex) {
-                    Logger.getLogger(ModifyGroupServlet.class.getName()).log(Level.SEVERE, null, ex);
+                    log.warn(ex);
+
                 }
-                
+
             }
         }
-        if(not_followers!=null){
-            for(int i =0; i<not_followers.length; i++){
+        if (not_followers != null) {
+            for (int i = 0; i < not_followers.length; i++) {
                 Integer id_not_follower = Integer.parseInt(not_followers[i]);
                 try {
-                    Invite in = new Invite();   
+                    Invite in = new Invite();
                     in.setCrew(crew);
                     in.setReceiver(uc.findUserbyId(id_not_follower));
                     in.setSender(crew.getAdmin());
                     in.setInvite_enabled(Boolean.TRUE);
                     ic.create_invite(in);
-                    
+
                 } catch (SQLException ex) {
-                    Logger.getLogger(ModifyGroupServlet.class.getName()).log(Level.SEVERE, null, ex);
+                    log.warn(ex);
                 }
-                
+
             }
         }
-        if(title.trim().equals("")||description.trim().equals("")){
+        if (title.trim().equals("") || description.trim().equals("")) {
             //ERROR
-        }else{
+        } else {
             crew.setDescription(description);
             crew.setName(title);
-            if(!crew.getCrew_private().equals(isprivate)){
+            if (!crew.getCrew_private().equals(isprivate)) {
                 crew.setCrew_private(isprivate);
             }
             try {
                 cu.updateCrew(crew);
             } catch (SQLException ex) {
-                Logger.getLogger(ModifyGroupServlet.class.getName()).log(Level.SEVERE, null, ex);
+                log.warn(ex);
             }
         }
-        response.sendRedirect("/SecondoProgettoWeb/ShowGroupServlet?id_group="+crew.getId());
-        
-        
-        
-       }
+        response.sendRedirect("/SecondoProgettoWeb/ShowGroupServlet?id_group=" + crew.getId());
+
+    }
 
     /**
      * Returns a short description of the servlet.

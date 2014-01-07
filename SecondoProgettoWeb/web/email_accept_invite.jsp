@@ -12,6 +12,7 @@
 <c:choose>
     <c:when test="${param.message == 'accepted'}">
         <p>Hai accetato l'invito al gruppo <b>${crew.name}</b></p>
+        <a href="login.jsp">Entra</a> per partecipare alla discussione.
     </c:when>
     <c:when test="${param.message == 'not_valid'}">
         <p>Invito non valido.</p>

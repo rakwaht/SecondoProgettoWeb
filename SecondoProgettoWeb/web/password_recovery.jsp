@@ -12,8 +12,29 @@
     Inserisci l'indirizzo email <input type='email' name='email' />
     <input type='submit' value='Invia'/>
 </form>
-    <p>${param.message_email}</p>
-    
-    <!-- MESSAGGIO SE L'UTENTE NON CAMBIA LA PASSWORD ENTRO 3 MIN -->
-    <p>${param.message_password}</p>
+
+<!-- MESSAGGIO SE L'UTENTE NON CAMBIA LA PASSWORD ENTRO 3 MIN -->
+<c:if test="">
+</c:if>
+
+
+
+<c:choose>
+    <c:when test="${param.message_email == 'sent'}">
+        <p>Messaggio inviato con successo.</p>
+    </c:when>
+    <c:when test="${param.message_email == 'not_sent'}">
+        <p>Errore, messaggio non inviato.</p>
+    </c:when>
+    <c:when test="${param.message_session == 'session_expired'}">
+        <p>La sessione è scaduta. Inserisci di nuovo la email per inviare una nuova richiesta di cambio password.</p>
+    </c:when>
+    <c:when test="${param.message_user == 'user_not_found'}">
+        <p>Non è stato registrato alcun utente con questa email.</p>
+    </c:when>
+    <c:otherwise>
+    </c:otherwise>
+</c:choose>
+
+
 <%@include file="layout/foot.jsp" %>

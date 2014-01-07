@@ -72,8 +72,8 @@ public class PasswordChangeServlet extends HttpServlet {
 
         // se l'hash è vuoto o null
         if (psw_change_id.equals("") || psw_change_id == null) {
-            message = "La sessione è scaduta. Inserisci di nuovo la email per inviare una nuova richiesta di cambio password.";
-            response.sendRedirect("password_recovery.jsp?message_password=" + URLEncoder.encode(message, "UTF-8"));
+            message = "session_expired";
+            response.sendRedirect("password_recovery.jsp?message_session=" + URLEncoder.encode(message, "UTF-8"));
         } else {
             try {
                 pc = pcc.getPassword_ChangeById(psw_change_id);
@@ -83,8 +83,8 @@ public class PasswordChangeServlet extends HttpServlet {
 
             // se non trova l'hash nel db messaggio di errore
             if (pc == null) {
-                message = "La sessione è scaduta. Inserisci di nuovo la email per inviare una nuova richiesta di cambio password.";
-                response.sendRedirect("password_recovery.jsp?message_password=" + URLEncoder.encode(message, "UTF-8"));
+                message = "session_expired";
+                response.sendRedirect("password_recovery.jsp?message_session=" + URLEncoder.encode(message, "UTF-8"));
             } else {
                 db_date = pc.getPassword_date();
 
@@ -105,8 +105,8 @@ public class PasswordChangeServlet extends HttpServlet {
 
                 // Se passano più di 180 sec la sessione scade e bye bye
                 if (diff > 180) {
-                    message = "La sessione è scaduta. Inserisci di nuovo la email per inviare una nuova richiesta di cambio password.";
-                    response.sendRedirect("password_recovery.jsp?message_password=" + URLEncoder.encode(message, "UTF-8"));
+                    message = "session_expired";
+                    response.sendRedirect("password_recovery.jsp?message_session=" + URLEncoder.encode(message, "UTF-8"));
                 } else {
                     UserController uc = new UserController();
                     User u = pc.getUser();
@@ -114,13 +114,13 @@ public class PasswordChangeServlet extends HttpServlet {
                     if (password.equals(password_confirm) && !password.trim().equals("") && password.length() >= 5) {
                         try {
                             u = uc.updatePassword(u, Md5.getMD5(password));
-                            message = "Password cambiata con successo";
+                            message = "password_changed";
                             response.sendRedirect("password_change.jsp?message_password=" + URLEncoder.encode(message, "UTF-8"));
                         } catch (SQLException ex) {
                             log.warn(ex);
                         }
                     } else {
-                        message = "Nuova password non valida. Le password devono coincidere ed essere di lunghezza minima 5 caratteri.";
+                        message = "password_not_valid";
                         response.sendRedirect("password_change.jsp?psw_change_id=" + psw_change_id + "&message_password=" + URLEncoder.encode(message, "UTF-8"));
                     }
                 }

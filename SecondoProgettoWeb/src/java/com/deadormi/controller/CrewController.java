@@ -143,9 +143,9 @@ public class CrewController {
         PreparedStatement stm = con.prepareStatement("UPDATE secondoprogettoweb.crew SET name=?,description=?,crew_private=? WHERE id=? ");
         try {
             stm.setString(1, crew.getName());
-            stm.setString(2,crew.getDescription());
+            stm.setString(2, crew.getDescription());
             stm.setInt(4, crew.getId());
-            stm.setBoolean(3,crew.getCrew_private() );
+            stm.setBoolean(3, crew.getCrew_private());
             stm.executeUpdate();
         } finally {
             stm.close();
@@ -156,29 +156,28 @@ public class CrewController {
 
     public ArrayList<Crew> getAllCrews() throws SQLException {
         ArrayList<Crew> crews = new ArrayList();
-         PreparedStatement stm = con.prepareStatement("SELECT * FROM secondoprogettoweb.CREW");
-         ResultSet rs;
-         UserController uc = new UserController();
+        PreparedStatement stm = con.prepareStatement("SELECT * FROM secondoprogettoweb.CREW");
+        ResultSet rs;
+        UserController uc = new UserController();
         try {
-           rs=stm.executeQuery();
-           while(rs.next()){
-               Crew c = new Crew();
-               User u = uc.findUserbyId(rs.getInt("id_admin"));
-               c.setAdmin(u);
-               c.setCrew_enabled(rs.getBoolean("crew_enabled"));
-               c.setCreation_date(rs.getString("creation_date"));
-               c.setCrew_private(rs.getBoolean("crew_private"));
-               c.setDescription(rs.getString("description"));
-               c.setId(rs.getInt("id"));
-               c.setName(rs.getString("name"));
-               crews.add(c);
-               
-           }
+            rs = stm.executeQuery();
+            while (rs.next()) {
+                Crew c = new Crew();
+                User u = uc.findUserbyId(rs.getInt("id_admin"));
+                c.setAdmin(u);
+                c.setCrew_enabled(rs.getBoolean("crew_enabled"));
+                c.setCreation_date(rs.getString("creation_date"));
+                c.setCrew_private(rs.getBoolean("crew_private"));
+                c.setDescription(rs.getString("description"));
+                c.setId(rs.getInt("id"));
+                c.setName(rs.getString("name"));
+                crews.add(c);
+
+            }
         } finally {
             stm.close();
         }
         return crews;
     }
-    
-   
+
 }
