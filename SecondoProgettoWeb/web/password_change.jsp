@@ -18,13 +18,13 @@
 
 <c:choose>
     <c:when test="${param.message_password == 'password_changed'}">
-        <p>Password cambiata con successo</p>
+        <p>Password cambiata con successo. <a href='login.jsp'>Entra</a>.</p>
     </c:when>
     <c:when test="${param.message_password == 'password_not_valid'}">
         <p>Nuova password non valida. Le password devono coincidere ed essere di lunghezza minima 5 caratteri.</p>
     </c:when>
     <c:when test="${param.message_session == 'session_expired'}">
-        <p>La sessione è scaduta. Inserisci di nuovo la email per inviare una nuova richiesta di cambio password.</p>
+        <p>La sessione è scaduta. Inserisci di nuovo la email per inviare una nuova richiesta di cambio password oppure torna alla <a href="login.jsp">home</a>.</p>
     </c:when>
     <c:otherwise>
     </c:otherwise>
