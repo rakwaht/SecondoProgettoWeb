@@ -8,15 +8,15 @@ function add_upload_file() {
 //creo datatable per moderator page
 $(document).ready(function() {
     $('#moderator_table_id').dataTable({
-                 "aaSorting": [[ 4, "desc" ]],
-                 "oLanguage": {
-                    "sLengthMenu": "Display _MENU_ records per pagina",
-                    "sZeroRecords": "Nessun gruppo presente",
-                    "sInfo": "Mostro da _START_ a _END_ di _TOTAL_ ",
-                    "sInfoEmpty": "Mostro da 0 a 0 di 0",
-                    "sInfoFiltered": "(filtrati da _MAX_ record totali)",
-                    "sSearch": "Filtra"
-                }
-            }
-        );
-} );
+        "aaSorting": [[4, "desc"]],
+        "oLanguage": {
+            "sLengthMenu": "Display _MENU_ records per pagina",
+            "sZeroRecords": "Nessun gruppo presente",
+            "sInfo": "Mostro da _START_ a _END_ di _TOTAL_ ",
+            "sInfoEmpty": "Mostro da 0 a 0 di 0",
+            "sInfoFiltered": "(filtrati da _MAX_ record totali)",
+            "sSearch": "Filtra"
+        }
+    }
+    );
+});

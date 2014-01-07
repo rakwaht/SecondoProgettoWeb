@@ -63,7 +63,7 @@ public class InviteServlet extends HttpServlet {
 
         try {
             invites = ic.getInvitesByIdUser(u.getId());
-            System.out.println(invites.size());
+            log.debug("Numero inviti: " + invites.size());
         } catch (SQLException ex) {
             log.warn(ex);
         }

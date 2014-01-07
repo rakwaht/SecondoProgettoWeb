@@ -14,6 +14,7 @@ import com.deadormi.entity.Invite;
 import com.deadormi.entity.User;
 import com.deadormi.util.CurrentDate;
 import com.deadormi.util.Mailer;
+import com.deadormi.util.Md5;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.URLEncoder;
@@ -147,8 +148,9 @@ public class NewGroupServlet extends HttpServlet {
 
                         // Messaggio HTML
                         String link_path = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath();
-                        String link_invites = "<a href='" + link_path + "/AcceptInviteServlet?id_gruppo=" + in.getCrew().getId() + "&email_receiver=" + r.getEmail() + "&email_sender=" + u.getEmail() + "'>qui</a>";
-
+                        String link_invites = "<a href='" + link_path + "/AcceptInviteServlet?id_c=" + in.getCrew().getId();
+                        link_invites += "&e_r=" + r.getEmail() + "'>qui</a>";
+                        
                         String text = "Ciao " + r.getUsername() + ",<br /><br />";
                         text += "<b>" + u.getUsername() + "</b> ti ha invitato a partecipare al gruppo <b>" + c.getName() + "</b>.<br />";
                         text += "Clicca " + link_invites + " per accettare l'invito. Altrimenti ignora il messaggio.";
