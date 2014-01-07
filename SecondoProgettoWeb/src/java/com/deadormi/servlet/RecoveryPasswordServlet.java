@@ -76,42 +76,45 @@ public class RecoveryPasswordServlet extends HttpServlet {
         String email = request.getParameter("email");
         UserController uc = new UserController();
         User u = null;
-        String message = null  ;
+        String message = null;
         try {
             u = uc.findUserByEmail(email);
             if (u != null) {
-                
+
                 Password_Change pc = new Password_Change();
                 Password_ChangeController pcc = new Password_ChangeController();
                 HashGenerator hg = new HashGenerator();
-                
+
                 // Genera id univoco per la password change
                 String psw_change_id = hg.generateId();
-                
+
                 // Setto l'oggetto pc
                 pc.setId(psw_change_id);
                 pc.setUser(u);
                 pc.setPassword_date(CurrentDate.getCurrentDate());
                 // Salvo nel DB
                 pcc.insert(pc);
-                
+
                 // Nuovo oggetto Mailer() per invio email
                 Mailer m = new Mailer();
                 // Oggetto del messaggio
                 String subject = "[SecondoProgettoWeb] Recupero password";
-                
+
+                String button = "<div style=\"background-color: #82c1a9; font-size: 20px; width: 200px; text-align: center; margin: 20px auto; padding: 10px; border-radius: 10px; color: white\">Cambia password</div>";
+
                 // Link di recovery
                 String link_path = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath();
-                String link_recovery = "<a href='" + link_path + "/password_change.jsp?psw_change_id=" + psw_change_id + "'>qui</a>";
-                
+                String link_recovery = "<a style='text-decoration:none' href='" + link_path + "/password_change.jsp?psw_change_id=" + psw_change_id + "'>" + button + "</a>";
+
                 // Testo del messaggio in HTML
-                String text = "Ciao " + u.getUsername() + ",<br /><br />"; 
-                text += "E' arrivata una richista di recupero password per l'utente " + u.getEmail() + ".<br /><br />";
-                text += "Se vuoi cambiare la password clicca ";
-                text += link_recovery + ".<br /><br />";
-                text += "Altrimenti ignora il messaggio.<br /><br />";
+                String text = "<div style='font-size: 16px; font-family:\"Helvetica Neue\", Helvetica, Arial, \"Lucida Grande\", sans-serif;'>";
+                text += "Ciao " + u.getUsername() + ",<br /><br />";
+                text += "E' arrivata una richista di recupero password per l'utente " + u.getEmail() + ".<br />";
+                text += link_recovery;
+                text += "<div style='text-align:center; font-size:14px'>Altrimenti ignora il messaggio.</div><br />";
                 text += "A presto,<br /><br />DeaDormi Team";
-                
+                text += "</div>";
+
                 // Invia email
                 if (m.sendEmail(u, subject, text)) {
                     message = "Messaggio inviato correttamente.";
