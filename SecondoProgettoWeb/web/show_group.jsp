@@ -15,29 +15,37 @@ data creazione: ${crew.creation_date}<br />
 <br /><br /><br />
 
 <c:if test="${user_can_edit}">  
-   Crea un post in questo gruppo : <br />
-   <c:if test="${not empty param.error}">
-       Errore in input numero ${param.error}
-   </c:if>
-   <form method='POST' action='secure/NewPostServlet?id_crew=${crew.id}' enctype='multipart/form-data'>
-       Testo: <textarea id="testo" name="testo" type='text' ></textarea><br />
-       <input type='file' name='file' onchange='add_upload_file();' /> <br />
-       <button type='submit' >Submit</button>
-   </form>
+    Crea un post in questo gruppo : <br />
+    <c:if test="${not empty param.error}">
+        Errore in input numero ${param.error}
+    </c:if>
+    <form method='POST' action='secure/NewPostServlet?id_crew=${crew.id}' enctype='multipart/form-data'>
+        Testo: <textarea id="testo" name="testo" type='text' ></textarea><br />
+        <input type='file' name='file' onchange='add_upload_file();' /> <br />
+        <button type='submit' >Submit</button>
+    </form>
 </c:if>
-   
 
 
-   
-   
+
+
+
 <br />Ecco i post:<br />
 <c:forEach var="p" items="${posts}">
-    <c:out value="${p.text}" escapeXml="false" /><br />
-    Scritto da ${p.writer.username}<br />
-    Files del post:
-    <c:forEach var="f" items="${p.files}">
-        nome:${f.name}<br />
-    </c:forEach>
+
+    <div class="box">
+        <c:out value="${p.text}" escapeXml="false" /><br />
+        Scritto da ${p.writer.username} alle ${p.creation_date}<br />
+
+        <c:if test="${not empty p.files}">
+            Files del post:<br />
+            <ul>
+                <c:forEach var="f" items="${p.files}">
+                    <li><a href="${pageContext.request.contextPath}/resource/files/${crew.id}/${f.id}-${f.name}">${f.id}-${f.name}</a></li>
+                </c:forEach>
+            </ul>
+        </c:if>
+    </div>
 </c:forEach>
 
 <%@include file="/layout/foot.jsp" %>
