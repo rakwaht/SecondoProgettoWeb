@@ -21,10 +21,7 @@
         <p>Nome e/o descrizione obbligatorie!</p>
     </c:if>
 
-    <div>
-        <p></p>
-    </div>
-    <button type="submit" class="btn-loading">Crea</button>
+    <button type="submit">Crea</button>
     <button type="reset">Reset</button>
     
 </form>

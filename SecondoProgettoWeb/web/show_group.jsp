@@ -16,9 +16,19 @@ data creazione: ${crew.creation_date}<br />
 
 <c:if test="${user_can_edit}">  
     Crea un post in questo gruppo : <br />
-    <c:if test="${not empty param.error}">
-        Errore in input numero ${param.error}
-    </c:if>
+    
+    <c:choose>
+        <c:when test="${param.error == '1'}">
+            <p>I file caricati superano il peso totale massimo (10MB)!</p>
+        </c:when>
+        <c:when test="${param.error == '2'}">
+            <p>Campo di testo vuoto!</p>
+        </c:when>
+        <c:when test="${param.error == '3'}">
+            <p>Hai superato il limite massimo di parole!</p>
+        </c:when>
+    </c:choose>
+
     <form method='POST' action='secure/NewPostServlet?id_crew=${crew.id}' enctype='multipart/form-data'>
         Testo: <textarea id="testo" name="testo" type='text' ></textarea><br />
         <input type='file' name='file' onchange='add_upload_file();' /> <br />
@@ -42,7 +52,7 @@ data creazione: ${crew.creation_date}<br />
             <ul>
                 <c:forEach var="f" items="${p.files}">
                     <li><a href="${pageContext.request.contextPath}/resource/files/${crew.id}/${f.id}-${f.name}">${f.id}-${f.name}</a></li>
-                </c:forEach>
+                    </c:forEach>
             </ul>
         </c:if>
     </div>
