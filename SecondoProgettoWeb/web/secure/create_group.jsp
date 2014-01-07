@@ -17,8 +17,12 @@
     </c:forEach>
     <br /> 
 
+    <c:if test="${param.message_newgroup == 'empty_params'}">
+        <p>Nome e/o descrizione obbligatorie!</p>
+    </c:if>
+
     <div>
-        <p>${param.message_newgroup}</p>
+        <p></p>
     </div>
     <button type="submit" class="btn-loading">Crea</button>
     <button type="reset">Reset</button>

@@ -88,19 +88,19 @@ public class LoginServlet extends HttpServlet {
                 }
                 else if (uc.username_already_exist(username)) {
                     //torna a login con messaggio di errore
-                    String message = "Username gia esistene!";
+                    String message = "Username già esistene!";
                     response.sendRedirect("login.jsp?message_registration=" + URLEncoder.encode(message, "UTF-8"));
                 } else if (!password.equals(password2)) {
                     //torna a login con messaggio di errore
-                    String message = "Le password devono coincidere !";
+                    String message = "Le password devono coincidere!";
                     response.sendRedirect("login.jsp?message_registration=" + URLEncoder.encode(message, "UTF-8"));
                 } else if (!parser.isEmail(email)) {
                     //torna a login con messaggio di errore
-                    String message = "L'Email deve essere un email valida !";
+                    String message = "L'Email deve essere un email valida!";
                     response.sendRedirect("login.jsp?message_registration=" + URLEncoder.encode(message, "UTF-8"));
                 }else if (uc.email_already_exist(email)) {
                     //torna a login con messaggio di errore
-                    String message = "Email gia registrata!";
+                    String message = "Email già registrata!";
                     response.sendRedirect("login.jsp?message_registration=" + URLEncoder.encode(message, "UTF-8"));
                 }
                 else {

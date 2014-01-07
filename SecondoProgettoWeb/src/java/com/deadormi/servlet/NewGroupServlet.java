@@ -114,7 +114,7 @@ public class NewGroupServlet extends HttpServlet {
         Integer id_crew;
         if (name.trim().equals("") || description.trim().equals("")) {
             //torna a login con messaggio di errore
-            String message = "Nome e/o descrizione obbligatorie!";
+            String message = "empty_params";
             response.sendRedirect("NewGroupServlet?message_newgroup=" + URLEncoder.encode(message, "UTF-8"));
         } else {
             //ok registro il nuovo gruppo
