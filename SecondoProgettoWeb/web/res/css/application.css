@@ -37,3 +37,25 @@ and open the template in the editor.
     background-color: #ddd;
     margin: 10px;
 }
+
+
+/* buttons */
+.btn-wine {
+    color: #fff;
+    background-color: #4b394e  
+}
+
+.btn-wine:hover {
+    color: #fff;
+    background-color: #7a5b7f;
+}
+
+.btn-green {
+    color: #fff;
+    background-color: #82c1a9;
+}
+
+.btn-green:hover {
+    color: #fff;
+    background-color: #629b85;
+}
