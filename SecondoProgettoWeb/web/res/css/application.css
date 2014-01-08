@@ -8,6 +8,27 @@ and open the template in the editor.
     Author     : francesco
 */
 
+@import url(http://fonts.googleapis.com/css?family=Pacifico);
+
+body {
+    font-size: 18px;
+}
+
+.app-name {
+    font-family: 'Pacifico', cursive;
+    font-size: 3em;
+}
+
+.section {
+    padding: 40px;
+    min-height: 200px;
+    width: 100%;
+}
+
+.center {
+    margin: 0 auto;
+    text-align: center;
+}
 
 /* colors */
 .green { 
@@ -40,6 +61,10 @@ and open the template in the editor.
 
 .gray-bg {
     background-color: #ebebeb;
+}
+
+.white {
+    color: #fff;
 }
 
 .box {

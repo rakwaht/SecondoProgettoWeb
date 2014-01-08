@@ -3,7 +3,7 @@
 <c:choose>
     <c:when test="${empty user}">
 
-        <div class="container">
+        <div class="container" style="margin-bottom: 40px">
             <div class="row">
                 <div class="col-md-6">
 
@@ -37,7 +37,7 @@
                 <div class="col-md-6">
 
 
-                    <h1>Registration <i class="fa fa-anchor"></i></h1>
+                    <h1>Registration</h1>
                     <form method="post" action="LoginServlet?new_user=true" role="form">
 
                         <div class="form-group">
@@ -91,10 +91,17 @@
                 </div>
             </div>
 
-            <br /><br /><br />
-            <a href="/SecondoProgettoWeb/HomeServlet?next=groups">Vedi gruppi pubblici</a>
-
         </div>
+        <div class="section purple-bg center">
+            <div class="app-name white"><i class="fa fa-coffee" style="margin-right: 10px"></i>Coffee<span class="green">ClassRoom</span> <i class="fa fa-bolt"></i><i class="fa fa-bolt"></i></div>
+            <br />
+            <a href="/SecondoProgettoWeb/HomeServlet?next=groups">
+                <button type="submit" class="btn btn-green btn-lg">Gruppi pubblici</button>
+            </a>
+        </div>
+
+        
+
     </c:when>
     <c:otherwise>
         <c:redirect url="/secure/home.jsp"/>
