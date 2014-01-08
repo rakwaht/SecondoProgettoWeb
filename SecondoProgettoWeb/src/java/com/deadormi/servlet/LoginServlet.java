@@ -72,6 +72,7 @@ public class LoginServlet extends HttpServlet {
         UserController uc = new UserController();
         User u = null;
         String new_user = request.getParameter("new_user");
+        String message = null;
         //registrazione
         if (new_user != null && new_user.equals("true")) {
             //controllo validazione form di registrazione
@@ -83,24 +84,24 @@ public class LoginServlet extends HttpServlet {
             try {
                 if(username.trim().equals("") || password.trim().equals("")){
                       //torna a login con messaggio di errore
-                    String message = "Username e password obbligatorie!";
+                    message = "empty_usr_psw";
                     response.sendRedirect("login.jsp?message_registration=" + URLEncoder.encode(message, "UTF-8"));
                 }
                 else if (uc.username_already_exist(username)) {
                     //torna a login con messaggio di errore
-                    String message = "Username già esistene!";
+                    message = "usr_already_exists";
                     response.sendRedirect("login.jsp?message_registration=" + URLEncoder.encode(message, "UTF-8"));
                 } else if (!password.equals(password2)) {
                     //torna a login con messaggio di errore
-                    String message = "Le password devono coincidere!";
+                    message = "psw_error";
                     response.sendRedirect("login.jsp?message_registration=" + URLEncoder.encode(message, "UTF-8"));
                 } else if (!parser.isEmail(email)) {
                     //torna a login con messaggio di errore
-                    String message = "L'Email deve essere un email valida!";
+                    message = "email_not_valid";
                     response.sendRedirect("login.jsp?message_registration=" + URLEncoder.encode(message, "UTF-8"));
                 }else if (uc.email_already_exist(email)) {
                     //torna a login con messaggio di errore
-                    String message = "Email già registrata!";
+                    message = "email_elready_exists";
                     response.sendRedirect("login.jsp?message_registration=" + URLEncoder.encode(message, "UTF-8"));
                 }
                 else {
@@ -133,7 +134,7 @@ public class LoginServlet extends HttpServlet {
             session.setAttribute("user", u);
             response.sendRedirect("secure/home.jsp");
         } else if(!response.isCommitted()){
-            String message = "Username/password non esistente !";
+            message = "error";
             response.sendRedirect("login.jsp?message_login=" + URLEncoder.encode(message, "UTF-8"));
         }
     }
