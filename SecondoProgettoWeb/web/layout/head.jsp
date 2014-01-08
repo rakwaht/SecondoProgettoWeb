@@ -14,7 +14,8 @@
         <title>Secondo Progetto Web</title>
 
         <link rel='stylesheet' type='text/css' href='/SecondoProgettoWeb/res/css/bootstrap.min.css'>
-        <link rel='stylesheet' type='text/css' href='/SecondoProgettoWeb/res/css/application.css'>
+        <link rel='stylesheet' type='text/css' href='/SecondoProgettoWeb/res/css/font-awesome.min.css'>
         <link rel='stylesheet' type='text/css' href='/SecondoProgettoWeb/res/css/jquery.dataTables.css'>
+        <link rel='stylesheet' type='text/css' href='/SecondoProgettoWeb/res/css/application.css'>
     </head>
     <body>

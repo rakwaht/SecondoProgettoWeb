@@ -37,7 +37,7 @@
                 <div class="col-md-6">
 
 
-                    <h1>Registration</h1>
+                    <h1>Registration <i class="fa fa-anchor"></i></h1>
                     <form method="post" action="LoginServlet?new_user=true" role="form">
 
                         <div class="form-group">
