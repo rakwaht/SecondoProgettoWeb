@@ -11,17 +11,19 @@
     </form>
 
     <!-- ERRORI CAMBIO NOME UTENTE -->
-    <c:choose>
-        <c:when test="${param.message_username == 'changed'}">
-            <p>Username cambiato con successo! Il nuovo username è ${user.username}.</p>
-        </c:when>
-        <c:when test="${param.message_username == 'already_exists'}">
-            <p>Username già esistene!</p>
-        </c:when>
-        <c:when test="${param.message_username == 'too_short'}">
-            <p>Username troppo corto!</p>
-        </c:when>
-    </c:choose>
+    <p>
+        <c:choose>
+            <c:when test="${param.message_username == 'changed'}">
+                Username cambiato con successo! Il nuovo username è ${user.username}.
+            </c:when>
+            <c:when test="${param.message_username == 'already_exists'}">
+                Username già esistene!
+            </c:when>
+            <c:when test="${param.message_username == 'too_short'}">
+                Username troppo corto!
+            </c:when>
+        </c:choose>
+    </p>
 
 </div>    
 
@@ -35,17 +37,19 @@
     </form>
 
     <!-- ERRORI CAMBIO PASSWORD -->
-    <c:choose>
-        <c:when test="${param.message_password == 'changed'}">
-            <p>Password cambiata con successo!</p>
-        </c:when>
-        <c:when test="${param.message_password == 'old_psw_error'}">
-            <p>Password vecchia non corretta!</p>
-        </c:when>
-        <c:when test="${param.message_password == 'new_psw_error'}">
-            <p>Password nuove non coincidono!</p>
-        </c:when>
-    </c:choose>
+    <p>
+        <c:choose>
+            <c:when test="${param.message_password == 'changed'}">
+                Password cambiata con successo!
+            </c:when>
+            <c:when test="${param.message_password == 'old_psw_error'}">
+                Password vecchia non corretta!
+            </c:when>
+            <c:when test="${param.message_password == 'new_psw_error'}">
+                Password nuove non coincidono!
+            </c:when>
+        </c:choose>
+    </p>
 
 </div>           
 
@@ -56,21 +60,22 @@
     </form>
 
     <!-- ERRORI AVATAR -->
-    <c:choose>
-        <c:when test="${param.message_avatar == 'changed'}">
-            <p>Avatar cambiato!</p>
-        </c:when>
-        <c:when test="${param.message_avatar == 'too_big'}">
-            <p>File troppo grande!</p>
-        </c:when>
-        <c:when test="${param.message_avatar == 'not_image'}">
-            <p>Il file non è un'immagine!</p>
-        </c:when>
-        <c:when test="${param.message_avatar == 'not_uploaded'}">
-            <p>Nessun file selezionato!</p>
-        </c:when>
-    </c:choose>
-
+    <p>
+        <c:choose>
+            <c:when test="${param.message_avatar == 'changed'}">
+                Avatar cambiato!
+            </c:when>
+            <c:when test="${param.message_avatar == 'too_big'}">
+                File troppo grande!
+            </c:when>
+            <c:when test="${param.message_avatar == 'not_image'}">
+                Il file non è un'immagine!
+            </c:when>
+            <c:when test="${param.message_avatar == 'not_uploaded'}">
+                Nessun file selezionato!
+            </c:when>
+        </c:choose>
+    </p>
 
     <!-- IMMAGINE AVATAR -->        
     <c:choose>

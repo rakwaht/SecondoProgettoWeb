@@ -14,16 +14,18 @@
             <input type="text" name="username"/><br/>		
             Please enter your password
             <input type="password" name="password"/><br />
-            <a href="password_recovery.jsp">Password dimenticata?</a>
-            <input type="submit" value="Login" />
-            <input type="reset" value="Reset" />
+            <a href="password_recovery.jsp">Password dimenticata?</a><br />
+
+            <button type="submit">Entra</button>
+            <button type="reset">Reset</button>
         </form>
 
         <!--  error message -->
-        <c:if test="${param.message_login == 'error'}">
-            Username/password non esistente.
-        </c:if>
-
+        <p>
+            <c:if test="${param.message_login == 'error'}">
+                Username/password non esistente.
+            </c:if>
+        </p>
 
 
         <h1>Registration</h1>
@@ -36,8 +38,9 @@
             <input type="password" name="password-confirm"/><br/>
             Please enter your email
             <input type="email" name="email"/><br/>
-            <input type="submit" value="Register" />
-            <input type="reset" value="Reset" />
+
+            <button type="submit">Registrati</button>
+            <button type="reset">Reset</button>
         </form>
 
         <!-- error messages -->
