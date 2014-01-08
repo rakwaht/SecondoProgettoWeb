@@ -27,7 +27,7 @@
                     </c:choose>
                 </td>
                 <td><c:out value="${fn:length(m.posts)}" /></td>
-                <td><a href="/SecondoProgettoWeb/ShowGroupServlet?id_group=${c.id}">Vai a Gruppo</a></td>
+                <td><a href="/SecondoProgettoWeb/ShowGroupServlet?id_crew=${c.id}">Vai a Gruppo</a></td>
             </tr>
         </c:forEach>
     </tbody>

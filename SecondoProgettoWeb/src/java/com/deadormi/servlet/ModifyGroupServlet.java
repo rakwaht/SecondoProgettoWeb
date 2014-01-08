@@ -12,6 +12,7 @@ import com.deadormi.entity.Crew;
 import com.deadormi.entity.Invite;
 import com.deadormi.entity.User;
 import java.io.IOException;
+import java.net.URLEncoder;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.servlet.RequestDispatcher;
@@ -63,7 +64,9 @@ public class ModifyGroupServlet extends HttpServlet {
         CrewController cu = new CrewController();
         UserController uc = new UserController();
 
+        log.debug("ID_CREW: " + request.getParameter("id_crew"));
         Integer id_crew = Integer.parseInt(request.getParameter("id_crew"));
+        
 
         try {
             crew = cu.find_crew_by_id(id_crew);
@@ -149,6 +152,9 @@ public class ModifyGroupServlet extends HttpServlet {
         }
         if (title.trim().equals("") || description.trim().equals("")) {
             //ERROR
+            log.debug("Parametro/i vuoti");
+            String message = "empty_params";
+            response.sendRedirect("ModifyGroupServlet?id_crew=" + crew.getId() + "&message_editgroup=" + URLEncoder.encode(message, "UTF-8"));
         } else {
             crew.setDescription(description);
             crew.setName(title);
@@ -160,8 +166,8 @@ public class ModifyGroupServlet extends HttpServlet {
             } catch (SQLException ex) {
                 log.warn(ex);
             }
+            response.sendRedirect("/SecondoProgettoWeb/ShowGroupServlet?id_crew=" + crew.getId());
         }
-        response.sendRedirect("/SecondoProgettoWeb/ShowGroupServlet?id_group=" + crew.getId());
 
     }
 

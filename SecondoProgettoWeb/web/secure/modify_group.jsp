@@ -9,12 +9,20 @@
 <form method="post" action="ModifyGroupServlet?id_crew=${crew.id}">
     <input type='text' name='title'value='${crew.name}'/><br/>
     <textarea type='text' name='description'>${crew.description}</textarea><br/>
-    <c:if test='${crew.crew_private}'>
-        <input type='radio' name='type'value='0' />public<input type='radio' name='type'value='1' checked='checked'/>private<br/>
-    </c:if>
-    <c:if test='${!crew.crew_private}'>
-        <input type='radio' name='type'value='0' checked='checked' />public<input type='radio' name='type'value='1' />private<br/>
-    </c:if>
+
+    <c:choose>
+        <c:when test="${crew.crew_private}">
+            privato <input type='radio' name='type' value='1' checked='checked' />
+            pubblico <input type='radio' name='type' value='0' />
+        </c:when>
+        <c:otherwise>
+            privato <input type='radio' name='type' value='1' />
+            pubblico <input type='radio' name='type' value='0' checked='checked' />
+        </c:otherwise>
+    </c:choose>
+
+    <br />  
+
     <c:if test="${not empty followers}">
         ELIMINA:<br/>
         <c:forEach var="followers" items="${followers}">
@@ -35,6 +43,14 @@
     <input type='submit' value='Modifica'/>
 </form>
 
+<!-- error messages -->
+<p>
+    <c:choose>
+        <c:when test="${param.message_editgroup == 'empty_params'}">
+            Nome e/o descrizione obbligatorie!
+        </c:when>
+    </c:choose>
+</p>
 
 
 

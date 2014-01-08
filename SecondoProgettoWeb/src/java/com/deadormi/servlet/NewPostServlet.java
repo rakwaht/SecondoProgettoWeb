@@ -105,10 +105,10 @@ public class NewPostServlet extends HttpServlet {
                         error = pc.creaPost(request);
                     }
                     if(error != 0){
-                        response.sendRedirect(request.getServletContext().getContextPath() + "/ShowGroupServlet?id_group="+crew_id_string+"&error="+error);
+                        response.sendRedirect(request.getServletContext().getContextPath() + "/ShowGroupServlet?id_crew="+crew_id_string+"&error="+error);
                     }
                     else{
-                        response.sendRedirect(request.getServletContext().getContextPath() + "/ShowGroupServlet?id_group="+crew_id_string);
+                        response.sendRedirect(request.getServletContext().getContextPath() + "/ShowGroupServlet?id_crew="+crew_id_string);
                     }                   
                 } else {
                     log.debug("non puoi creare il post per altri motivi. Es: gruppo pubblico ma non sei iscritto");

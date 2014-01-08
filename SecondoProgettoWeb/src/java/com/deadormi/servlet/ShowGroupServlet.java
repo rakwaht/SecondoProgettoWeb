@@ -61,7 +61,7 @@ public class ShowGroupServlet extends HttpServlet {
         CrewController cc = new CrewController();
         Crew_UserController cu = new Crew_UserController();
         PostController pc = new PostController();
-        String crew_id_string = request.getParameter("id_group");
+        String crew_id_string = request.getParameter("id_crew");
         HttpSession session = request.getSession();
         User u = (User) session.getAttribute("user");
 
