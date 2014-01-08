@@ -29,7 +29,7 @@
     </c:if>        
     <c:if test="${not empty invited}">
         <c:forEach var="invited" items="${invited}">
-            ${invited.username} già invitato!
+            ${invited.username} già invitato!<br />
         </c:forEach>
     </c:if>
     <input type='submit' value='Modifica'/>
