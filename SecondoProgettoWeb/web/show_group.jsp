@@ -1,12 +1,22 @@
 
 <%@include file="/layout/head.jsp" %>
 
-<h1>Pagina show gruppo del gruppo: ${crew.name}</h1><br />
+<h1>Pagina show gruppo del gruppo: ${crew.name}</h1>
+<h2>
+    <c:choose>
+        <c:when test="${crew.crew_private}">
+            Gruppo privato
+        </c:when>
+        <c:otherwise>
+            Gruppo pubblico
+        </c:otherwise>
+    </c:choose>
+</h2>
 
 Dettagli gruppo:<br />
 nome: ${crew.name}<br />
-desctizione: ${crew.description}<br />
-propietario: ${crew.admin.username}<br />
+descrizione: ${crew.description}<br />
+proprietario: ${crew.admin.username}<br />
 data creazione: ${crew.creation_date}<br />
 
 <c:if test="${admin}">  
@@ -16,7 +26,7 @@ data creazione: ${crew.creation_date}<br />
 
 <c:if test="${user_can_edit}">  
     Crea un post in questo gruppo : <br />
-    
+
     <c:choose>
         <c:when test="${param.error == '1'}">
             <p>I file caricati superano il peso totale massimo (10MB)!</p>
