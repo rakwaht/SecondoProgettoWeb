@@ -14,6 +14,10 @@ body {
     font-size: 18px;
 }
 
+label {
+    font-weight: normal
+}
+
 .app-name {
     font-family: 'Pacifico', cursive;
     font-size: 3em;
