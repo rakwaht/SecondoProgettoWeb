@@ -12,12 +12,12 @@
 
     <c:choose>
         <c:when test="${crew.crew_private}">
-            privato <input type='radio' name='type' value='1' checked='checked' />
-            pubblico <input type='radio' name='type' value='0' />
+            privato <input type='radio' name='type' value='private' checked='checked' />
+            pubblico <input type='radio' name='type' value='public' />
         </c:when>
         <c:otherwise>
-            privato <input type='radio' name='type' value='1' />
-            pubblico <input type='radio' name='type' value='0' checked='checked' />
+            privato <input type='radio' name='type' value='private' />
+            pubblico <input type='radio' name='type' value='public' checked='checked' />
         </c:otherwise>
     </c:choose>
 

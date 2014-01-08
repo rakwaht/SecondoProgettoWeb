@@ -64,9 +64,7 @@ public class ModifyGroupServlet extends HttpServlet {
         CrewController cu = new CrewController();
         UserController uc = new UserController();
 
-        log.debug("ID_CREW: " + request.getParameter("id_crew"));
-        Integer id_crew = Integer.parseInt(request.getParameter("id_crew"));
-        
+        Integer id_crew = Integer.parseInt(request.getParameter("id_crew"));        
 
         try {
             crew = cu.find_crew_by_id(id_crew);
@@ -108,13 +106,13 @@ public class ModifyGroupServlet extends HttpServlet {
         String description = request.getParameter("description");
         CrewController cu = new CrewController();
         Crew crew = null;
-        Boolean isprivate = Boolean.parseBoolean(request.getParameter("type"));
+        String type = request.getParameter("type");
         UserController uc = new UserController();
         Crew_UserController cuc = new Crew_UserController();
         InviteController ic = new InviteController();
         String[] followers = request.getParameterValues("followers");
         String[] not_followers = request.getParameterValues("not_followers");
-
+        
         try {
             crew = cu.find_crew_by_id(id_crew);
         } catch (SQLException ex) {
@@ -152,15 +150,18 @@ public class ModifyGroupServlet extends HttpServlet {
         }
         if (title.trim().equals("") || description.trim().equals("")) {
             //ERROR
-            log.debug("Parametro/i vuoti");
             String message = "empty_params";
             response.sendRedirect("ModifyGroupServlet?id_crew=" + crew.getId() + "&message_editgroup=" + URLEncoder.encode(message, "UTF-8"));
         } else {
             crew.setDescription(description);
             crew.setName(title);
-            if (!crew.getCrew_private().equals(isprivate)) {
-                crew.setCrew_private(isprivate);
+                        
+            if (crew.isCrew_private() && type.equals("public")) {
+                crew.setCrew_private(Boolean.FALSE);
+            } else if (!crew.isCrew_private() && type.equals("private")) {
+                crew.setCrew_private(Boolean.TRUE);
             }
+            
             try {
                 cu.updateCrew(crew);
             } catch (SQLException ex) {
