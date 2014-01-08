@@ -9,16 +9,24 @@ and open the template in the editor.
 */
 
 
-
+/* colors */
 .green { 
+    color: #82c1a9;
+}
+
+.green-bg {
     background-color: #82c1a9;
 }
 
 .green-h {
-    background-color: #629b85;
+    color: #629b85;
 }
 
 .purple { 
+    color: #4b394e;
+}
+
+.purple-bg { 
     background-color: #4b394e;
 }
 
@@ -27,6 +35,10 @@ and open the template in the editor.
 }
 
 .gray { 
+    color: #ebebeb;
+}
+
+.gray-bg {
     background-color: #ebebeb;
 }
 
@@ -37,7 +49,6 @@ and open the template in the editor.
     background-color: #ddd;
     margin: 10px;
 }
-
 
 /* buttons */
 .btn-wine {
