@@ -14,24 +14,64 @@ body {
     font-size: 18px;
 }
 
+a, a:hover {
+    color: #4b394e;
+}
+
 label {
     font-weight: normal
+}
+
+.index-header {
+    background-image: url('http://666a658c624a3c03a6b2-25cda059d975d2f318c03e90bcf17c40.r92.cf1.rackcdn.com/unsplash_52b2cfb6647f6_1.JPG');
+    background-size: cover;
 }
 
 .app-name {
     font-family: 'Pacifico', cursive;
     font-size: 3em;
+    margin-top: 30%;
+    text-shadow: 2px 2px 5px #000;
 }
 
-.section {
-    padding: 40px;
-    min-height: 200px;
-    width: 100%;
-}
 
+
+/* util */
 .center {
     margin: 0 auto;
     text-align: center;
+}
+
+/* margin for icons */
+.m-r {
+    margin-right: 10px;
+}
+
+.m-l {
+    margin-left: 10px;
+}
+
+
+/* section and box */
+.section {
+    padding: 40px;
+    min-height: 50px;
+    width: 100%;
+}
+
+.box-i {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    margin: 40px auto;
+}
+
+.box {
+    width: 600px;
+    display: block;
+    padding: 10px;
+    background-color: #ddd;
+    margin: 10px;
 }
 
 /* colors */
@@ -69,14 +109,6 @@ label {
 
 .white {
     color: #fff;
-}
-
-.box {
-    width: 600px;
-    display: block;
-    padding: 10px;
-    background-color: #ddd;
-    margin: 10px;
 }
 
 /* buttons */
