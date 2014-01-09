@@ -35,9 +35,13 @@ label {
     background-color: #7a5b7f;
 }
 
+.icon-bar {
+    background-color: #333
+}
+
 /* avatar */
 .avatar {
-    margin:0 auto; width:100px; height:100px; margin-top: 20px; float: right
+    margin:0 auto; width:100px; height:100px; margin-top: 20px
 }
 
 .avatar-small {
