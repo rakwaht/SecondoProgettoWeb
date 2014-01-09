@@ -2,55 +2,65 @@
 <%@include file="/layout/navigation.jsp" %>
 
 <div class="main container">
-    <h1>Modifica gruppo ${crew.name}</h1>
-    <a href="/SecondoProgettoWeb/ShowGroupServlet?id_crew=${crew.id}">Torna al gruppo</a>
-    
-    <form method="post" action="ModifyGroupServlet?id_crew=${crew.id}">  
-        <input type='text' name='title'value='${crew.name}'/><br/>
-        <textarea type='text' name='description'>${crew.description}</textarea><br/>
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <h1>Modifica gruppo ${crew.name}</h1>
+            <a href="/SecondoProgettoWeb/ShowGroupServlet?id_crew=${crew.id}">Torna al gruppo</a>
 
-        <c:choose>
-            <c:when test="${crew.crew_private}">
-                privato <input type='radio' name='type' value='private' checked='checked' />
-                pubblico <input type='radio' name='type' value='public' />
-            </c:when>
-            <c:otherwise>
-                privato <input type='radio' name='type' value='private' />
-                pubblico <input type='radio' name='type' value='public' checked='checked' />
-            </c:otherwise>
-        </c:choose>
+            <form method="post" action="ModifyGroupServlet?id_crew=${crew.id}" role="form">  
+                <div class="form-group">
+                    <label>Nome</label>
+                    <input type='text' name='title'value='${crew.name}' class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label>Descrizione</label>
+                    <textarea type='text' name='description' class="form-control">${crew.description}</textarea><br/>
+                </div>
 
-        <br />  
+                <c:choose>
+                    <c:when test="${crew.crew_private}">
+                        privato <input type='radio' name='type' value='private' checked='checked' />
+                        pubblico <input type='radio' name='type' value='public' />
+                    </c:when>
+                    <c:otherwise>
+                        privato <input type='radio' name='type' value='private' />
+                        pubblico <input type='radio' name='type' value='public' checked='checked' />
+                    </c:otherwise>
+                </c:choose>
 
-        <c:if test="${not empty followers}">
-            ELIMINA:<br/>
-            <c:forEach var="followers" items="${followers}">
-                ${followers.username}<input type='checkbox' name='followers'value='${followers.id}'/><br/>
-            </c:forEach>
-        </c:if>
-        <c:if test="${not empty not_followers}">
-            INVITA:<br/>
-            <c:forEach var="not_followers" items="${not_followers}">
-                ${not_followers.username}<input type='checkbox' name='not_followers'value='${not_followers.id}'/><br/>
-            </c:forEach>
-        </c:if>        
-        <c:if test="${not empty invited}">
-            <c:forEach var="invited" items="${invited}">
-                ${invited.username} già invitato!<br />
-            </c:forEach>
-        </c:if>
-        <input type='submit' value='Modifica'/>
-    </form>
+                <br />  
 
-    <!-- error messages -->
-    <p>
-        <c:choose>
-            <c:when test="${param.message_editgroup == 'empty_params'}">
-                Nome e/o descrizione obbligatorie!
-            </c:when>
-        </c:choose>
-    </p>
+                <c:if test="${not empty followers}">
+                    Elimina<br/>
+                    <c:forEach var="followers" items="${followers}">
+                        <input type='checkbox' name='followers'value='${followers.id}'/> ${followers.username}<br/>
+                    </c:forEach>
+                </c:if>
+                <c:if test="${not empty not_followers}">
+                    Invita<br/>
+                    <c:forEach var="not_followers" items="${not_followers}">
+                        <input type='checkbox' name='not_followers'value='${not_followers.id}'/> ${not_followers.username}<br/>
+                    </c:forEach>
+                </c:if>        
+                <c:if test="${not empty invited}">
+                    <c:forEach var="invited" items="${invited}">
+                        ${invited.username} già invitato!<br />
+                    </c:forEach>
+                </c:if>
+                <button type='submit' class="btn btn-green">Modifica</button>
+            </form>
 
+            <!-- error messages -->
+            <p>
+                <c:choose>
+                    <c:when test="${param.message_editgroup == 'empty_params'}">
+                        Nome e/o descrizione obbligatorie!
+                    </c:when>
+                </c:choose>
+            </p>
+
+        </div>
+    </div>
 </div>
 <%@include file="/layout/foot.jsp" %>
 
