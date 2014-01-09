@@ -3,7 +3,7 @@
 
 <div class="main container">
     <div class='row'>    
-        <div class="col-md-8 col-md-offset-2">
+        <div class="col-md-6 col-md-offset-3">
             <div class="box">
                 <form method="post" action="EditProfileServlet?whatEdit=editName" role="form">
                     <h3>Cambia username</h3>
