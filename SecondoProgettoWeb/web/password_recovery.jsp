@@ -7,31 +7,36 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@include file="layout/head.jsp" %>
 
-<h1>Ripristino password</h1>
-<form method="post" action="RecoveryPasswordServlet">
-    Inserisci l'indirizzo email <input type='email' name='email' />
-    <input type='submit' value='Invia'/>
-</form>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <h1>Ripristino password</h1>
+            <form method="post" action="RecoveryPasswordServlet" role="form">
+                <div class="form-group">
+                    <label>Inserisci l'indirizzo email</label> 
+                    <input type='email' name='email' class="form-control" />
+                </div>
+                <button type="submit" class="btn btn-green btn-lg">Invia</button>
+            </form>
 
-<!-- MESSAGGIO SE L'UTENTE NON CAMBIA LA PASSWORD ENTRO 3 MIN -->
-<c:if test="">
-</c:if>
+            <c:choose>
+                <c:when test="${param.message_email == 'sent'}">
+                    <div class="alert alert-success">
+                        <p>Messaggio inviato con successo.</p>    </div>
+                    </c:when>
+                    <c:when test="${param.message_email == 'not_sent'}">
+                    <div class="alert alert-danger"><p>Errore, messaggio non inviato.</p>    </div>
+                </c:when>
+                <c:when test="${param.message_user == 'user_not_found'}">
+                    <div class="alert alert-danger"><p>Non è stato registrato alcun utente con questa email.</p>    </div>
 
-
-
-<c:choose>
-    <c:when test="${param.message_email == 'sent'}">
-        <p>Messaggio inviato con successo.</p>
-    </c:when>
-    <c:when test="${param.message_email == 'not_sent'}">
-        <p>Errore, messaggio non inviato.</p>
-    </c:when>
-    <c:when test="${param.message_user == 'user_not_found'}">
-        <p>Non è stato registrato alcun utente con questa email.</p>
-    </c:when>
-    <c:otherwise>
-    </c:otherwise>
-</c:choose>
-
+                </c:when>
+                <c:when test="${param.message_session == 'session_expired'}">
+                    <div class="alert alert-danger"><p>La sessione è scaduta. Inserisci di nuovo la email per inviare una nuova richiesta di cambio password oppure torna alla <a href="login.jsp">home</a>.</p>    </div>
+                </c:when>
+            </c:choose>
+        </div>
+    </div>
+</div>
 
 <%@include file="layout/foot.jsp" %>

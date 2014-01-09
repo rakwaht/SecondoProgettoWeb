@@ -4,13 +4,13 @@
 <%@include file="/layout/head.jsp" %>
 <%@include file="/layout/navigation.jsp" %>
 
-<div class="container">
+<div class="main container">
 <c:choose>
     <c:when test="${empty user.last_login_date}">
-        <h1>Benvenuto, ${user.username} ! </h1><br />
+        <h1>Benvenuto, ${user.username}! </h1>
     </c:when>
     <c:otherwise>
-        <h1>Bentornato, ${user.username} ! </h1><br /> last_login date:${user.last_login_date}<br />
+        <h1>Bentornato, ${user.username}! </h1><p>È da ${user.last_login_date} che non ci vediamo.<p />
     </c:otherwise>
 </c:choose>
 
@@ -24,11 +24,7 @@
     </c:otherwise>
 </c:choose>
 
-        <br />
-psw: ${user.password}<br />
-email:${user.email}<br />
-id:${user.id}<br />
-moderatore? ${user.moderator}<br />
+<br />moderatore? ${user.moderator}<br />
 
 </div>
 <%@include file="/layout/foot.jsp" %>

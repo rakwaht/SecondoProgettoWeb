@@ -1,6 +1,8 @@
 <%@include file="/layout/head.jsp" %>
+<%@include file="/layout/navigation.jsp" %>
+
 <div class="main container">
-    <h1>MOD PAGE</h1>
+    <h1>Pagina moderatore</h1>
 
     <table id="moderator_table_id">
         <thead>

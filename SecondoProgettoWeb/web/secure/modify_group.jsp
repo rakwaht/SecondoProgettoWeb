@@ -1,10 +1,9 @@
 <%@include file="/layout/head.jsp" %>
 <%@include file="/layout/navigation.jsp" %>
 
-
 <div class="main container">
-    <h1>MODIFICA GRUPPO ${crew.name}</h1><br />
-    <a href="ShowGroupServlet?id_crew=${crew.id}">Torna al gruppo</a>
+    <h1>Modifica gruppo ${crew.name}</h1>
+    <a href="/SecondoProgettoWeb/ShowGroupServlet?id_crew=${crew.id}">Torna al gruppo</a>
     
     <form method="post" action="ModifyGroupServlet?id_crew=${crew.id}">  
         <input type='text' name='title'value='${crew.name}'/><br/>

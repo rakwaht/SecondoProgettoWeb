@@ -22,6 +22,10 @@ label {
     font-weight: normal
 }
 
+.alert {
+    margin-top: 20px
+}
+
 .avatar {
     margin:0 auto; width:100px; heigth:100px
 }
