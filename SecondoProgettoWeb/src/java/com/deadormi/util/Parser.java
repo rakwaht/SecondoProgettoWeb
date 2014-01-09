@@ -42,32 +42,13 @@ public class Parser {
 
     public static String checkTesto(HttpServletRequest request, String testo, String crew_id_string) throws SQLException {
         testo = testo.replaceAll("<[^>]*>", "");
-        Pattern p = Pattern.compile("\\$\\$(.*?)\\$\\$");
-        Matcher m = p.matcher(testo);
+        FileController fc = new FileController();
+        log.debug("Ecco la string prima del parsing: " + testo);
+        Pattern pqr = Pattern.compile("\\$QR\\$(.*?)\\$\\$");
+        Matcher mqr = pqr.matcher(testo);
         String inizio;
         String trovata;
         String target = testo;
-        FileController fc = new FileController();
-        while (m.find()) {
-            inizio = testo.substring(m.start(), m.end());
-            trovata = testo.substring(m.start() + 2, m.end() - 2);
-
-            String website = Parser.checkWeb(trovata);
-
-            if (website != null) {
-                target = target.replace(inizio, "<a href='" + website + "' target='_blank'>" + trovata + "</a>");
-            } else if (fc.isFile(trovata, crew_id_string)) {
-                target = target.replace(inizio, "<a href='" + request.getContextPath() + "/resource/files/" + crew_id_string + "/" + trovata + "' target='_blank'> " + trovata + "</a>");
-            } else {
-                target = target.replace(inizio, trovata);
-            }
-
-        }
-        log.debug("ecco il target " + target);
-        //controllo qr code
-        testo = target;
-        Pattern pqr = Pattern.compile("\\$QR\\$(.*?)\\$\\$");
-        Matcher mqr = pqr.matcher(testo);
         while (mqr.find()) {
             log.debug("parso i qrcode");
             inizio = testo.substring(mqr.start(), mqr.end());
@@ -80,7 +61,7 @@ public class Parser {
                 String attributo_pop = "\"<img src='" + request.getContextPath() + "/resource/qrcode/" + qr_name + "' />\"";
                 target = target.replace(inizio, "<a href='" + website + "' target='_blank' class='qrpopup' rel='popover' data-content=" + attributo_pop + " >" + website + "</a>");
             } else if (fc.isFile(trovata, crew_id_string)) {
-                String link = request.getServerName() + ":" + request.getServerPort() +  request.getContextPath() + "/resource/files/" + crew_id_string + "/" + trovata;
+                String link = request.getServerName() + ":" + request.getServerPort() + request.getContextPath() + "/resource/files/" + crew_id_string + "/" + trovata;
                 String qr_name = QRgenerator.create_qr(request, link);
                 String attributo_pop = "\"<img src='" + request.getContextPath() + "/resource/qrcode/" + qr_name + "' />\"";
                 target = target.replace(inizio, "<a href='" + request.getContextPath() + "/resource/files/" + crew_id_string + "/" + trovata + "' target='_blank'class='qrpopup' rel='popover' data-content=" + attributo_pop + " >" + trovata + "</a>");
@@ -89,7 +70,26 @@ public class Parser {
             }
         }
 
+        log.debug("ecco il target " + target);
+        //controllo qr code
+        testo = target;
+        Pattern p = Pattern.compile("\\$\\$(.*?)\\$\\$");
+        Matcher m = p.matcher(testo);
+        while (m.find()) {
+            inizio = testo.substring(m.start(), m.end());
+            trovata = testo.substring(m.start() + 2, m.end() - 2);
+            log.debug("Sono il primo parser e ho trovato: " + inizio);
+            String website = Parser.checkWeb(trovata);
 
+            if (website != null) {
+                target = target.replace(inizio, "<a href='" + website + "' target='_blank'>" + trovata + "</a>");
+            } else if (fc.isFile(trovata, crew_id_string)) {
+                target = target.replace(inizio, "<a href='" + request.getContextPath() + "/resource/files/" + crew_id_string + "/" + trovata + "' target='_blank'> " + trovata + "</a>");
+            } else {
+                target = target.replace(inizio, trovata);
+            }
+
+        }
         return target;
     }
 

@@ -26,6 +26,6 @@ $(document).ready(function() {
     $(".qrpopup").popover({
         html: true,
         trigger : 'hover',
-        placement : 'top'
+        placement : 'right'
     });
 });
