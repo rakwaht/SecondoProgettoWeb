@@ -21,6 +21,11 @@ $(document).ready(function() {
     );
 });
 
+//creo popover show gruppo
 $(document).ready(function() {
-    $('#example').tooltip();
+    $(".qrpopup").popover({
+        html: true,
+        trigger : 'hover',
+        placement : 'top'
+    });
 });
