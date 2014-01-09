@@ -13,18 +13,31 @@
     </c:choose>
 </h2>
 
+<c:if test="${user.moderator}">  
+    <button class="btn">Chiudi gruppo</button>
+</c:if>
+
+<c:if test="${admin}">  
+    <a href='secure/ModifyGroupServlet?id_crew=${crew.id}'>Modify Group</a>
+</c:if>  
+<br /><br />
+
+Membri del gruppo:<br />
+<c:forEach var="m" items="${members}">
+    ${m.username}<br />
+</c:forEach>
+
+<br />
 Dettagli gruppo:<br />
 nome: ${crew.name}<br />
 descrizione: ${crew.description}<br />
 proprietario: ${crew.admin.username}<br />
 data creazione: ${crew.creation_date}<br />
 
-<c:if test="${admin}">  
-    <a href='secure/ModifyGroupServlet?id_crew=${crew.id}'>Modify Group</a>
-</c:if>
+
 <br /><br /><br />
 
-<c:if test="${user_can_edit}">  
+<c:if test="${user_can_edit && crew.crew_enabled}">  
     Crea un post in questo gruppo : <br />
 
     <c:choose>
@@ -46,6 +59,9 @@ data creazione: ${crew.creation_date}<br />
     </form>
 </c:if>
 
+<c:if test="${not crew.crew_enabled}"> 
+    <h2>Gruppo chiuso</h2>
+</c:if>
 
 
 

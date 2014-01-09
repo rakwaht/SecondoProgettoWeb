@@ -7,6 +7,7 @@ package com.deadormi.servlet;
 import com.deadormi.controller.CrewController;
 import com.deadormi.controller.Crew_UserController;
 import com.deadormi.controller.PostController;
+import com.deadormi.controller.UserController;
 import com.deadormi.entity.Crew;
 import com.deadormi.entity.Post;
 import com.deadormi.entity.User;
@@ -61,6 +62,8 @@ public class ShowGroupServlet extends HttpServlet {
         CrewController cc = new CrewController();
         Crew_UserController cu = new Crew_UserController();
         PostController pc = new PostController();
+        UserController uc = new UserController();
+
         String crew_id_string = request.getParameter("id_crew");
         HttpSession session = request.getSession();
         User u = (User) session.getAttribute("user");
@@ -83,9 +86,13 @@ public class ShowGroupServlet extends HttpServlet {
                     } else if (!crew.isCrew_private()) {
                         log.debug("gruppo pubblico quindi lo mostro");
                         //se il gruppo è pubblico lo mostro
-                        if(u != null && cu.crew_belongs_to_user(crew.getId(), u.getId())){
+                        ArrayList<User> members = uc.getUsersInGroup(crew_id);
+                        if (u != null && cu.crew_belongs_to_user(crew.getId(), u.getId())) {
                             //se sono loggato e ho accettato l'invito a questo gruppo posso anche scrivere
                             request.setAttribute("user_can_edit", true);
+                            request.setAttribute("members", members);
+                        } else if (u != null && u.isModerator()) {
+                            request.setAttribute("members", members);
                         }
                         ArrayList<Post> posts = pc.getPostsByCrewId(crew_id);
                         RequestDispatcher rd = request.getRequestDispatcher("show_group.jsp");
@@ -105,14 +112,30 @@ public class ShowGroupServlet extends HttpServlet {
                         log.debug("utente e crew matchano quindi mostro il gruppo");
                         //se sono loggato e il gruppo è privato ed io sono iscritto lo mostro
                         ArrayList<Post> posts = pc.getPostsByCrewId(crew_id);
+                        ArrayList<User> members = uc.getUsersInGroup(crew_id);
                         RequestDispatcher rd = request.getRequestDispatcher("show_group.jsp");
                         request.setAttribute("user_can_edit", true);
                         request.setAttribute("crew", crew);
                         request.setAttribute("posts", posts);
+                        request.setAttribute("members", members);
                         if (crew.getAdmin().getId().equals(u.getId())) {
                             request.setAttribute("admin", true);
                         } else {
                             request.setAttribute("admin", false);
+                        }
+                        rd.forward(request, response);
+                    } else if (u.isModerator()) {
+                        log.debug("utente moderatore, accede in lettura a tutti i gruppi");
+                        // se l'utente è moderatore può accedere in lettura a tutti i gruppi
+                        ArrayList<Post> posts = pc.getPostsByCrewId(crew_id);
+                        ArrayList<User> members = uc.getUsersInGroup(crew_id);
+                        RequestDispatcher rd = request.getRequestDispatcher("show_group.jsp");
+                        request.setAttribute("moderator", true);
+                        request.setAttribute("crew", crew);
+                        request.setAttribute("posts", posts);
+                        request.setAttribute("members", members);
+                        if (cu.crew_belongs_to_user(crew.getId(), u.getId())) {
+                            request.setAttribute("user_can_edit", true);
                         }
                         rd.forward(request, response);
                     } else {

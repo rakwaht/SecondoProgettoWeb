@@ -16,18 +16,19 @@
 <!-- AVATAR -->        
 <c:choose>
     <c:when test="${empty user.avatar_name}">
-        <img src="${pageContext.request.contextPath}/res/images/default_avatar.png" style="margin:0 auto; width:100px; heigth:100px;" />
+        <img src="${pageContext.request.contextPath}/res/images/default_avatar.png" class="avatar" />
     </c:when>
     <c:otherwise>
-        <img src="${pageContext.request.contextPath}/resource/avatar/${user.id}_${user.avatar_name}" style="margin:0 auto; width:100px; heigth:100px;" />
+        <img src="${pageContext.request.contextPath}/resource/avatar/${user.id}_${user.avatar_name}" class="avatar" />
     </c:otherwise>
 </c:choose>
 
         <br />
 psw: ${user.password}<br />
 email:${user.email}<br />
-avatar:${user.avatar_name}<br />
 id:${user.id}<br />
+moderatore? ${user.moderator}<br />
+
 
 
 <br />

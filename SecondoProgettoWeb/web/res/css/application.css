@@ -15,11 +15,15 @@ body {
 }
 
 a, a:hover {
-    color: #4b394e;
+    color: #82c1a9;
 }
 
 label {
     font-weight: normal
+}
+
+.avatar {
+    margin:0 auto; width:100px; heigth:100px
 }
 
 .index-header {
@@ -33,8 +37,6 @@ label {
     margin-top: 30%;
     text-shadow: 2px 2px 5px #000;
 }
-
-
 
 /* util */
 .center {
@@ -50,7 +52,6 @@ label {
 .m-l {
     margin-left: 10px;
 }
-
 
 /* section and box */
 .section {

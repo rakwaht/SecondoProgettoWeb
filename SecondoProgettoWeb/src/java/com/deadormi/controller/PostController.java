@@ -43,7 +43,7 @@ public class PostController {
     }
 
     public ArrayList<Post> getPostsByCrewId(Integer crew_id) throws SQLException {
-        PreparedStatement stm = con.prepareStatement("SELECT * FROM secondoprogettoweb.post WHERE id_crew=?");
+        PreparedStatement stm = con.prepareStatement("SELECT * FROM secondoprogettoweb.post WHERE id_crew=? ORDER BY id DESC");
         ArrayList<Post> result = new ArrayList<Post>();
         UserController uc = new UserController();
         FileController fc = new FileController();

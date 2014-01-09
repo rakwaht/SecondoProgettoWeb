@@ -29,7 +29,7 @@ public class CrewController {
     }
 
     public ArrayList<Crew> findCrewsByUserId(Integer id) throws SQLException {
-        PreparedStatement stm = con.prepareStatement("SELECT * FROM secondoprogettoweb.crew C JOIN secondoprogettoweb.crew_user U ON C.id=U.id_crew  WHERE id_user=? AND crew_enabled=true AND crew_user_enabled=true");
+        PreparedStatement stm = con.prepareStatement("SELECT * FROM secondoprogettoweb.crew C JOIN secondoprogettoweb.crew_user U ON C.id=U.id_crew  WHERE id_user=? AND crew_enabled=true AND crew_user_enabled=true ORDER BY C.id DESC");
         ArrayList<Crew> result = new ArrayList<Crew>();
         UserController uc = new UserController();
         try {
@@ -58,7 +58,7 @@ public class CrewController {
     }
 
     public ArrayList<Crew> findPublicCrew() throws SQLException {
-        PreparedStatement stm = con.prepareStatement("SELECT * FROM secondoprogettoweb.crew WHERE crew_private=false AND crew_enabled=true");
+        PreparedStatement stm = con.prepareStatement("SELECT * FROM secondoprogettoweb.crew WHERE crew_private=false AND crew_enabled=true ORDER BY id DESC");
         ArrayList<Crew> result = new ArrayList<Crew>();
         UserController uc = new UserController();
         try {

@@ -3,10 +3,7 @@
 
 <h1>MODIFICA GRUPPO ${crew.name}</h1><br />
 
-
-
-
-<form method="post" action="ModifyGroupServlet?id_crew=${crew.id}">
+<form method="post" action="ModifyGroupServlet?id_crew=${crew.id}">  
     <input type='text' name='title'value='${crew.name}'/><br/>
     <textarea type='text' name='description'>${crew.description}</textarea><br/>
 
@@ -51,14 +48,5 @@
         </c:when>
     </c:choose>
 </p>
-
-
-
-
-
-
-
-
-
 <%@include file="/layout/foot.jsp" %>
 
