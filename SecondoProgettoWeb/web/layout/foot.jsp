@@ -10,5 +10,6 @@
 <script src="/SecondoProgettoWeb/res/js/bootstrap.min.js"></script>
 <script src="/SecondoProgettoWeb/res/js/application.js"></script>
 <script src="/SecondoProgettoWeb/res/js/jquery.dataTables.js"></script>
+
 </body>
 </html>
