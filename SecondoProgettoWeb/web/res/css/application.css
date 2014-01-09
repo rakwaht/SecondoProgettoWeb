@@ -37,7 +37,7 @@ label {
 
 /* avatar */
 .avatar {
-    margin:0 auto; width:100px; height:100px
+    margin:0 auto; width:100px; height:100px; margin-top: 20px; float: right
 }
 
 .avatar-small {

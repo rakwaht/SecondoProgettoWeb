@@ -1,7 +1,12 @@
 <%@include file="/layout/head.jsp" %>
-<c:if test="${not empty user}">
-    <%@include file="/layout/navigation.jsp" %>
-</c:if>
+<c:choose>
+    <c:when test="${not empty user}">
+        <%@include file="/layout/navigation.jsp" %>
+    </c:when>
+    <c:otherwise>
+        <%@include file="/layout/navigation_no_login.jsp" %>
+    </c:otherwise>
+</c:choose>
 
 <div class="main">
     <div class="section gray-bg">

@@ -8,7 +8,7 @@
 <%@include file="/layout/navigation.jsp" %>
 
 <div class="main container">
-
+<div class="box">
     <h1>Inviti!</h1>
     <c:if test="${not empty invites}">
         <form action='InviteServlet' method='POST'>
@@ -29,4 +29,5 @@
         Non ci sono inviti! <a href="home.jsp">Torna alla home</a>
     </c:if>
 </div>
+    </div>
 <%@include file="/layout/foot.jsp" %>
