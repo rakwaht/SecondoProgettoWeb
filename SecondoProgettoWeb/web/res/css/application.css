@@ -26,6 +26,14 @@ label {
     margin:0 auto; width:100px; heigth:100px
 }
 
+.avatar-small {
+        margin:0 auto; width:50px; heigth:50px
+}
+
+.main {
+    margin-top: 100px
+}
+
 .index-header {
     background-image: url('http://666a658c624a3c03a6b2-25cda059d975d2f318c03e90bcf17c40.r92.cf1.rackcdn.com/unsplash_52b2cfb6647f6_1.JPG');
     background-size: cover;

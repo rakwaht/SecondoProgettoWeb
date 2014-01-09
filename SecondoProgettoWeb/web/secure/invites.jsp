@@ -4,9 +4,9 @@
     Author     : Davide
 --%>
 
-
-
 <%@include file="/layout/head.jsp" %>
+<%@include file="/layout/navigation.jsp" %>
+
 <h1>Inviti!</h1>
 <c:if test="${not empty invites}">
     <form action='InviteServlet' method='POST'>

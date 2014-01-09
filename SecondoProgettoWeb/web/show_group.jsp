@@ -66,7 +66,7 @@ data creazione: ${crew.creation_date}<br />
 
 
 
-<br />Ecco i post:<br />
+<br />Ci sono ${fn:length(posts)} post:<br />
 <c:forEach var="p" items="${posts}">
 
     <div class="box">

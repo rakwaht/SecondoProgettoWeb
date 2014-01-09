@@ -1,6 +1,10 @@
 
 <%@include file="/layout/head.jsp" %>
 
+<c:if test="${not empty user}">
+    <%@include file="/layout/navigation.jsp" %>
+</c:if>
+
 <div class="container">
 
     <c:choose>

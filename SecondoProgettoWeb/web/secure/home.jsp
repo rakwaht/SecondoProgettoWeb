@@ -2,7 +2,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <%@include file="/layout/head.jsp" %>
-<a href="/SecondoProgettoWeb/LogoutServlet">logout</a>
+<%@include file="/layout/navigation.jsp" %>
 
 <c:choose>
     <c:when test="${empty user.last_login_date}">
@@ -29,15 +29,5 @@ email:${user.email}<br />
 id:${user.id}<br />
 moderatore? ${user.moderator}<br />
 
-
-
-<br />
-<br />
-<a href="/SecondoProgettoWeb/HomeServlet?next=edit">Edita il mio profilo</a><br />
-<a href="/SecondoProgettoWeb/HomeServlet?next=groups">Gruppi</a><br />
-<a href="/SecondoProgettoWeb/secure/InviteServlet">Inviti</a><br />
-<c:if test="${user.moderator}">
-    <a href="/SecondoProgettoWeb/secure/ModeratorServlet">ModeratorPage</a>
-</c:if>
 
 <%@include file="/layout/foot.jsp" %>
