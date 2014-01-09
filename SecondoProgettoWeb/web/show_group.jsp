@@ -1,7 +1,7 @@
-
 <%@include file="/layout/head.jsp" %>
-<%@include file="/layout/navigation.jsp" %>
-
+<c:if test="${not empty user}">
+    <%@include file="/layout/navigation.jsp" %>
+</c:if>
 
 <div class="main container">
 
@@ -65,7 +65,7 @@
                 </c:choose>
 
                 <form method='POST' action='secure/NewPostServlet?id_crew=${crew.id}' enctype='multipart/form-data'>
-                  
+
                     <textarea class="form-control" id="testo" rows="3" name="testo" type='text' placeholder="Scrivi un post"></textarea><br />
                     <input type='file' name='file' onchange='add_upload_file();' /> <br />
                     <button type='submit' class="btn btn-green">Invia</button>
