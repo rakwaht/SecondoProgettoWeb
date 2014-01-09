@@ -1,6 +1,9 @@
 
 <%@include file="/layout/head.jsp" %>
+<%@include file="/layout/navigation.jsp" %>
 
+
+<div class="main container">
 <h1>Pagina show gruppo del gruppo: ${crew.name}</h1>
 <h2>
     <c:choose>
@@ -18,7 +21,7 @@
 </c:if>
 
 <c:if test="${admin}">  
-    <a href='secure/ModifyGroupServlet?id_crew=${crew.id}'>Modify Group</a>
+    <a href='secure/ModifyGroupServlet?id_crew=${crew.id}'>Modica gruppo</a>
 </c:if>  
 <br /><br />
 
@@ -84,5 +87,6 @@ data creazione: ${crew.creation_date}<br />
     </div>
 </c:forEach>
 
+</div>
 <%@include file="/layout/foot.jsp" %>
 

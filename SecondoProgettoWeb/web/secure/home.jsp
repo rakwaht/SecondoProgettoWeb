@@ -4,6 +4,7 @@
 <%@include file="/layout/head.jsp" %>
 <%@include file="/layout/navigation.jsp" %>
 
+<div class="container">
 <c:choose>
     <c:when test="${empty user.last_login_date}">
         <h1>Benvenuto, ${user.username} ! </h1><br />
@@ -29,5 +30,5 @@ email:${user.email}<br />
 id:${user.id}<br />
 moderatore? ${user.moderator}<br />
 
-
+</div>
 <%@include file="/layout/foot.jsp" %>

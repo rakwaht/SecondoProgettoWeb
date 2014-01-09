@@ -1,5 +1,5 @@
 <%@include file="/layout/head.jsp" %>
-<div class="container">
+<div class="main container">
     <h1>MOD PAGE</h1>
 
     <table id="moderator_table_id">

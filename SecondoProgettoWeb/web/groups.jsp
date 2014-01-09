@@ -5,7 +5,7 @@
     <%@include file="/layout/navigation.jsp" %>
 </c:if>
 
-<div class="container">
+<div class="main container">
 
     <c:choose>
         <c:when test="${empty user}">
