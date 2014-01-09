@@ -90,7 +90,7 @@
                 </p>
             </form>
         </div>
-        <div class="section purple-bg center">
+        <div class="section purple-bg center" style="min-height: 200px">
             <h2 class="white">Just gotta have a Coffee.<i class="fa fa-coffee m-l"></i></h2>
         </div>
         
