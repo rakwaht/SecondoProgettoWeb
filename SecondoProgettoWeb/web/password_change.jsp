@@ -7,30 +7,41 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@include file="/layout/head.jsp" %>
 
-<h1>Cambia password</h1>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <h1>Cambia password</h1>
 
-<form method="post" action="PasswordChangeServlet?psw_change_id=${param.psw_change_id}">
-    Nuova password: <input type='password' name='password' /><br />
-    Ripeti nuova passvord: <input type='password' name='password_confirm' /><br />
-    <input type='submit' value="Invia"/>
-</form>
-
-
-<c:choose>
-    <c:when test="${param.message_password == 'password_changed'}">
-        <p>Password cambiata con successo. <a href='login.jsp'>Entra</a>.</p>
-    </c:when>
-    <c:when test="${param.message_password == 'password_not_valid'}">
-        <p>Nuova password non valida. Le password devono coincidere ed essere di lunghezza minima 5 caratteri.</p>
-    </c:when>
-    <c:when test="${param.message_session == 'session_expired'}">
-        <p>La sessione è scaduta. Inserisci di nuovo la email per inviare una nuova richiesta di cambio password oppure torna alla <a href="login.jsp">home</a>.</p>
-    </c:when>
-    <c:otherwise>
-    </c:otherwise>
-</c:choose>
+            <form method="post" action="PasswordChangeServlet?psw_change_id=${param.psw_change_id}" role="form">
+                <div class="form-group">
+                    <label>Nuova password</label>
+                    <input type='password' name='password' class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label>Ripeti nuova passvord</label>
+                    <input type='password' name='password_confirm' class="form-control" />
+                </div>
+                <button type='submit' class="btn btn-green btn-lg">Invia</button>
+            </form>
 
 
+            <c:choose>
+                <c:when test="${param.message_password == 'password_changed'}">
+                    <div class="alert alert-success">
+
+                        <p>Password cambiata con successo. <a href='login.jsp'>Entra</a>.</p>
+                    </div>
+                </c:when>
+                <c:when test="${param.message_password == 'password_not_valid'}">
+                    <div class="alert alert-error">
+                        <p>Nuova password non valida. Le password devono coincidere ed essere di lunghezza minima 5 caratteri.</p>
+                    </div>
+                </c:when>
+            </c:choose>
+
+        </div>
+    </div>
+</div>
 
 <%@include file="/layout/foot.jsp" %>
 

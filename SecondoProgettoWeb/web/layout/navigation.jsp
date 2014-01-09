@@ -10,7 +10,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="home.jsp">
+            <a class="navbar-brand" href="/SecondoProgettoWeb/secure/home.jsp">
                 <!-- AVATAR -->        
                 <c:choose>
                     <c:when test="${empty user.avatar_name}">
@@ -37,5 +37,3 @@
         </div><!-- /.navbar-collapse -->
     </div>
 </nav>
-
-<div class="main">

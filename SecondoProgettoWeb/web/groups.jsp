@@ -5,7 +5,7 @@
     <%@include file="/layout/navigation.jsp" %>
 </c:if>
 
-<div class="container">
+<div class="main container">
 
     <c:choose>
         <c:when test="${empty user}">
@@ -19,21 +19,26 @@
         </c:otherwise>
     </c:choose>
 
-    <c:if test="${not empty user}">
-        <h2>Gruppi ai quali sei iscritto</h2>
-        <c:forEach var="myg" items="${my_groups}">
-            <a href="ShowGroupServlet?id_crew=${myg.id}" ><c:out value="${myg.name}" /></a>
-            Admin: <c:out value="${myg.admin.username}" />
-            <br />
-        </c:forEach>
-    </c:if>
-
-    <h2>Gruppi pubblici</h2>
-    <c:forEach var="g" items="${public_groups}">
-        <a href="ShowGroupServlet?id_crew=${g.id}" ><c:out value="${g.name}" /></a>
-        Admin: <c:out value="${g.admin.username}" />
-        <br />
-    </c:forEach>
+    <div class="row"> 
+        <div class="col-md-6">
+            <c:if test="${not empty user}">
+                <h2>Gruppi ai quali sei iscritto</h2>
+                <c:forEach var="myg" items="${my_groups}">
+                    <a href="ShowGroupServlet?id_crew=${myg.id}" ><c:out value="${myg.name}" /></a>
+                    Admin: <c:out value="${myg.admin.username}" />
+                    <br />
+                </c:forEach>
+            </c:if>
+        </div>
+        <div class="col-md-6">
+            <h2>Gruppi pubblici</h2>
+            <c:forEach var="g" items="${public_groups}">
+                <a href="ShowGroupServlet?id_crew=${g.id}" ><c:out value="${g.name}" /></a>
+                Admin: <c:out value="${g.admin.username}" />
+                <br />
+            </c:forEach>
+        </div>
+    </div>
 
 </div>
 

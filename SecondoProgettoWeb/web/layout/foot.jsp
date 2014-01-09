@@ -6,11 +6,10 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
-</div><!-- chiude div main -->
-
 <script src="/SecondoProgettoWeb/res/js/jquery.js"></script>
 <script src="/SecondoProgettoWeb/res/js/bootstrap.min.js"></script>
 <script src="/SecondoProgettoWeb/res/js/application.js"></script>
 <script src="/SecondoProgettoWeb/res/js/jquery.dataTables.js"></script>
+
 </body>
 </html>
