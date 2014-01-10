@@ -6,6 +6,10 @@
         <div class="col-md-6 col-md-offset-3">
             <div class="box">
                 <h1>Crea qui il tuo fantastico gruppo!</h1>
+                <c:if test="${param.message_newgroup == 'empty_params'}">
+                    <p>Nome e/o descrizione obbligatorie!</p>
+                </c:if>
+
                 <form method="post" action="NewGroupServlet" role="form">
                     <div class="form-group">
                         <label>Nome</label>	
@@ -15,22 +19,20 @@
                         <label>Descrizione</label>	
                         <textarea type="password" name="description" class="form-control" ></textarea>
                     </div>
-                    <input type='radio' name='type' value='private' checked='checked' /> privato<br />
-                    <input type='radio' name='type' value='public' /> pubblico 
+                    <input type='radio' name='type' value='public' checked='checked' /> pubblico<br /> 
+                    <input type='radio' name='type' value='private' /> privato
                     <br /><br /> 
                     <c:if test="${not empty users}">
-                        Invita utenti<br/>
+                        <p>Invita utenti<p/>
+                        <ul class="list-group">
+                            <c:forEach var="u" items="${users}">
+                                <li class="list-group-item">
+                                    <input type="checkbox" name="users" value="${u.id}" /> <c:out value="${u.username}" />
+                                </li>
+                            </c:forEach>
+                        </ul>
                     </c:if>
-
-                    <c:forEach var="u" items="${users}">
-                        <input type="checkbox" name="users" value="${u.id}" /> <c:out value="${u.username}" /><br />
-                    </c:forEach>
-                    <br /> 
-
-                    <c:if test="${param.message_newgroup == 'empty_params'}">
-                        <p>Nome e/o descrizione obbligatorie!</p>
-                    </c:if>
-
+                   
                     <button type="submit" class="btn btn-green">Crea</button>
                     <button type="reset" class="btn btn-default">Reset</button>
                 </form>
