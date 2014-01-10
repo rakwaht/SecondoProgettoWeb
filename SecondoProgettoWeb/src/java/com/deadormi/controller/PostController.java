@@ -167,4 +167,18 @@ public class PostController {
         return 0;
 
     }
+
+    public void createCloseGroupPost(Post post) throws SQLException {
+        PreparedStatement stm = con.prepareStatement("INSERT INTO secondoprogettoweb.POST (id_writer,id_crew,creation_date,text) VALUES (?,?,?,?)");
+       try {
+            stm.setInt(1, post.getWriter().getId());
+            stm.setInt(2, post.getId_crew());
+            stm.setString(3,post.getCreation_date());
+            stm.setString(4, post.getText());
+            stm.executeUpdate();
+       }finally{
+           stm.close();
+       }
+            
+    }
 }

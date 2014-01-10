@@ -29,7 +29,7 @@ public class CrewController {
     }
 
     public ArrayList<Crew> findCrewsByUserId(Integer id) throws SQLException {
-        PreparedStatement stm = con.prepareStatement("SELECT * FROM secondoprogettoweb.crew C JOIN secondoprogettoweb.crew_user U ON C.id=U.id_crew  WHERE id_user=? AND crew_enabled=true AND crew_user_enabled=true ORDER BY C.id DESC");
+        PreparedStatement stm = con.prepareStatement("SELECT * FROM secondoprogettoweb.crew C JOIN secondoprogettoweb.crew_user U ON C.id=U.id_crew  WHERE id_user=?  AND crew_user_enabled=true ORDER BY C.id DESC");
         ArrayList<Crew> result = new ArrayList<Crew>();
         UserController uc = new UserController();
         try {
@@ -58,7 +58,7 @@ public class CrewController {
     }
 
     public ArrayList<Crew> findPublicCrew() throws SQLException {
-        PreparedStatement stm = con.prepareStatement("SELECT * FROM secondoprogettoweb.crew WHERE crew_private=false AND crew_enabled=true ORDER BY id DESC");
+        PreparedStatement stm = con.prepareStatement("SELECT * FROM secondoprogettoweb.crew WHERE crew_private=false  ORDER BY id DESC");
         ArrayList<Crew> result = new ArrayList<Crew>();
         UserController uc = new UserController();
         try {
@@ -112,7 +112,7 @@ public class CrewController {
     }
 
     public Crew find_crew_by_id(Integer crew_id) throws SQLException {
-        PreparedStatement stm = con.prepareStatement("SELECT * FROM secondoprogettoweb.crew WHERE id=? AND crew_enabled=true");
+        PreparedStatement stm = con.prepareStatement("SELECT * FROM secondoprogettoweb.crew WHERE id=? ");
         UserController uc = new UserController();
         try {
             stm.setInt(1, crew_id);
@@ -140,12 +140,15 @@ public class CrewController {
     }
 
     public void updateCrew(Crew crew) throws SQLException {
-        PreparedStatement stm = con.prepareStatement("UPDATE secondoprogettoweb.crew SET name=?,description=?,crew_private=? WHERE id=? ");
+        PreparedStatement stm = con.prepareStatement("UPDATE secondoprogettoweb.crew SET name=?,description=?,crew_private=?,crew_enabled=? WHERE id=? ");
         try {
             stm.setString(1, crew.getName());
             stm.setString(2, crew.getDescription());
-            stm.setInt(4, crew.getId());
             stm.setBoolean(3, crew.getCrew_private());
+            stm.setBoolean(4, crew.getCrew_enabled());
+            stm.setInt(5, crew.getId());
+            
+            
             stm.executeUpdate();
         } finally {
             stm.close();

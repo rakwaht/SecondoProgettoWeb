@@ -17,18 +17,18 @@
                     <h3>
                         <c:choose>
                             <c:when test="${crew.crew_private}">
-                                Gruppo privato
+                                <i class="fa fa-eye-slash"></i>&nbsp;Gruppo privato
                             </c:when>
                             <c:otherwise>
-                                Gruppo pubblico
+                                <i class="fa fa-eye"></i>&nbsp;Gruppo pubblico
                             </c:otherwise>
                         </c:choose>
                     </h3>
                     <c:if test="${not crew.crew_enabled}"> 
-                        <h4>Gruppo chiuso</h4>
+                        <h4><i class="fa fa-lock"></i>&nbsp;&nbsp;Gruppo chiuso</h4>
                     </c:if>
-                    <c:if test="${user.moderator}">  
-                        <button class="btn btn-wine">Chiudi gruppo</button>
+                    <c:if test="${user.moderator} && ${ crew.crew_enabled}">  
+                        <a href="secure/CloseGroupServlet?id_crew=${crew.id}"><button class="btn btn-wine">Chiudi gruppo</button></a>
                     </c:if>
                     <c:if test="${admin}">
                         <a href='secure/ModifyGroupServlet?id_crew=${crew.id}'>

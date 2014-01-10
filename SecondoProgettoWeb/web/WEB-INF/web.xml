@@ -83,6 +83,10 @@
         <servlet-name>AcceptInviteServlet</servlet-name>
         <servlet-class>com.deadormi.servlet.AcceptInviteServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CloseGroupServlet</servlet-name>
+        <servlet-class>com.deadormi.servlet.CloseGroupServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/LoginServlet</url-pattern>
@@ -142,6 +146,10 @@
     <servlet-mapping>
         <servlet-name>AcceptInviteServlet</servlet-name>
         <url-pattern>/AcceptInviteServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CloseGroupServlet</servlet-name>
+        <url-pattern>/secure/CloseGroupServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
