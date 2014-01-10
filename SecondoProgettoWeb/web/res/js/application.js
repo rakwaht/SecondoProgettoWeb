@@ -21,11 +21,21 @@ $(document).ready(function() {
     );
 });
 
-//creo popover show gruppo
 $(document).ready(function() {
+    //creo popover show gruppo
     $(".qrpopup").popover({
         html: true,
-        trigger : 'hover',
-        placement : 'right'
+        trigger: 'hover',
+        placement: 'right'
+    });
+
+    //toggle partecipanti
+    $("#members").click(function() {
+        $("#members-toggle").toggle("slow");
+    });
+    
+    //toggle files
+    $("#files").click(function() {
+        $("#files-toggle").toggle("slow");
     });
 });

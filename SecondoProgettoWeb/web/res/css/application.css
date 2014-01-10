@@ -127,6 +127,19 @@ label {
     float: left
 }
 
+/* box info gruppo files e members */
+#files:hover, #members:hover {
+    color:#7a5b7f
+}
+
+#files-toggle, #members-toggle {
+    display: none
+}
+
+p>a.white:hover {
+    color:white
+}
+
 /* colors */
 .green { 
     color: #82c1a9;

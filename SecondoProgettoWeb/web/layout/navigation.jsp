@@ -36,7 +36,11 @@
                 <c:if test="${user.moderator}">
                     <li><a href="/SecondoProgettoWeb/secure/ModeratorServlet">Pagina moderatore</a></li>
                 </c:if>
+            </ul>
+
+            <ul class="nav navbar-nav navbar-right">
                 <li><a href="/SecondoProgettoWeb/LogoutServlet">Logout</a></li>
+            </ul>
 
         </div><!-- /.navbar-collapse -->
     </div>

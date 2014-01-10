@@ -28,39 +28,34 @@
                         <h4>Gruppo chiuso</h4>
                     </c:if>
                 </div>
-                <div class="col-md-6">
-
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="section green-bg">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-4">
-                    <p style="margin-top: 20px">
-                        <c:if test="${user.moderator}">  
-                            <button class="btn btn-wine">Chiudi gruppo</button>
-                        </c:if>
-                        <c:if test="${admin}">
-                            <a href='secure/ModifyGroupServlet?id_crew=${crew.id}'>
-                                <button type="button" class="btn btn-wine">Modifica gruppo</button>
-                            </a>
-                        </c:if> 
-                    </p>
-                </div>
-                <div class="col-md-4 white">
+                <div class="col-md-6 green-bg white">
                     <h3>Info</h3>
                     <p>${crew.description}</p>
                     <p>Admin: ${crew.admin.username}</p>
                     <p>Data creazione: ${crew.creation_date}</p>
-                </div>
-                <div class="col-md-4 white">
-                    <h3>Partecipanti</h3>
-                    <c:forEach var="m" items="${members}">
-                        ${m.username}<br />
-                    </c:forEach>
+
+                    <div class="row">
+                        <div class="col-md-6 green-bg white">
+
+                            <button href="#" id="members" class="btn btn-wine" style="margin-bottom:20px">Partecipanti</button>
+                            <p id="members-toggle">
+                                <c:forEach var="m" items="${members}">
+                                    ${m.username}<br />
+                                </c:forEach>
+                            </p>
+                        </div>
+                        <div class="col-md-6 green-bg white">
+                            <button href="#" id="files" class="btn btn-wine" style="margin-bottom:20px">Files</button>
+                            <p id="files-toggle">
+                                <c:forEach var="p" items="${posts}">
+                                    <c:forEach var="f" items="${p.files}">
+                                        <a class="white" href="${pageContext.request.contextPath}/resource/files/${crew.id}/${f.id}-${f.name}">${f.id}-${f.name}</a><br />
+                                </c:forEach>        
+                            </c:forEach>
+                            </p>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>
