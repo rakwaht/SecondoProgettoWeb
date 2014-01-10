@@ -10,8 +10,17 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a href="/SecondoProgettoWeb/secure/home.jsp">
-                <!-- AVATAR -->        
+
+            <a class="navbar-brand nav-app-name" href="/SecondoProgettoWeb/secure/home.jsp">
+                <i class="fa fa-coffee m-r" style='font-size: 15px'></i>CoffeClassRoom 2
+            </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li>
+                    <!-- AVATAR -->        
                 <c:choose>
                     <c:when test="${empty user.avatar_name}">
                         <img src="${pageContext.request.contextPath}/res/images/default_avatar.png" class="avatar-small" />
@@ -20,12 +29,7 @@
                         <img src="${pageContext.request.contextPath}/resource/avatar/${user.id}_${user.avatar_name}" class="avatar-small" />
                     </c:otherwise>
                 </c:choose>
-            </a>
-        </div>
-
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav">
+                </li>
                 <li><a href="/SecondoProgettoWeb/HomeServlet?next=groups">Gruppi</a></li>
                 <li><a href="/SecondoProgettoWeb/secure/InviteServlet">Inviti</a></li>
                 <li><a href="/SecondoProgettoWeb/HomeServlet?next=edit">Profilo</a></li>

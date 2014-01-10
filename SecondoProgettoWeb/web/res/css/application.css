@@ -39,13 +39,24 @@ label {
     background-color: #333
 }
 
+.nav-app-name {
+    font-family: 'Pacifico', cursive;
+    color: whitesmoke;
+}
+
+.nav-app-name:hover {
+    font-family: 'Pacifico', cursive;
+    color: #82c1a9;
+    text-decoration: none;
+}
+
 /* avatar */
 .avatar {
     margin:0 auto; width:100px; height:100px; margin-top: 20px
 }
 
 .avatar-small {
-    margin:0 auto; width:40px; height:40px; margin-top: 5px; margin-right: 10px
+    margin-top: 5px; width: 40px; height:40px
 }
 
 .main {
