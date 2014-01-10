@@ -128,10 +128,6 @@ label {
 }
 
 /* box info gruppo files e members */
-#files:hover, #members:hover {
-    color:#7a5b7f
-}
-
 #files-toggle, #members-toggle {
     display: none
 }

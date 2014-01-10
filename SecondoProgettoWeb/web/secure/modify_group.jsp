@@ -62,6 +62,7 @@
                         </c:if>
 
                         <button type='submit' class="btn btn-green">Modifica</button>
+                        <button type="reset" class="btn btn-default">Reset</button>
                 </form>
 
                 <!-- error messages -->

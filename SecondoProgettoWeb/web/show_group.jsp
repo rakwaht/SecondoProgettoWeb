@@ -27,6 +27,14 @@
                     <c:if test="${not crew.crew_enabled}"> 
                         <h4>Gruppo chiuso</h4>
                     </c:if>
+                    <c:if test="${user.moderator}">  
+                        <button class="btn btn-wine">Chiudi gruppo</button>
+                    </c:if>
+                    <c:if test="${admin}">
+                        <a href='secure/ModifyGroupServlet?id_crew=${crew.id}'>
+                            <button type="button" class="btn btn-wine">Modifica gruppo</button>
+                        </a>
+                    </c:if> 
                 </div>
                 <div class="col-md-6 green-bg white">
                     <h3>Info</h3>
@@ -37,7 +45,7 @@
                     <div class="row">
                         <div class="col-md-6 green-bg white">
 
-                            <button href="#" id="members" class="btn btn-wine" style="margin-bottom:20px">Partecipanti</button>
+                            <button href="#" id="members" class="btn btn-wine" style="margin-bottom:20px; width:100%">Partecipanti</button>
                             <p id="members-toggle">
                                 <c:forEach var="m" items="${members}">
                                     ${m.username}<br />
@@ -45,13 +53,13 @@
                             </p>
                         </div>
                         <div class="col-md-6 green-bg white">
-                            <button href="#" id="files" class="btn btn-wine" style="margin-bottom:20px">Files</button>
+                            <button href="#" id="files" class="btn btn-wine" style="margin-bottom:20px; width:100%">Files</button>
                             <p id="files-toggle">
                                 <c:forEach var="p" items="${posts}">
                                     <c:forEach var="f" items="${p.files}">
                                         <a class="white" href="${pageContext.request.contextPath}/resource/files/${crew.id}/${f.id}-${f.name}">${f.id}-${f.name}</a><br />
-                                </c:forEach>        
-                            </c:forEach>
+                                    </c:forEach>        
+                                </c:forEach>
                             </p>
                         </div>
                     </div>
