@@ -5,6 +5,44 @@
     <div class='row'>    
         <div class="col-md-6 col-md-offset-3">
             <div class="box">
+                <form method="post" action="EditProfileServlet?whatEdit=editAvatar" enctype="multipart/form-data" role="form">
+                    <h3>Cambia avatar</h3>
+                    <div class="form-group">
+                        <input type="file" name="avatar" />
+                    </div>
+                    <button type="submit" class="btn btn-green">Modifica</button>
+                </form>
+
+                <!-- ERRORI AVATAR -->
+                <p>
+                    <c:choose>
+                        <c:when test="${param.message_avatar == 'changed'}">
+                            Avatar cambiato!
+                        </c:when>
+                        <c:when test="${param.message_avatar == 'too_big'}">
+                            File troppo grande!
+                        </c:when>
+                        <c:when test="${param.message_avatar == 'not_image'}">
+                            Il file non è un'immagine!
+                        </c:when>
+                        <c:when test="${param.message_avatar == 'not_uploaded'}">
+                            Nessun file selezionato!
+                        </c:when>
+                    </c:choose>
+                </p>
+
+                <!-- IMMAGINE AVATAR -->        
+                <c:choose>
+                    <c:when test="${empty user.avatar_name}">
+                        <img src="${pageContext.request.contextPath}/res/images/default_avatar.png" style="margin:0 auto; width:100px; heigth:100px;" />
+                    </c:when>
+                    <c:otherwise>
+                        <img src="${pageContext.request.contextPath}/resource/avatar/${user.id}_${user.avatar_name}" style="margin:0 auto; width:100px; heigth:100px;" />
+                    </c:otherwise>
+                </c:choose>
+
+            </div>
+            <div class="box">
                 <form method="post" action="EditProfileServlet?whatEdit=editName" role="form">
                     <h3>Cambia username</h3>
                     <div class="form-group">
@@ -66,44 +104,7 @@
 
             </div>           
 
-            <div class="box">
-                <form method="post" action="EditProfileServlet?whatEdit=editAvatar" enctype="multipart/form-data" role="form">
-                    <h3>Cambia avatar</h3>
-                    <div class="form-group">
-                        <input type="file" name="avatar" />
-                    </div>
-                    <button type="submit" class="btn btn-green">Modifica</button>
-                </form>
-
-                <!-- ERRORI AVATAR -->
-                <p>
-                    <c:choose>
-                        <c:when test="${param.message_avatar == 'changed'}">
-                            Avatar cambiato!
-                        </c:when>
-                        <c:when test="${param.message_avatar == 'too_big'}">
-                            File troppo grande!
-                        </c:when>
-                        <c:when test="${param.message_avatar == 'not_image'}">
-                            Il file non è un'immagine!
-                        </c:when>
-                        <c:when test="${param.message_avatar == 'not_uploaded'}">
-                            Nessun file selezionato!
-                        </c:when>
-                    </c:choose>
-                </p>
-
-                <!-- IMMAGINE AVATAR -->        
-                <c:choose>
-                    <c:when test="${empty user.avatar_name}">
-                        <img src="${pageContext.request.contextPath}/res/images/default_avatar.png" style="margin:0 auto; width:100px; heigth:100px;" />
-                    </c:when>
-                    <c:otherwise>
-                        <img src="${pageContext.request.contextPath}/resource/avatar/${user.id}_${user.avatar_name}" style="margin:0 auto; width:100px; heigth:100px;" />
-                    </c:otherwise>
-                </c:choose>
-
-            </div>
+            
         </div>
     </div>
 </div>
