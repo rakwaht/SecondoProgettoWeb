@@ -100,11 +100,11 @@
                         <div class="col-md-2">
                             <!-- AVATAR -->        
                             <c:choose>
-                                <c:when test="${empty user.avatar_name}">
+                                <c:when test="${empty p.writer.avatar_name}">
                                     <img src="${pageContext.request.contextPath}/res/images/default_avatar.png" class="avatar" />
                                 </c:when>
                                 <c:otherwise>
-                                    <img src="${pageContext.request.contextPath}/resource/avatar/${user.id}_${user.avatar_name}" class="avatar" />
+                                    <img src="${pageContext.request.contextPath}/resource/avatar/${p.writer.id}_${p.writer.avatar_name}" class="avatar" />
                                 </c:otherwise>
                             </c:choose>
                         </div>
