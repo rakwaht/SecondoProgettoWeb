@@ -19,7 +19,7 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                <li><a href="/SecondoProgettoWeb/HomeServlet?next=groups">Gruppi</a></li>
+                <li><a href="/SecondoProgettoWeb/HomeServlet?next=groups">Gruppi&nbsp;&nbsp;<i class="fa fa-users" ></i></a></li>
             </ul>
             
             <form class="navbar-form navbar-right" method="post" action="LoginServlet" role="form">
