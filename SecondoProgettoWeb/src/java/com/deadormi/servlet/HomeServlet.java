@@ -55,6 +55,10 @@ public class HomeServlet extends HttpServlet {
         else if(next.equals("groups")){
              response.sendRedirect("GroupsServlet");
         }
+        else{
+            response.sendRedirect("Login.jsp");
+        }
+        
     }
 
     /**
