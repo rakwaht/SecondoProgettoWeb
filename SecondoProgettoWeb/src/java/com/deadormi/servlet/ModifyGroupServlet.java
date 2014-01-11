@@ -11,6 +11,7 @@ import com.deadormi.controller.UserController;
 import com.deadormi.entity.Crew;
 import com.deadormi.entity.Invite;
 import com.deadormi.entity.User;
+import com.deadormi.util.Parser;
 import java.io.IOException;
 import java.net.URLEncoder;
 import java.sql.SQLException;
@@ -63,30 +64,40 @@ public class ModifyGroupServlet extends HttpServlet {
         Crew crew = null;
         CrewController cu = new CrewController();
         UserController uc = new UserController();
+        User u = (User) request.getSession().getAttribute("user");
+        String id_crew_string = request.getParameter("id_crew");
 
-        Integer id_crew = Integer.parseInt(request.getParameter("id_crew"));        
-
-        try {
-            crew = cu.find_crew_by_id(id_crew);
-            followers = uc.getUsersInGroup(id_crew);
-            not_followers = uc.getUserNotInGroup(id_crew);
-            invited = uc.getUserInvitedToGroup(id_crew);
-        } catch (SQLException ex) {
-            log.warn(ex);
-        }
-        for (int i = 0; i < followers.size(); i++) {
-            if (followers.get(i).getId().equals(crew.getAdmin().getId())) {
-                followers.remove(i);
+        if (id_crew_string == null || !Parser.isNumeric(id_crew_string) || u == null) {
+            //torno alla lista gruppi
+            response.sendRedirect("/SecondoProgettoWeb/GroupsServlet");
+        } else {
+            Integer id_crew = Integer.parseInt(id_crew_string);
+            //esguo l'sql
+            try {
+                crew = cu.find_crew_by_id(id_crew);
+                followers = uc.getUsersInGroup(id_crew);
+                not_followers = uc.getUserNotInGroup(id_crew);
+                invited = uc.getUserInvitedToGroup(id_crew);
+            } catch (SQLException ex) {
+                log.warn(ex);
+            }
+            if (crew == null || !crew.getAdmin().getId().equals(u.getId())) {
+                //torno alla lista gruppi
+                response.sendRedirect("/SecondoProgettoWeb/GroupsServlet");
+            } else {
+                for (int i = 0; i < followers.size(); i++) {
+                    if (followers.get(i).getId().equals(crew.getAdmin().getId())) {
+                        followers.remove(i);
+                    }
+                }
+                RequestDispatcher rd = request.getRequestDispatcher("modify_group.jsp");
+                request.setAttribute("followers", followers);
+                request.setAttribute("not_followers", not_followers);
+                request.setAttribute("invited", invited);
+                request.setAttribute("crew", crew);
+                rd.forward(request, response);
             }
         }
-        RequestDispatcher rd = request.getRequestDispatcher("modify_group.jsp");
-        request.setAttribute("followers", followers);
-        request.setAttribute("not_followers", not_followers);
-        request.setAttribute("invited", invited);
-        request.setAttribute("crew", crew);
-        rd.forward(request, response);
-
-
     }
 
     /**
@@ -112,7 +123,7 @@ public class ModifyGroupServlet extends HttpServlet {
         InviteController ic = new InviteController();
         String[] followers = request.getParameterValues("followers");
         String[] not_followers = request.getParameterValues("not_followers");
-        
+
         try {
             crew = cu.find_crew_by_id(id_crew);
         } catch (SQLException ex) {
@@ -155,13 +166,13 @@ public class ModifyGroupServlet extends HttpServlet {
         } else {
             crew.setDescription(description);
             crew.setName(title);
-                        
+
             if (crew.isCrew_private() && type.equals("public")) {
                 crew.setCrew_private(Boolean.FALSE);
             } else if (!crew.isCrew_private() && type.equals("private")) {
                 crew.setCrew_private(Boolean.TRUE);
             }
-            
+
             try {
                 cu.updateCrew(crew);
             } catch (SQLException ex) {

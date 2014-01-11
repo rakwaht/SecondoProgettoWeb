@@ -7,11 +7,13 @@ package com.deadormi.dbmanager;
 
 import java.io.Serializable;
 import java.sql.Connection;
+import java.sql.Driver;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Enumeration;
 
 /**
  *
@@ -46,6 +48,17 @@ public class DbManager implements Serializable {
                 DriverManager.getConnection("jdbc:mysql:;shutdown=true");
             }
         } catch (Exception e) {
+        }
+        // This manually deregisters JDBC driver, which prevents Tomcat 7 from complaining about memory leaks wrto this class
+        Enumeration<Driver> drivers = DriverManager.getDrivers();
+        while (drivers.hasMoreElements()) {
+            Driver driver = drivers.nextElement();
+            try {
+                DriverManager.deregisterDriver(driver);
+            } catch (SQLException e) {
+                
+            }
+
         }
     }
     

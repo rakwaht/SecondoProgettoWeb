@@ -27,7 +27,7 @@
                     <c:if test="${not crew.crew_enabled}"> 
                         <h4><i class="fa fa-lock"></i>&nbsp;&nbsp;Gruppo chiuso</h4>
                     </c:if>
-                    <c:if test="${user.moderator} && ${ crew.crew_enabled}">  
+                    <c:if test="${user.moderator &&  crew.crew_enabled}">  
                         <a href="secure/CloseGroupServlet?id_crew=${crew.id}"><button class="btn btn-wine">Chiudi gruppo</button></a>
                     </c:if>
                     <c:if test="${admin}">
@@ -36,6 +36,7 @@
                         </a>
                     </c:if> 
                 </div>
+                    
                 <div class="col-md-6 green-bg white">
                     <h3>Info</h3>
                     <p>${crew.description}</p>
@@ -126,7 +127,7 @@
                                     <c:if test="${not empty p.files}">
                                         File allegati <ul class="files_list">
                                             <c:forEach var="f" items="${p.files}">
-                                                <li><a href="${pageContext.request.contextPath}/resource/files/${crew.id}/${f.id}-${f.name}">${f.id}-${f.name}</a>
+                                                <li><a href="${pageContext.request.contextPath}/resource/files/${crew.id}/${f.id}-${f.name}" target="_blank" >${f.id}-${f.name}</a>
                                                 </li>
                                             </c:forEach>
                                         </ul>
