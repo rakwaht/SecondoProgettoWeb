@@ -6,7 +6,9 @@ package com.deadormi.util;
 
 import com.deadormi.controller.FileController;
 import com.deadormi.entity.Crew;
+import com.deadormi.entity.Post;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.servlet.http.HttpServletRequest;
@@ -19,6 +21,7 @@ import org.apache.log4j.Logger;
 public class Parser {
 
     static Logger log = Logger.getLogger(Parser.class);
+
     private Pattern pattern;
     private Matcher matcher;
     private static final String EMAIL_PATTERN =
@@ -104,4 +107,26 @@ public class Parser {
         }
         return null;
     }
+    
+    
+    public static ArrayList<Post> censura_mail(ArrayList<Post> posts) {
+        log.debug("Sono nel parser!");
+        Pattern p = Pattern.compile(EMAIL_PATTERN);
+        for(int i=0; i<posts.size(); i++){
+            log.debug("Analizzo il post # " + i);
+            String text = posts.get(i).getText();
+            Matcher m = p.matcher(text);
+            log.debug(m.find());
+            while(m.find()){
+                String email = text.substring(m.start(), m.end());
+                log.debug("Ho trovato una mail: " + email);
+                email = email.substring(email.indexOf('@')+1);
+                String replacer = new String(new char[email.length()]).replace('\0', 'X');
+                text = text.replace(email, replacer);
+            }
+            posts.get(i).setText(text);
+        }
+        return posts;
+    }
+    
 }

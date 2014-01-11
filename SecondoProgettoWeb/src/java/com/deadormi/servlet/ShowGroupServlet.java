@@ -97,6 +97,10 @@ public class ShowGroupServlet extends HttpServlet {
                         }
                         ArrayList<Post> posts = pc.getPostsByCrewId(crew_id);
                         RequestDispatcher rd = request.getRequestDispatcher("show_group.jsp");
+                        if(u == null){
+                            //modifico la crew e censuro la mail
+                            posts = Parser.censura_mail(posts);
+                        }
                         request.setAttribute("crew", crew);
                         request.setAttribute("posts", posts);
                         if (u != null && crew.getAdmin().getId().equals(u.getId())) {
