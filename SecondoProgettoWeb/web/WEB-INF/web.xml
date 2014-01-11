@@ -11,9 +11,17 @@
         <filter-name>SecureFilter</filter-name>
         <filter-class>com.deadormi.filter.SecureFilter</filter-class>
     </filter>
+    <filter>
+        <filter-name>FileFilter</filter-name>
+        <filter-class>com.deadormi.filter.FileFilter</filter-class>
+    </filter>
     <filter-mapping>
         <filter-name>SecureFilter</filter-name>
         <url-pattern>/secure/*</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>FileFilter</filter-name>
+        <url-pattern>/resource/files/*</url-pattern>
     </filter-mapping>
     <listener>
         <description>listener</description>
