@@ -4,7 +4,14 @@
  */
 package com.deadormi.servlet;
 
+import com.deadormi.controller.PostController;
+import com.deadormi.entity.Post;
+import com.deadormi.entity.User;
 import java.io.IOException;
+import java.sql.SQLException;
+import java.util.List;
+import java.util.logging.Level;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -19,7 +26,7 @@ import org.apache.log4j.Logger;
 public class HomeServlet extends HttpServlet {
 
     static Logger log = Logger.getLogger(HomeServlet.class);
-    
+
     /**
      * Processes requests for both HTTP
      * <code>GET</code> and
@@ -49,16 +56,28 @@ public class HomeServlet extends HttpServlet {
             throws ServletException, IOException {
         String next = request.getParameter("next");
         HttpSession session = request.getSession();
-        if(next.equals("edit")){
+        User u = (User) session.getAttribute("user");
+        if (next != null && next.equals("edit")) {
             response.sendRedirect("secure/edit_profile.jsp");
-        }
-        else if(next.equals("groups")){
-             response.sendRedirect("GroupsServlet");
-        }
-        else{
+        } else if (next != null && next.equals("groups")) {
+            response.sendRedirect("GroupsServlet");
+        } else if (u != null) {
+            RequestDispatcher rd = request.getRequestDispatcher("secure/home.jsp");
+            PostController pc = new PostController();
+            List<Post> posts;
+            try {
+                posts = pc.post_from_last_login(u);
+                request.setAttribute("posts", posts);
+                rd.forward(request, response);
+            } catch (SQLException ex) {
+                log.warn(ex);
+                response.sendRedirect("Login.jsp");
+            }
+
+        } else {
             response.sendRedirect("Login.jsp");
         }
-        
+
     }
 
     /**

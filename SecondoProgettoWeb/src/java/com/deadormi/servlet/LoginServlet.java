@@ -132,7 +132,7 @@ public class LoginServlet extends HttpServlet {
         if (u != null && !response.isCommitted()) {
             HttpSession session = request.getSession(true);
             session.setAttribute("user", u);
-            response.sendRedirect("secure/home.jsp");
+            response.sendRedirect("HomeServlet");
         } else if(!response.isCommitted()){
             message = "error";
             response.sendRedirect("login.jsp?message_login=" + URLEncoder.encode(message, "UTF-8"));

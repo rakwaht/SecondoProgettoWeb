@@ -30,6 +30,13 @@
             </c:choose>
 
         </div>
+        <div>
+            <c:forEach var="p" items="${posts}">
+                        Post di: <c:out value="${p.writer.username}" /><br />
+                        Testo: <c:out value="${p.text}" /> <br />
+                        <br />
+             </c:forEach>
+        </div>
     </div>
 </div>
 <%@include file="/layout/foot.jsp" %>
