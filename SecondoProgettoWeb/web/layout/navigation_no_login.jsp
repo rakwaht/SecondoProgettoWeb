@@ -11,7 +11,7 @@
                 <span class="icon-bar"></span>
             </button>
 
-            <a class="navbar-brand nav-app-name" href="/SecondoProgettoWeb/secure/home.jsp">
+            <a class="navbar-brand nav-app-name" href="/SecondoProgettoWeb/HomeServlet">
                 <i class="fa fa-coffee m-r" style='font-size: 15px'></i>CoffeClassRoom 2
             </a>
         </div>

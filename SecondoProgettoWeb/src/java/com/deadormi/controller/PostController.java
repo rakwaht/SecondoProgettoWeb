@@ -112,12 +112,13 @@ public class PostController {
             if (fi.isFormField() && fi.getFieldName().equals("testo")) {
                 try {
                     testo = fi.getString("UTF-8");
+                    log.debug("Questo testo è: " + testo);
                 } catch (UnsupportedEncodingException ex) {
                     log.error(ex);
                 }
             }
         }
-        log.debug("parso il testo");
+        
         testo = Parser.checkTesto(request, testo, crew_id_string);
 
         if (testo.trim().equals("")) {

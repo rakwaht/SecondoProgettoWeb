@@ -8,6 +8,13 @@ DROP TABLE secondoprogettoweb.CREW_USER;
 DROP TABLE secondoprogettoweb.CREW;
 DROP TABLE secondoprogettoweb.USER;
 
+#DROP DB E RICREO CON UTF-8
+
+DROP DATABASE secondoprogettoweb;
+CREATE DATABASE secondoprogettoweb
+  DEFAULT CHARACTER SET utf8
+  DEFAULT COLLATE utf8_general_ci;
+
 # USER TABLE CREATION
 
 CREATE TABLE secondoprogettoweb.USER(
