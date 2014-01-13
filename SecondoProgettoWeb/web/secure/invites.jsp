@@ -23,7 +23,7 @@
                             </li>
                     </c:forEach>
                 </ul>
-                <button type='submit' class="btn btn-green btn-lg">Accetta</button>
+                <button type='submit' class="btn btn-green">Accetta</button>
             </form>
         </c:if>
 
