@@ -7,6 +7,9 @@
         <param-name>dburl</param-name>
         <param-value>jdbc:mysql://localhost:3306/secondoprogettoweb</param-value>
     </context-param>
+    <error-page>
+        <location>/error.jsp</location>
+    </error-page>
     <filter>
         <filter-name>SecureFilter</filter-name>
         <filter-class>com.deadormi.filter.SecureFilter</filter-class>
