@@ -25,7 +25,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author Timbu
  */
 public class CloseGroupServlet extends HttpServlet {
-
+   
     /**
      * Processes requests for both HTTP
      * <code>GET</code> and
@@ -84,9 +84,10 @@ public class CloseGroupServlet extends HttpServlet {
             } catch (Exception ex) {
                 response.sendRedirect("/SecondoProgettoWeb/GroupsServlet");
             }
-            if(!crew.isCrew_enabled()||!user.isModerator()){
+            if(!response.isCommitted()  && (crew==null||!crew.isCrew_enabled()||!user.isModerator())){
+                System.out.println("Il gruppo è gia stato chiuso o non sono moderatore!");
                 response.sendRedirect("/SecondoProgettoWeb/GroupsServlet");
-            }
+            }else{
             crew.setCrew_enabled(false);
             try {
                 cc.updateCrew(crew);
@@ -103,6 +104,7 @@ public class CloseGroupServlet extends HttpServlet {
                 Logger.getLogger(CloseGroupServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
             response.sendRedirect("/SecondoProgettoWeb/ShowGroupServlet?id_crew="+ crew.getId());
+            }
         }
         
     }
