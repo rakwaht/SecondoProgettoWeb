@@ -34,6 +34,7 @@
                     <table class="table">
                         <thead>
                             <tr>
+                                <th></th>
                                 <th>Gruppo</th>
                                 <th>Descrizione</th>
                                 <th>Admin</th>
@@ -42,6 +43,12 @@
                         <tbody>
                             <c:forEach var="myg" items="${my_groups}">
                                 <tr>
+                                    <td>
+                                        <c:choose>
+                                            <c:when test="${not myg.crew_enabled}"><i class="fa fa-lock"></i></c:when>
+                                            <c:otherwise></c:otherwise>
+                                        </c:choose>
+                                    </td>
                                     <td><a href="ShowGroupServlet?id_crew=${myg.id}" > ${myg.name}</a></td>
                                     <td>${myg.description}</td>
                                     <td>${myg.admin.username}</td>
@@ -60,6 +67,7 @@
                 <table class="table">
                     <thead>
                         <tr>
+                            <th></th>
                             <th>Gruppo</th>
                             <th>Descrizione</th>
                             <th>Admin</th>
@@ -68,6 +76,12 @@
                     <tbody>
                         <c:forEach var="g" items="${public_groups}">
                             <tr>
+                                <td>
+                                    <c:choose>
+                                        <c:when test="${not g.crew_enabled}"><i class="fa fa-lock"></i></c:when>
+                                        <c:otherwise></c:otherwise>
+                                    </c:choose>
+                                </td>
                                 <td><a href="ShowGroupServlet?id_crew=${g.id}" > ${g.name}</a></td>
                                 <td>${g.description}</td>
                                 <td>${g.admin.username}</td>

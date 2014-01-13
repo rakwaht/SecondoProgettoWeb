@@ -11,10 +11,10 @@
 
             <c:choose>
                 <c:when test="${empty user.avatar_name}">
-                    <img src="${pageContext.request.contextPath}/res/images/default_avatar.png" class="avatar" />
+                    <img src="${pageContext.request.contextPath}/res/images/default_avatar.png" class="avatar" style="margin-top: 20px" />
                 </c:when>
                 <c:otherwise>
-                    <img src="${pageContext.request.contextPath}/resource/avatar/${user.id}_${user.avatar_name}" class="avatar" />
+                    <img src="${pageContext.request.contextPath}/resource/avatar/${user.id}_${user.avatar_name}" class="avatar" style="margin-top: 20px" />
                 </c:otherwise>
             </c:choose>
 
@@ -41,15 +41,18 @@
                 <c:if test="${p.writer.email != user.email}">
                     <div class="row box">
                         <div class="col-md-2">
-                            <!-- AVATAR -->        
-                            <c:choose>
-                                <c:when test="${empty p.writer.avatar_name}">
-                                    <img src="${pageContext.request.contextPath}/res/images/default_avatar.png" class="avatar" />
-                                </c:when>
-                                <c:otherwise>
-                                    <img src="${pageContext.request.contextPath}/resource/avatar/${p.writer.id}_${p.writer.avatar_name}" class="avatar" />
-                                </c:otherwise>
-                            </c:choose>
+                            <div class="center">
+                                <!-- AVATAR -->        
+                                <c:choose>
+                                    <c:when test="${empty p.writer.avatar_name}">
+                                        <img src="${pageContext.request.contextPath}/res/images/default_avatar.png" class="avatar" />
+                                    </c:when>
+                                    <c:otherwise>
+                                        <img src="${pageContext.request.contextPath}/resource/avatar/${p.writer.id}_${p.writer.avatar_name}" class="avatar" />
+                                    </c:otherwise>
+                                </c:choose>
+                                <p>${p.writer.username}</p>
+                            </div>
                         </div>
                         <div class="col-md-10">
 

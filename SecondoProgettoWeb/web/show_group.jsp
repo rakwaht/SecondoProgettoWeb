@@ -36,7 +36,7 @@
                         </a>
                     </c:if> 
                 </div>
-                    
+
                 <div class="col-md-6 green-bg white">
                     <h3>Info</h3>
                     <p>${crew.description}</p>
@@ -70,7 +70,7 @@
         </div>
     </div>
 
-    <div class="container" style="margin-top: 40px">
+    <div class="container" style="margin-top: 20px">
         <div class="row">
             <div class="col-md-12">
 
@@ -99,15 +99,18 @@
                     <div class="row box">
 
                         <div class="col-md-2">
-                            <!-- AVATAR -->        
-                            <c:choose>
-                                <c:when test="${empty p.writer.avatar_name}">
-                                    <img src="${pageContext.request.contextPath}/res/images/default_avatar.png" class="avatar" />
-                                </c:when>
-                                <c:otherwise>
-                                    <img src="${pageContext.request.contextPath}/resource/avatar/${p.writer.id}_${p.writer.avatar_name}" class="avatar" />
-                                </c:otherwise>
-                            </c:choose>
+                            <div class="center">
+                                <!-- AVATAR -->        
+                                <c:choose>
+                                    <c:when test="${empty p.writer.avatar_name}">
+                                        <img src="${pageContext.request.contextPath}/res/images/default_avatar.png" class="avatar" />
+                                    </c:when>
+                                    <c:otherwise>
+                                        <img src="${pageContext.request.contextPath}/resource/avatar/${p.writer.id}_${p.writer.avatar_name}" class="avatar center" />
+                                    </c:otherwise>
+                                </c:choose>
+                                        <p>${p.writer.username}</p>
+                            </div>
                         </div>
                         <div class="col-md-10">
 
@@ -120,7 +123,7 @@
                             <div class="row">
                                 <div class="col-md-5">
                                     <p>
-                                        Scritto da ${p.writer.username} alle ${p.creation_date}
+                                        Scritto alle ${p.creation_date}
                                     </p>
                                 </div>
                                 <div class="col-md-5">

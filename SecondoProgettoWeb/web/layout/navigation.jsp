@@ -29,6 +29,7 @@
             </ul>
 
             <ul class="nav navbar-nav navbar-right">
+                <li><a href="#">${user.username}</a></li>
                 <li><a href="/SecondoProgettoWeb/LogoutServlet"><i class="fa fa-sign-out"></i>&nbsp;&nbsp;Logout</a></li>
             </ul>
 
