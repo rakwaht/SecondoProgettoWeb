@@ -11,6 +11,7 @@ import com.deadormi.controller.UserController;
 import com.deadormi.entity.Crew;
 import com.deadormi.entity.Invite;
 import com.deadormi.entity.User;
+import com.deadormi.util.Mailer;
 import com.deadormi.util.Parser;
 import java.io.IOException;
 import java.net.URLEncoder;
@@ -147,11 +148,35 @@ public class ModifyGroupServlet extends HttpServlet {
                 Integer id_not_follower = Integer.parseInt(not_followers[i]);
                 try {
                     Invite in = new Invite();
+                    User r = uc.findUserbyId(Integer.parseInt(not_followers[i]));
                     in.setCrew(crew);
-                    in.setReceiver(uc.findUserbyId(id_not_follower));
+                    in.setReceiver(r);
                     in.setSender(crew.getAdmin());
                     in.setInvite_enabled(Boolean.TRUE);
                     ic.create_invite(in);
+
+                    // Preparo dati per l'invito via email
+                    Mailer m = new Mailer();
+                    // Oggetto
+                    String subject = "[SecondoProgettoWeb] Hai ricevuto un invito per " + crew.getName();
+
+                    // Messaggio HTML
+                    String button = "<div style=\"background-color: #82c1a9; font-size: 20px; width: 200px; text-align: center; margin: 20px auto; padding: 10px; border-radius: 10px; color: white\">Accetta invito</div>";
+
+                    String link_path = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath();
+                    String link_invites = "<a style='text-decoration:none' href='" + link_path + "/AcceptInviteServlet?id_c=" + in.getCrew().getId();
+                    link_invites += "&e_r=" + r.getEmail() + "'>" + button + "</a>";
+
+                    String text = "<div style='font-size: 16px; font-family:\"Helvetica Neue\", Helvetica, Arial, \"Lucida Grande\", sans-serif;'>";
+                    text += "Ciao " + r.getUsername() + ",<br /><br />";
+                    text += "<b>" + crew.getAdmin().getUsername() + "</b> ti ha invitato a partecipare al gruppo <b>" + crew.getName() + "</b>.<br />";
+                    text += link_invites;
+                    text += "<div style='text-align:center; font-size:14px'>Altrimenti ignora il messaggio.</div>";
+                    text += "</div>";
+
+                    // Invio email: se la email non dovesse essere mandata per errori del server, ecc.
+                    // l'invito non arriva per email
+                    m.sendEmail(r, subject, text);
 
                 } catch (SQLException ex) {
                     log.warn(ex);

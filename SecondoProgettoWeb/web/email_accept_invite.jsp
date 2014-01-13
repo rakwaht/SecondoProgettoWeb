@@ -12,7 +12,6 @@
         <div class="col-md-6 col-md-offset-3">
             <h1>Acceta invito via email</h1>
 
-
             <c:choose>
                 <c:when test="${param.message == 'accepted'}">
                     <p>Hai accetato l'invito al gruppo <b>${crew.name}</b></p>
