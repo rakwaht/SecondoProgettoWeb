@@ -65,7 +65,7 @@
                         <c:if test="${not empty p.files}">
                             File allegati <ul class="files_list">
                                 <c:forEach var="f" items="${p.files}">
-                                    <li><a href="${pageContext.request.contextPath}/resource/files/${crew.id}/${f.id}-${f.name}" target="_blank" >${f.id}-${f.name}</a>
+                                    <li><a href="${pageContext.request.contextPath}/resource/files/${p.crew.id}/${f.id}-${f.name}" target="_blank" >${f.id}-${f.name}</a>
                                     </li>
                                 </c:forEach>
                             </ul>

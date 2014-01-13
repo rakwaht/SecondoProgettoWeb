@@ -113,7 +113,7 @@ label {
     display: block;
     padding: 15px;
     background-color: #ebebeb;
-    margin: 10px;
+    margin: 10px 0px 10px 0px;
 }
 
 .files_list {
