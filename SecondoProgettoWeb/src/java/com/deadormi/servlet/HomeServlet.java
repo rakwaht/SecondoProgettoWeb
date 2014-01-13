@@ -71,11 +71,11 @@ public class HomeServlet extends HttpServlet {
                 rd.forward(request, response);
             } catch (SQLException ex) {
                 log.warn(ex);
-                response.sendRedirect("Login.jsp");
+                response.sendRedirect("login.jsp");
             }
 
         } else {
-            response.sendRedirect("Login.jsp");
+            response.sendRedirect("login.jsp");
         }
 
     }
