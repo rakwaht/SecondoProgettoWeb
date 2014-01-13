@@ -17,7 +17,7 @@ public class Post implements Serializable {
 
     private Integer id;
     private User writer;
-    private Integer id_crew;
+    private Crew crew;
     private String creation_date;
     private String text;
     private ArrayList<Post_File> files;
@@ -38,12 +38,12 @@ public class Post implements Serializable {
         this.id = id;
     }
 
-    public Integer getId_crew() {
-        return id_crew;
+    public Crew getCrew() {
+        return crew;
     }
 
-    public void setId_crew(Integer id_crew) {
-        this.id_crew = id_crew;
+    public void setCrew(Crew crew) {
+        this.crew = crew;
     }
 
     public String getCreation_date() {

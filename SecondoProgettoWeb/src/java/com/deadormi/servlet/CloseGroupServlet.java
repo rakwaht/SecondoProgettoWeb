@@ -90,7 +90,7 @@ public class CloseGroupServlet extends HttpServlet {
                 Logger.getLogger(CloseGroupServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
             post.setCreation_date(CurrentDate.getCurrentDate());
-            post.setId_crew(crew.getId());
+            post.setCrew(crew);
             post.setText("Questo gruppo è stato chiuso da un amministratore!");
             post.setWriter(user);
             try {

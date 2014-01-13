@@ -8,16 +8,16 @@
     <div class="row">
         <div class="col-lg-3">
             <!-- AVATAR -->
-            
-                <c:choose>
-                    <c:when test="${empty user.avatar_name}">
-                        <img src="${pageContext.request.contextPath}/res/images/default_avatar.png" class="avatar" />
-                    </c:when>
-                    <c:otherwise>
-                        <img src="${pageContext.request.contextPath}/resource/avatar/${user.id}_${user.avatar_name}" class="avatar" />
-                    </c:otherwise>
-                </c:choose>
-            
+
+            <c:choose>
+                <c:when test="${empty user.avatar_name}">
+                    <img src="${pageContext.request.contextPath}/res/images/default_avatar.png" class="avatar" />
+                </c:when>
+                <c:otherwise>
+                    <img src="${pageContext.request.contextPath}/resource/avatar/${user.id}_${user.avatar_name}" class="avatar" />
+                </c:otherwise>
+            </c:choose>
+
         </div>
         <div class="col-lg-9">
             <c:choose>
@@ -29,14 +29,54 @@
                 </c:otherwise>
             </c:choose>
 
-        </div>
-        <div>
-            <c:forEach var="p" items="${posts}">
-                        Post di: <c:out value="${p.writer.username}" /><br />
-                        Testo: <c:out value="${p.text}" /> <br />
-                        <br />
-             </c:forEach>
-        </div>
+        </div>   
     </div>
+
+
+    <c:forEach var="p" items="${posts}">
+
+        <div class="row box">
+            <div class="col-md-2">
+                <!-- AVATAR -->        
+                <c:choose>
+                    <c:when test="${empty p.writer.avatar_name}">
+                        <img src="${pageContext.request.contextPath}/res/images/default_avatar.png" class="avatar" />
+                    </c:when>
+                    <c:otherwise>
+                        <img src="${pageContext.request.contextPath}/resource/avatar/${p.writer.id}_${p.writer.avatar_name}" class="avatar" />
+                    </c:otherwise>
+                </c:choose>
+            </div>
+            <div class="col-md-10">
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <p><c:out value="${p.text}" escapeXml="false" /></p>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-5">
+                        <p>
+                            Scritto da ${p.writer.username} alle ${p.creation_date} in <a href="ShowGroupServlet?id_crew=${p.crew.id}">${p.crew.name}</a>
+                        </p>
+                    </div>
+                    <div class="col-md-5">
+                        <c:if test="${not empty p.files}">
+                            File allegati <ul class="files_list">
+                                <c:forEach var="f" items="${p.files}">
+                                    <li><a href="${pageContext.request.contextPath}/resource/files/${crew.id}/${f.id}-${f.name}" target="_blank" >${f.id}-${f.name}</a>
+                                    </li>
+                                </c:forEach>
+                            </ul>
+                        </c:if>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </c:forEach>
+
+
 </div>
 <%@include file="/layout/foot.jsp" %>

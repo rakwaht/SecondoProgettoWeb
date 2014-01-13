@@ -48,6 +48,7 @@ public class PostController {
         ArrayList<Post> result = new ArrayList<Post>();
         UserController uc = new UserController();
         FileController fc = new FileController();
+        CrewController cc = new CrewController();
         try {
             stm.setInt(1, crew_id);
             ResultSet rs = stm.executeQuery();
@@ -56,7 +57,7 @@ public class PostController {
                     Post p = new Post();
                     p.setCreation_date(rs.getString("creation_date"));
                     p.setId(rs.getInt("id"));
-                    p.setId_crew(rs.getInt("id_crew"));
+                    p.setCrew(cc.find_crew_by_id(rs.getInt("id_crew")));
                     p.setWriter(uc.findUserbyId(rs.getInt("id_writer")));
                     p.setText(rs.getString("text"));
                     p.setFiles(fc.getFileByPostId(p.getId()));
@@ -118,7 +119,7 @@ public class PostController {
                 }
             }
         }
-        
+
         testo = Parser.checkTesto(request, testo, crew_id_string);
 
         if (testo.trim().equals("")) {
@@ -172,16 +173,16 @@ public class PostController {
 
     public void createCloseGroupPost(Post post) throws SQLException {
         PreparedStatement stm = con.prepareStatement("INSERT INTO secondoprogettoweb.POST (id_writer,id_crew,creation_date,text) VALUES (?,?,?,?)");
-       try {
+        try {
             stm.setInt(1, post.getWriter().getId());
-            stm.setInt(2, post.getId_crew());
-            stm.setString(3,post.getCreation_date());
+            stm.setInt(2, post.getCrew().getId());
+            stm.setString(3, post.getCreation_date());
             stm.setString(4, post.getText());
             stm.executeUpdate();
-       }finally{
-           stm.close();
-       }
-            
+        } finally {
+            stm.close();
+        }
+
     }
 
     public List<Post> post_from_last_login(User u) throws SQLException {
@@ -189,17 +190,18 @@ public class PostController {
         PostController pc = new PostController();
         List<Crew> user_groups = cc.findCrewsByUserId(u.getId());
         List<Post> result = new ArrayList();
-        for(int i=0; i<user_groups.size(); i++){
-            result.addAll(pc.getPostByCrewIdAndDate(user_groups.get(i).getId(),u.getLast_login_date()));
+        for (int i = 0; i < user_groups.size(); i++) {
+            result.addAll(pc.getPostByCrewIdAndDate(user_groups.get(i).getId(), u.getLast_login_date()));
         }
         return result;
     }
 
     private List<Post> getPostByCrewIdAndDate(Integer id, String last_login_date) throws SQLException {
-         PreparedStatement stm = con.prepareStatement("SELECT * FROM secondoprogettoweb.post WHERE id_crew=? AND creation_date>? ORDER BY id DESC");
+        PreparedStatement stm = con.prepareStatement("SELECT * FROM secondoprogettoweb.post WHERE id_crew=? AND creation_date>? ORDER BY id DESC");
         ArrayList<Post> result = new ArrayList<Post>();
         UserController uc = new UserController();
         FileController fc = new FileController();
+        CrewController cc = new CrewController();
         try {
             stm.setInt(1, id);
             stm.setString(2, last_login_date);
@@ -209,7 +211,7 @@ public class PostController {
                     Post p = new Post();
                     p.setCreation_date(rs.getString("creation_date"));
                     p.setId(rs.getInt("id"));
-                    p.setId_crew(rs.getInt("id_crew"));
+                    p.setCrew(cc.find_crew_by_id(rs.getInt("id_crew")));
                     p.setWriter(uc.findUserbyId(rs.getInt("id_writer")));
                     p.setText(rs.getString("text"));
                     p.setFiles(fc.getFileByPostId(p.getId()));
