@@ -74,18 +74,23 @@
         <div class="row">
             <div class="col-md-12">
 
-                <c:if test="${user_can_edit && crew.crew_enabled}">  
-                    <c:choose>
-                        <c:when test="${param.error == '1'}">
-                            <p>I file caricati superano il peso totale massimo (10MB)!</p>
-                        </c:when>
-                        <c:when test="${param.error == '2'}">
-                            <p>Campo di testo vuoto!</p>
-                        </c:when>
-                        <c:when test="${param.error == '3'}">
-                            <p>Hai superato il limite massimo di parole!</p>
-                        </c:when>
-                    </c:choose>
+                <c:if test="${user_can_edit && crew.crew_enabled}"> 
+
+                    <c:if test="${not empty param.error}">
+                        <div class="alert alert-danger">
+                            <c:choose>
+                                <c:when test="${param.error == '1'}">
+                                    <p>I file caricati superano il peso totale massimo (10MB)!</p>
+                                </c:when>
+                                <c:when test="${param.error == '2'}">
+                                    <p>Campo di testo vuoto!</p>
+                                </c:when>
+                                <c:when test="${param.error == '3'}">
+                                    <p>Hai superato il limite massimo di parole!</p>
+                                </c:when>
+                            </c:choose>
+                        </div>
+                    </c:if>
 
                     <form method='POST' action='secure/NewPostServlet?id_crew=${crew.id}' enctype='multipart/form-data' accept-charset="UTF-8">
                         <textarea class="form-control" id="testo" rows="3" name="testo" type='text' placeholder="Scrivi un post"></textarea><br />
@@ -109,7 +114,7 @@
                                         <img src="${pageContext.request.contextPath}/resource/avatar/${p.writer.id}_${p.writer.avatar_name}" class="avatar center" />
                                     </c:otherwise>
                                 </c:choose>
-                                        <p>${p.writer.username}</p>
+                                <p>${p.writer.username}</p>
                             </div>
                         </div>
                         <div class="col-md-10">

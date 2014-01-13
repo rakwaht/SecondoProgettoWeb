@@ -7,6 +7,13 @@
             <div class="box">
                 <h1>Modifica gruppo <a href="/SecondoProgettoWeb/ShowGroupServlet?id_crew=${crew.id}">${crew.name}</a></h1>
 
+                <!-- error messages -->
+                <c:if test="${param.message_editgroup == 'empty_params'}">
+                    <div class="alert alert-danger">
+                        Nome e/o descrizione obbligatorie!               
+                    </div>
+                </c:if>
+
                 <form method="post" action="ModifyGroupServlet?id_crew=${crew.id}" role="form">  
                     <div class="form-group">
                         <label>Nome</label>
@@ -64,15 +71,6 @@
                             <button type="reset" class="btn btn-default">Reset</button>
                         </p>
                 </form>
-
-                <!-- error messages -->
-                <p>
-                    <c:choose>
-                        <c:when test="${param.message_editgroup == 'empty_params'}">
-                            Nome e/o descrizione obbligatorie!
-                        </c:when>
-                    </c:choose>
-                </p>
 
             </div>
         </div>

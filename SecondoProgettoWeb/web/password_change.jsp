@@ -28,13 +28,12 @@
             <c:choose>
                 <c:when test="${param.message_password == 'password_changed'}">
                     <div class="alert alert-success">
-
                         <p>Password cambiata con successo. <a href='login.jsp'>Entra</a>.</p>
                     </div>
                 </c:when>
                 <c:when test="${param.message_password == 'password_not_valid'}">
-                    <div class="alert alert-error">
-                        <p>Nuova password non valida. Le password devono coincidere ed essere di lunghezza minima 5 caratteri.</p>
+                    <div class="alert alert-danger">
+                        Nuova password non valida. Le password devono coincidere ed essere di lunghezza minima 5 caratteri.
                     </div>
                 </c:when>
             </c:choose>

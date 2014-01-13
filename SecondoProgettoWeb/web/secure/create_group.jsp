@@ -6,8 +6,12 @@
         <div class="col-md-6 col-md-offset-3">
             <div class="box">
                 <h1>Crea qui il tuo fantastico gruppo!</h1>
+
+                <!-- error messages -->
                 <c:if test="${param.message_newgroup == 'empty_params'}">
-                    <p>Nome e/o descrizione obbligatorie!</p>
+                    <div class="alert alert-danger">
+                        Nome e/o descrizione obbligatorie!               
+                    </div>
                 </c:if>
 
                 <form method="post" action="NewGroupServlet" role="form">
@@ -32,7 +36,7 @@
                             </c:forEach>
                         </ul>
                     </c:if>
-                   
+
                     <button type="submit" class="btn btn-green">Crea</button>
                     <button type="reset" class="btn btn-default">Reset</button>
                 </form>
