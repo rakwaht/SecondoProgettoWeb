@@ -31,7 +31,7 @@
                         <ul class="list-group">
                             <c:forEach var="u" items="${users}">
                                 <li class="list-group-item">
-                                    <input type="checkbox" name="users" value="${u.id}" /> ${u.username}
+                                    <input type="checkbox" name="users" value="${u.id}" /> <c:out value="${u.username}"></c:out>
                                 </li>
                             </c:forEach>
                         </ul>
