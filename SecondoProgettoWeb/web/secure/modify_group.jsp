@@ -5,8 +5,7 @@
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
             <div class="box">
-                <h1>Modifica gruppo ${crew.name}</h1>
-                <a href="/SecondoProgettoWeb/ShowGroupServlet?id_crew=${crew.id}">Torna al gruppo</a>
+                <h1>Modifica gruppo <a href="/SecondoProgettoWeb/ShowGroupServlet?id_crew=${crew.id}">${crew.name}</a></h1>
 
                 <form method="post" action="ModifyGroupServlet?id_crew=${crew.id}" role="form">  
                     <div class="form-group">
@@ -60,9 +59,10 @@
                                 </c:forEach>
                             </ul>
                         </c:if>
-
-                        <button type='submit' class="btn btn-green">Modifica</button>
-                        <button type="reset" class="btn btn-default">Reset</button>
+                        <p style="margin-top: 20px">
+                            <button type='submit' class="btn btn-green">Modifica</button>
+                            <button type="reset" class="btn btn-default">Reset</button>
+                        </p>
                 </form>
 
                 <!-- error messages -->

@@ -23,11 +23,11 @@
                     <input type='radio' name='type' value='private' /> privato
                     <br /><br /> 
                     <c:if test="${not empty users}">
-                        <p>Invita utenti<p/>
+                        <p>Invita utenti</p>
                         <ul class="list-group">
                             <c:forEach var="u" items="${users}">
                                 <li class="list-group-item">
-                                    <input type="checkbox" name="users" value="${u.id}" /> <c:out value="${u.username}" />
+                                    <input type="checkbox" name="users" value="${u.id}" /> ${u.username}
                                 </li>
                             </c:forEach>
                         </ul>

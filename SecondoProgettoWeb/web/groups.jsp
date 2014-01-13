@@ -31,22 +31,50 @@
             <c:if test="${not empty user}">
                 <div class="box">
                     <h2>Gruppi ai quali sei iscritto</h2>
-                    <c:forEach var="myg" items="${my_groups}">
-                        <a href="ShowGroupServlet?id_crew=${myg.id}" ><c:out value="${myg.name}" /></a>
-                        Admin: <c:out value="${myg.admin.username}" />
-                        <br />
-                    </c:forEach>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Gruppo</th>
+                                <th>Descrizione</th>
+                                <th>Admin</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <c:forEach var="myg" items="${my_groups}">
+                                <tr>
+                                    <td><a href="ShowGroupServlet?id_crew=${myg.id}" > ${myg.name}</a></td>
+                                    <td>${myg.description}</td>
+                                    <td>${myg.admin.username}</td>
+                                </tr>
+
+                            </c:forEach>
+
+                        </tbody>
+                    </table>
                 </div>
             </c:if>
         </div>
         <div class="col-md-6">
             <div class="box">
                 <h2>Gruppi pubblici</h2>
-                <c:forEach var="g" items="${public_groups}">
-                    <a href="ShowGroupServlet?id_crew=${g.id}" ><c:out value="${g.name}" /></a>
-                    Admin: <c:out value="${g.admin.username}" />
-                    <br />
-                </c:forEach>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Gruppo</th>
+                            <th>Descrizione</th>
+                            <th>Admin</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <c:forEach var="g" items="${public_groups}">
+                            <tr>
+                                <td><a href="ShowGroupServlet?id_crew=${g.id}" > ${g.name}</a></td>
+                                <td>${g.description}</td>
+                                <td>${g.admin.username}</td>
+                            </tr>
+                        </c:forEach>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
