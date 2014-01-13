@@ -77,10 +77,14 @@ public class CloseGroupServlet extends HttpServlet {
         User user = (User)request.getSession().getAttribute("user");
         Crew crew = null;
         Post post = new Post();
+        
         if(id_crew!=null){
             try {
                 crew = cc.find_crew_by_id(Integer.parseInt(id_crew));
             } catch (Exception ex) {
+                response.sendRedirect("/SecondoProgettoWeb/GroupsServlet");
+            }
+            if(!crew.isCrew_enabled()||!user.isModerator()){
                 response.sendRedirect("/SecondoProgettoWeb/GroupsServlet");
             }
             crew.setCrew_enabled(false);

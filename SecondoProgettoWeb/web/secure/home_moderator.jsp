@@ -19,7 +19,7 @@
         <tbody>
             <c:forEach var="m" items="${moderatordtos}">
                 <tr>
-                    <td><c:out value="${m.crew.name}" /></td>
+                    <td><a href="/SecondoProgettoWeb/ShowGroupServlet?id_crew=${m.crew.id}"><c:out value="${m.crew.name}" /></a></td>
                     <td>
                         <!-- AVATAR -->
                         <p>
@@ -56,8 +56,10 @@
                             </c:otherwise>
                         </c:choose>
                     </td>
-                    <td><a href="/SecondoProgettoWeb/ShowGroupServlet?id_crew=${m.crew.id}">Vai a Gruppo</a></td>
-                </tr>
+                    <c:if test="${m.crew.crew_enabled}">
+                    <td><a href="/SecondoProgettoWeb/secure/CloseGroupServlet?id_crew=${m.crew.id}">Chiudi</a></td>
+                    </c:if>
+                    </tr>
             </c:forEach>
         </tbody>
     </table>   
