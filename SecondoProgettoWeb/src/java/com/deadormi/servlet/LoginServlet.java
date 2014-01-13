@@ -103,6 +103,9 @@ public class LoginServlet extends HttpServlet {
                     //torna a login con messaggio di errore
                     message = "email_elready_exists";
                     response.sendRedirect("login.jsp?message_registration=" + URLEncoder.encode(message, "UTF-8"));
+                }else if(Parser.isHTML(username)){
+                     message = "html";
+                    response.sendRedirect("login.jsp?message_registration=" + URLEncoder.encode(message, "UTF-8"));
                 }
                 else {
                     //ok registro il nuovo utente

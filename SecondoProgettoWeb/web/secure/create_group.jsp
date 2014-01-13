@@ -13,6 +13,11 @@
                         Nome e/o descrizione obbligatorie!               
                     </div>
                 </c:if>
+                <c:if test="${param.message_newgroup == 'html'}">
+                    <div class="alert alert-danger">
+                        E' presente HTML nei campi! (Rimuovi il codice).            
+                    </div>
+                </c:if>
 
                 <form method="post" action="NewGroupServlet" role="form">
                     <div class="form-group">

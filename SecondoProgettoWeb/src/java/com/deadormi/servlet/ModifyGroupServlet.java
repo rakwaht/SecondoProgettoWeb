@@ -163,6 +163,9 @@ public class ModifyGroupServlet extends HttpServlet {
             //ERROR
             String message = "empty_params";
             response.sendRedirect("ModifyGroupServlet?id_crew=" + crew.getId() + "&message_editgroup=" + URLEncoder.encode(message, "UTF-8"));
+        } else if (Parser.isHTML(title) || Parser.isHTML(description)) {
+            String message = "html";
+            response.sendRedirect("ModifyGroupServlet?id_crew=" + crew.getId() + "&message_editgroup=" + URLEncoder.encode(message, "UTF-8"));
         } else {
             crew.setDescription(description);
             crew.setName(title);

@@ -22,6 +22,14 @@ public class Parser {
 
     static Logger log = Logger.getLogger(Parser.class);
 
+    public static boolean isHTML(String name) {
+         
+          Pattern pattern = Pattern.compile(".*\\<[^>]+>.*");
+          Matcher matcher = pattern.matcher(name);
+           log.debug("Sono nel check HTML! " + name + "   -->" + matcher.matches() );
+          return matcher.matches();
+    }
+
     private Pattern pattern;
     private Matcher matcher;
     private static final String EMAIL_PATTERN =
