@@ -15,6 +15,7 @@ import com.deadormi.entity.User;
 import com.deadormi.util.CurrentDate;
 import com.deadormi.util.Mailer;
 import com.deadormi.util.Md5;
+import com.deadormi.util.Parser;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.URLEncoder;
@@ -116,7 +117,13 @@ public class NewGroupServlet extends HttpServlet {
             //torna a login con messaggio di errore
             String message = "empty_params";
             response.sendRedirect("NewGroupServlet?message_newgroup=" + URLEncoder.encode(message, "UTF-8"));
-        } else {
+        } else if(Parser.isHTML(name)||Parser.isHTML(description)){
+            
+            String message = "html";
+            response.sendRedirect("NewGroupServlet?message_newgroup=" + URLEncoder.encode(message, "UTF-8"));
+        }
+        
+        else {
             //ok registro il nuovo gruppo
             Crew c = new Crew();
             c.setAdmin(u);

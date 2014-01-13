@@ -18,7 +18,7 @@
                 <h1>Lista gruppi</h1>
             </c:when>
             <c:otherwise>
-                <h1>Gruppi di ${user.username}! </h1><br />
+                <h1>Gruppi di <c:out value="${user.username}"></c:out>! </h1><br />
                 <a href="secure/NewGroupServlet">
                     <button type="button" class="btn btn-green">Nuovo gruppo</button>
                 </a>
@@ -49,9 +49,9 @@
                                             <c:otherwise></c:otherwise>
                                         </c:choose>
                                     </td>
-                                    <td><a href="ShowGroupServlet?id_crew=${myg.id}" > ${myg.name}</a></td>
-                                    <td>${myg.description}</td>
-                                    <td>${myg.admin.username}</td>
+                                    <td><a href="ShowGroupServlet?id_crew=${myg.id}" > <c:out value="${myg.name}"></c:out></a></td>
+                                    <td><c:out value="${myg.description}"></c:out></td>
+                                    <td><c:out value="${myg.admin.username}"></c:out></td>
                                 </tr>
 
                             </c:forEach>
@@ -82,7 +82,7 @@
                                         <c:otherwise></c:otherwise>
                                     </c:choose>
                                 </td>
-                                <td><a href="ShowGroupServlet?id_crew=${g.id}" > ${g.name}</a></td>
+                                <td><a href="ShowGroupServlet?id_crew=${g.id}" > <c:out value="${g.name}"></c:out></a></td>
                                 <td>${g.description}</td>
                                 <td>${g.admin.username}</td>
                             </tr>

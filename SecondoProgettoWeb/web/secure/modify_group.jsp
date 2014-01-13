@@ -5,12 +5,17 @@
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
             <div class="box">
-                <h1>Modifica gruppo <a href="/SecondoProgettoWeb/ShowGroupServlet?id_crew=${crew.id}">${crew.name}</a></h1>
+                <h1>Modifica gruppo <a href="/SecondoProgettoWeb/ShowGroupServlet?id_crew=${crew.id}"><c:out value="${crew.name}"></c:out></a></h1>
 
                 <!-- error messages -->
                 <c:if test="${param.message_editgroup == 'empty_params'}">
                     <div class="alert alert-danger">
                         Nome e/o descrizione obbligatorie!               
+                    </div>
+                </c:if>
+                <c:if test="${param.message_editgroup == 'html'}">
+                    <div class="alert alert-danger">
+                       E' presente HTML nei campi!              
                     </div>
                 </c:if>
 
@@ -21,7 +26,7 @@
                     </div>
                     <div class="form-group">
                         <label>Descrizione</label>
-                        <textarea type='text' name='description' class="form-control">${crew.description}</textarea>
+                        <textarea type='text' name='description' class="form-control"><c:out value="${crew.description}"></c:out></textarea>
                     </div>
 
                     <c:choose>
@@ -42,7 +47,7 @@
                         <ul class="list-group">
                             <c:forEach var="followers" items="${followers}">
                                 <li class="list-group-item">
-                                    <input type='checkbox' name='followers'value='${followers.id}'/> ${followers.username}
+                                    <input type='checkbox' name='followers'value='${followers.id}'/> <c:out value="${followers.username}"></c:out>
                                 </li>
                             </c:forEach>
                         </ul>
@@ -52,7 +57,7 @@
                         <ul class="list-group">
                             <c:forEach var="not_followers" items="${not_followers}">
                                 <li class="list-group-item">
-                                    <input type='checkbox' name='not_followers'value='${not_followers.id}'/> ${not_followers.username}<br/>
+                                    <input type='checkbox' name='not_followers'value='${not_followers.id}'/> <c:out value="${not_followers.username}"></c:out><br/>
                                 </li>
                             </c:forEach>
                         </c:if>        
@@ -61,7 +66,7 @@
                             <ul class="list-group">
                                 <c:forEach var="invited" items="${invited}">
                                     <li class="list-group-item">
-                                        ${invited.username}
+                                        <c:out value="${invited.username}"></c:out>
                                     </li>
                                 </c:forEach>
                             </ul>

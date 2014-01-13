@@ -13,6 +13,11 @@
                         Nome e/o descrizione obbligatorie!               
                     </div>
                 </c:if>
+                <c:if test="${param.message_newgroup == 'html'}">
+                    <div class="alert alert-danger">
+                        E' presente HTML nei campi! (Rimuovi il codice).            
+                    </div>
+                </c:if>
 
                 <form method="post" action="NewGroupServlet" role="form">
                     <div class="form-group">
@@ -31,7 +36,7 @@
                         <ul class="list-group">
                             <c:forEach var="u" items="${users}">
                                 <li class="list-group-item">
-                                    <input type="checkbox" name="users" value="${u.id}" /> ${u.username}
+                                    <input type="checkbox" name="users" value="${u.id}" /> <c:out value="${u.username}"></c:out>
                                 </li>
                             </c:forEach>
                         </ul>

@@ -22,10 +22,10 @@
         <div class="col-lg-9">
             <c:choose>
                 <c:when test="${empty user.last_login_date}">
-                    <h1>Benvenuto, ${user.username}! </h1>
+                    <h1>Benvenuto, <c:out value="${user.username}"></c:out>! </h1>
                 </c:when>
                 <c:otherwise>
-                    <h1>Bentornato, ${user.username}! </h1><p>È da ${user.last_login_date} che non ci vediamo.<p />
+                    <h1>Bentornato, <c:out value="${user.username}"></c:out>! </h1><p>È da <c:out value="${user.last_login_date}"></c:out> che non ci vediamo.<p />
                 </c:otherwise>
             </c:choose>
 
@@ -51,7 +51,7 @@
                                         <img src="${pageContext.request.contextPath}/resource/avatar/${p.writer.id}_${p.writer.avatar_name}" class="avatar" />
                                     </c:otherwise>
                                 </c:choose>
-                                <p>${p.writer.username}</p>
+                                <p><c:out value="${p.writer.username}"></c:out></p>
                             </div>
                         </div>
                         <div class="col-md-10">
@@ -65,7 +65,7 @@
                             <div class="row">
                                 <div class="col-md-5">
                                     <p>
-                                        Scritto da ${p.writer.username} alle ${p.creation_date} in <a href="ShowGroupServlet?id_crew=${p.crew.id}">${p.crew.name}</a>
+                                        Scritto da <c:out value="${p.writer.username}"></c:out> alle <c:out value="${p.creation_date}"></c:out> in <a href="ShowGroupServlet?id_crew=<c:out value="${p.crew.id}"></c:out>"><c:out value="${p.crew.name}"></c:out></a>
                                     </p>
                                 </div>
                                 <div class="col-md-5">

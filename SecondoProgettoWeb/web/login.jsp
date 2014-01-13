@@ -62,6 +62,9 @@
                                         <c:when test="${param.message_registration == 'email_elready_exists'}">
                                             Email già registrata!
                                         </c:when>
+                                        <c:when test="${param.message_registration == 'html'}">
+                                            Hai usato HTML nell'username!
+                                        </c:when>
                                     </c:choose>
                                 </div>
                             </c:if>
@@ -93,7 +96,7 @@
         <div class="section purple-bg center" style="min-height: 200px">
             <h2 class="white">Just gotta have a Coffee.<i class="fa fa-coffee m-l"></i></h2>
         </div>
-        
+
     </c:when>
     <c:otherwise>
         <c:redirect url="/secure/home.jsp"/>
