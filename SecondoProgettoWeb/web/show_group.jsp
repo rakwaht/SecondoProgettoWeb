@@ -97,6 +97,21 @@
                         <input type='file' name='file' onchange='add_upload_file();' /> <br />
                         <button type='submit' class="btn btn-green btn-lg">Invia</button>
                     </form>
+                    
+                   <div style="background-color: red;">
+                        <div id='scelte'>
+                            <c:forEach var="p" items="${posts}">
+                                    <c:forEach var="f" items="${p.files}">
+                                        <div>
+                                            <input type='checkbox' value="${f.id}-${f.name}" name='file' value='file'>
+                                            <label>${f.id}-${f.name}</label>
+                                        </div><br/>
+                                    </c:forEach>        
+                            </c:forEach>
+                            <button type='button' value='Linka Selezionati' onclick='linka_selezionati()' >Linka Selezionati</button>
+                            <button type='button' value='QR Selezionati' onclick='qr_selezionati()' >QR Selezionati</button>
+                        </div>
+                    </div>
                 </c:if>
 
                 <c:forEach var="p" items="${posts}">

@@ -39,3 +39,23 @@ $(document).ready(function() {
         $("#files-toggle").toggle("slow");
     });
 });
+
+
+//linko i file nei post
+function linka_selezionati() {
+    $('#scelte :checked').each(function() {
+        var link = '$$' + $(this).val().toString() + '$$';
+        var textarea = $('#testo');
+        textarea.val(textarea.val() + ' ' + link);
+    });
+}
+
+
+//qr dei file nei post
+function qr_selezionati() {
+    $('#scelte :checked').each(function() {
+        var link = '$QR$' + $(this).val().toString() + '$$';
+        var textarea = $('#testo');
+        textarea.val(textarea.val() + ' ' + link);
+    });
+}
