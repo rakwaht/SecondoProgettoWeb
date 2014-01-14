@@ -116,7 +116,7 @@ public class JspFilter implements Filter {
         System.out.println("Request page= " + request_page);
         
         //uniche due pagine accessibili direttamente da url. Il caso vuoto è quando parte il progetto con solo context path
-        if (request_page.equals("edit_profile.jsp") || request_page.equals("login.jsp") || request_page.equals("") ) {
+        if (request_page.equals("password_change.jsp") ||request_page.equals("password_recovery.jsp") || request_page.equals("edit_profile.jsp") || request_page.equals("login.jsp") || request_page.equals("") ) {
             try {
                 chain.doFilter(request, response);
             } catch (Throwable t) {
