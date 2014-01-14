@@ -59,6 +59,10 @@
                     <c:if test="${m.crew.crew_enabled}">
                     <td><a href="/SecondoProgettoWeb/secure/CloseGroupServlet?id_crew=${m.crew.id}">Chiudi</a></td>
                     </c:if>
+                    <c:if test="${!m.crew.crew_enabled}">
+                        <td><i class='fa fa-lock'></i></td>
+                     
+                    </c:if>
                     </tr>
             </c:forEach>
         </tbody>
