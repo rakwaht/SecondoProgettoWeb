@@ -8,7 +8,7 @@ DROP TABLE secondoprogettoweb.CREW_USER;
 DROP TABLE secondoprogettoweb.CREW;
 DROP TABLE secondoprogettoweb.USER;
 
-#DROP DB E RICREO CON UTF-8
+# DROP DB E RICREO CON UTF-8
 
 DROP DATABASE secondoprogettoweb;
 CREATE DATABASE secondoprogettoweb
