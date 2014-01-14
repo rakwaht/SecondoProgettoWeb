@@ -22,7 +22,7 @@ public class Mailer {
 
         final String email_to = u.getEmail();
         final String username = "deadormi@gmail.com";
-        final String password = "diomerda";
+        final String password = "deadormi";
 
         Properties props = new Properties();
         props.put("mail.smtp.auth", "true");
