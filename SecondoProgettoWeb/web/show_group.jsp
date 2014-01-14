@@ -38,7 +38,7 @@
                 </div>
 
                 <div class="col-md-6 green-bg white">
-                    <h3>Info</h3>
+                    <h3><i class="fa fa-info-circle"></i>&nbsp;Info</h3>
                     <p>${crew.description}</p>
                     <p>Admin: ${crew.admin.username}</p>
                     <p>Data creazione: ${crew.creation_date}</p>
@@ -94,24 +94,28 @@
 
                     <form method='POST' action='secure/NewPostServlet?id_crew=${crew.id}' enctype='multipart/form-data' accept-charset="UTF-8">
                         <textarea class="form-control" id="testo" rows="3" name="testo" type='text' placeholder="Scrivi un post"></textarea><br />
+
                         <input type='file' name='file' onchange='add_upload_file();' /> <br />
-                        <button type='submit' class="btn btn-green btn-lg">Invia</button>
-                    </form>
-                    
-                   <div style="background-color: red;">
-                        <div id='scelte'>
-                            <c:forEach var="p" items="${posts}">
+
+                        <div >
+                            <div id='scelte'>
+                                <c:forEach var="p" items="${posts}">
                                     <c:forEach var="f" items="${p.files}">
                                         <div>
                                             <input type='checkbox' value="${f.id}-${f.name}" name='file' value='file'>
                                             <label>${f.id}-${f.name}</label>
-                                        </div><br/>
+                                        </div>
                                     </c:forEach>        
-                            </c:forEach>
-                            <button type='button' value='Linka Selezionati' onclick='linka_selezionati()' >Linka Selezionati</button>
-                            <button type='button' value='QR Selezionati' onclick='qr_selezionati()' >QR Selezionati</button>
+                                </c:forEach>
+                                
+                            </div>
                         </div>
-                    </div>
+                        <button type='button' class="btn btn-wine btn-small" value='Linka Selezionati' onclick='linka_selezionati()' ><i class="fa fa-paperclip"></i>&nbsp;Linka Selezionati</button>
+                                <button type='button' class="btn btn-wine btn-small" value='QR Selezionati' onclick='qr_selezionati()' ><i class="fa fa-qrcode"></i>&nbsp;QR Selezionati</button>
+                        <button type='submit' class="btn btn-green btn-lg">Invia</button>
+                    </form>
+
+
                 </c:if>
 
                 <c:forEach var="p" items="${posts}">

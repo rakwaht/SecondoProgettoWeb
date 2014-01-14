@@ -22,7 +22,7 @@
                
                 <li><a href="/SecondoProgettoWeb/HomeServlet?next=groups">Gruppi&nbsp;&nbsp;<i class="fa fa-users" ></i></a></li>
                 <li><a href="/SecondoProgettoWeb/secure/InviteServlet">Inviti&nbsp;&nbsp;<i class="fa fa-envelope"></i></a></li>
-                <li><a href="/SecondoProgettoWeb/HomeServlet?next=edit">Profilo&nbsp;&nbsp;<i class="fa fa-smile-o" ></i></a></li>
+                <li><a href="/SecondoProgettoWeb/HomeServlet?next=edit">Profilo&nbsp;&nbsp;<i class="fa fa-male" ></i></a></li>
                 <c:if test="${user.moderator}">
                     <li><a href="/SecondoProgettoWeb/secure/ModeratorServlet">Pagina moderatore&nbsp;&nbsp;<i class="fa fa-search" ></i></a></li>
                 </c:if>
