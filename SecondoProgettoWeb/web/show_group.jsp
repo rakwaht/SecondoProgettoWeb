@@ -96,7 +96,7 @@
                         <textarea class="form-control" id="testo" rows="3" name="testo" type='text' placeholder="Scrivi un post"></textarea><br />
 
                         <input type='file' name='file' onchange='add_upload_file();' /> <br />
-
+                        
                         <div >
                             <div id='scelte'>
                                 <c:forEach var="p" items="${posts}">
@@ -110,9 +110,12 @@
                                 
                             </div>
                         </div>
+                        
+                        <c:if test="${have_file}">
                         <button type='button' class="btn btn-wine btn-small" value='Linka Selezionati' onclick='linka_selezionati()' ><i class="fa fa-paperclip"></i>&nbsp;Linka Selezionati</button>
                                 <button type='button' class="btn btn-wine btn-small" value='QR Selezionati' onclick='qr_selezionati()' ><i class="fa fa-qrcode"></i>&nbsp;QR Selezionati</button>
-                        <button type='submit' class="btn btn-green btn-lg">Invia</button>
+                        </c:if>
+                                <button type='submit' class="btn btn-green btn-lg">Invia</button>
                     </form>
 
 

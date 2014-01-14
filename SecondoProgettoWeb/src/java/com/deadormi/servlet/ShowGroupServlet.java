@@ -103,6 +103,14 @@ public class ShowGroupServlet extends HttpServlet {
                         }
                         request.setAttribute("crew", crew);
                         request.setAttribute("posts", posts);
+                        Boolean have_file = false;
+                        for(int i=0; i<posts.size() ; i++){
+                            if(posts.get(i).getFiles().size()>0){
+                                have_file=true;
+                            }
+                        }
+                        
+                        request.setAttribute("have_file", have_file);
                         if (u != null && crew.getAdmin().getId().equals(u.getId())) {
                             request.setAttribute("admin", true);
                         } else {
@@ -123,6 +131,14 @@ public class ShowGroupServlet extends HttpServlet {
                         request.setAttribute("crew", crew);
                         request.setAttribute("posts", posts);
                         request.setAttribute("members", members);
+                        Boolean have_file = false;
+                        for(int i=0; i<posts.size() ; i++){
+                            if(posts.get(i).getFiles().size()>0){
+                                have_file=true;
+                            }
+                        }
+                        
+                        request.setAttribute("have_file", have_file);
                         if (crew.getAdmin().getId().equals(u.getId())) {
                             request.setAttribute("admin", true);
                         } else {
@@ -139,6 +155,14 @@ public class ShowGroupServlet extends HttpServlet {
                         request.setAttribute("crew", crew);
                         request.setAttribute("posts", posts);
                         request.setAttribute("members", members);
+                        Boolean have_file = false;
+                        for(int i=0; i<posts.size() ; i++){
+                            if(posts.get(i).getFiles().size()>0){
+                                have_file=true;
+                            }
+                        }
+                        
+                        request.setAttribute("have_file", have_file);
                         if (cu.crew_belongs_to_user(crew.getId(), u.getId())) {
                             request.setAttribute("user_can_edit", true);
                         }
