@@ -101,7 +101,7 @@ PRIMARY KEY(id),
 FOREIGN KEY (id_post) REFERENCES POST(id)
 );
 
-# Inserimento utente gino perna
+# Inserimento utenti
 INSERT INTO secondoprogettoweb.USER(username, password, email, moderator, login_date) VALUES ('gino', 'd9d72431035d8535d1b65ce9a01c2f60','ciao@gino.com',TRUE,'2014-01-09 alle 16:13:21');
 INSERT INTO secondoprogettoweb.USER(username, password, email, moderator, login_date) VALUES ('davide', '446fca5553df49ad9c6348cf1ff71d51','davide@example.com',TRUE,'2014-01-09 alle 12:13:21');
 INSERT INTO secondoprogettoweb.USER(username, password, email, moderator, login_date) VALUES ('federico', '616706c4d6f7bdf68b30893f860cbb2b','federico@example.com',TRUE,'2014-01-09 alle 21:13:21');
@@ -118,7 +118,7 @@ INSERT INTO secondoprogettoweb.USER(username, password, email, moderator, login_
 
 # inserimento gruppo pubblico
 INSERT INTO secondoprogettoweb.CREW(id_admin,name,description,crew_private,creation_date,crew_enabled) VALUES ('1','[Programmazione per il Web]','Pagina del corso. Qui trovate info e aiuto.','0','2014-01-07 alle 14:06:44','1');
-INSERT INTO secondoprogettoweb.CREW(id_admin,name,description,crew_private,creation_date,crew_enabled) VALUES ('2','[Architettura degli Elaboratori]','Pagina del corso. Qui trovate info e aiuto.','0','2014-01-07 alle 14:06:44','1');
+INSERT INTO secondoprogettoweb.CREW(id_admin,name,description,crew_private,creation_date,crew_enabled) VALUES ('2','[Architettura degli Elaboratori]','Pagina del corso. Qui trovate info e aiuto.','0','2014-01-07 alle 14:06:44','0');
 
 # inserimento crew privata
 INSERT INTO secondoprogettoweb.CREW(id_admin,name,description,crew_private,creation_date,crew_enabled) VALUES ('3','[Algoritmi e Strutture Dati]','Pagina del corso. Qui trovate info e aiuto.','1','2014-01-02 alle 14:14:00','1');
