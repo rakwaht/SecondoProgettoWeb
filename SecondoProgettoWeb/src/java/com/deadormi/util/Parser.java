@@ -110,7 +110,9 @@ public class Parser {
                 return trovata;
             } else if (trovata.length() >= 13 && trovata.substring(0, 8).equals("https://") && dotOccurences >= 1){
                 return trovata;
-            }else if (trovata.length() >= 9 && trovata.substring(0, 4).equals("www.") && dotOccurences >= 2) {
+            } else if (trovata.length() >= 11 && trovata.substring(0, 6).equals("ftp://") && dotOccurences >= 1){
+                return trovata;
+            } else if (trovata.length() >= 9 && trovata.substring(0, 4).equals("www.") && dotOccurences >= 2) {
                 return "http://" + trovata;
             }
         }
