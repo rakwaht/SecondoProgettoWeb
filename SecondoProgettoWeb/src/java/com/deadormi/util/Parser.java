@@ -23,13 +23,12 @@ public class Parser {
     static Logger log = Logger.getLogger(Parser.class);
 
     public static boolean isHTML(String name) {
-         
-          Pattern pattern = Pattern.compile(".*\\<[^>]+>.*");
-          Matcher matcher = pattern.matcher(name);
-           log.debug("Sono nel check HTML! " + name + "   -->" + matcher.matches() );
-          return matcher.matches();
-    }
 
+        Pattern pattern = Pattern.compile(".*\\<[^>]+>.*");
+        Matcher matcher = pattern.matcher(name);
+        log.debug("Sono nel check HTML! " + name + "   -->" + matcher.matches());
+        return matcher.matches();
+    }
     private Pattern pattern;
     private Matcher matcher;
     private static final String EMAIL_PATTERN =
@@ -109,25 +108,26 @@ public class Parser {
             int dotOccurences = trovata.length() - trovata.replace(".", "").length();
             if (trovata.length() >= 12 && trovata.substring(0, 7).equals("http://") && dotOccurences >= 1) {
                 return trovata;
-            } else if (trovata.length() >= 9 && trovata.substring(0, 4).equals("www.") && dotOccurences >= 2) {
+            } else if (trovata.length() >= 13 && trovata.substring(0, 8).equals("https://") && dotOccurences >= 1){
+                return trovata;
+            }else if (trovata.length() >= 9 && trovata.substring(0, 4).equals("www.") && dotOccurences >= 2) {
                 return "http://" + trovata;
             }
         }
         return null;
     }
-    
-    
+
     public static ArrayList<Post> censura_mail(ArrayList<Post> posts) {
         log.debug("Sono nel parser!");
         Pattern p = Pattern.compile("(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|\"(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21\\x23-\\x5b\\x5d-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])*\")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21-\\x5a\\x53-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)\\])");
-        for(int i=0; i<posts.size(); i++){
+        for (int i = 0; i < posts.size(); i++) {
             log.debug("Analizzo il post # " + i);
             String text = posts.get(i).getText();
             Matcher m = p.matcher(text);
-            while(m.find()){
+            while (m.find()) {
                 String email = text.substring(m.start(), m.end());
                 log.debug("Ho trovato una mail: " + email);
-                email = email.substring(email.indexOf('@')+1);
+                email = email.substring(email.indexOf('@') + 1);
                 String replacer = new String(new char[email.length()]).replace('\0', 'X');
                 text = text.replace(email, replacer);
             }
@@ -135,5 +135,4 @@ public class Parser {
         }
         return posts;
     }
-    
 }

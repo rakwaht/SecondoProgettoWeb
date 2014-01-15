@@ -8,6 +8,7 @@ import com.deadormi.controller.FileController;
 import com.deadormi.controller.UserController;
 import com.deadormi.entity.User;
 import com.deadormi.util.Md5;
+import com.deadormi.util.Parser;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.URLEncoder;
@@ -122,6 +123,9 @@ public class EditProfileServlet extends HttpServlet {
                     response.sendRedirect("edit_profile.jsp?message_username=" + URLEncoder.encode(message, "UTF-8"));
                 } else if (new_username.length() < 4) {
                     String message = "too_short";
+                    response.sendRedirect("edit_profile.jsp?message_username=" + URLEncoder.encode(message, "UTF-8"));
+                } else if (Parser.isHTML(new_username)) {
+                    String message = "html";
                     response.sendRedirect("edit_profile.jsp?message_username=" + URLEncoder.encode(message, "UTF-8"));
                 } else {
                     u = uc.updateUsername(u, new_username);

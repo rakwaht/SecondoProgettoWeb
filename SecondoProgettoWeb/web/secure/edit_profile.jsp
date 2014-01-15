@@ -64,6 +64,9 @@
                         <c:when test="${param.message_username == 'too_short'}">
                             Username troppo corto!
                         </c:when>
+                        <c:when test="${param.message_username == 'html'}">
+                            Nome non valido, non inserire HTML
+                        </c:when>
                     </c:choose>
                 </p>
 
@@ -104,7 +107,7 @@
 
             </div>           
 
-            
+
         </div>
     </div>
 </div>
